@@ -9,5 +9,8 @@
     "background":{
         "service_worker":"worker.js"
     },
-    "permissions":["activeTab"]
+    "permissions":[
+        "activeTab",
+        "storage"
+    ]
 }
