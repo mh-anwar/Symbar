@@ -1,0 +1,4 @@
+/*Add dark mode, light mode themes, padding and various text features*/
+class .darkMode {
+  font-family: Arial, Helvetica, sans-serif;
+}

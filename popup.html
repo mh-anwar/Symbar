@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <!--Connected sheets-->
+</head>
+<main>
+    <h2>Symbols & Accents' Copier</h2>
+    <!--Add more specific instructions below-->
+    <paragraph>Click a button to copy the letter to your clipboard!</paragraph>
+    <br>
+    <!--All the buttons go here, they need to be sorted by category (a dropdown)-->
+    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+
+    <form id="frm" autocomplete="off">
+        <label for="checkbox">Choose From:</label>
+        <select name="choices" id="choices">
+            <!--These are the categories-->
+            <option value=1>Math/Science</option>
+            <option value=2>French</option>
+            <option value=3>Spanish</option>
+        </select>
+    </form>
+    <br>
+    <div id="result">
+    </div>
+</main>
+<!--Scripts-->
+<script src="dist/clipboard.min.js"></script>
+<script type="text/javascript" src="popup_Script.js"> </script>
+<link rel="stylesheet" type="text/css" href="popup_Styling.css">
+
+</html>
