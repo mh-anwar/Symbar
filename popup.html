@@ -7,23 +7,30 @@
 <main>
     <h2>Symbols & Accents' Copier</h2>
     <!--Add more specific instructions below-->
-    <paragraph>Click a button to copy the letter to your clipboard!</paragraph>
+    <p>Click a button to copy the letter to your clipboard!</p>
     <br>
-    <!--All the buttons go here, they need to be sorted by category (a dropdown)-->
-    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+    <select id="target">
+        <option value="">Select...</option>
+        <option value="Math">Math</option>
+        <option value="French">French</option>
+        <option value="Spanish">Spanish</option>
+        <select>
+            <br><br>
+            <div id="Math" class="inv">
+                <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>&nbsp;
+                <!--&nbsp; provides a space between each button-->
+                <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+                &nbsp;
+                <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+            </div>
+            <div id="French" class="inv">
 
-    <form id="frm" autocomplete="off">
-        <label for="checkbox">Choose From:</label>
-        <select name="choices" id="choices">
-            <!--These are the categories-->
-            <option value=1>Math/Science</option>
-            <option value=2>French</option>
-            <option value=3>Spanish</option>
-        </select>
-    </form>
-    <br>
-    <div id="result">
-    </div>
+            </div>
+            <div id="Spanish" class="inv">
+
+            </div>
+            <br>
+            <div id="result"></div>
 </main>
 <!--Scripts-->
 <script src="dist/clipboard.min.js"></script>
