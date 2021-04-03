@@ -5,33 +5,34 @@
     <!--Connected sheets-->
 
 </head>
-<main>
-    <h2>Symbols & Accents' Copier</h2>
-    <!--Add more specific instructions below-->
-    <p>Click a button to copy the letter to your clipboard!</p>
-    <br>
-    <select id="target">
-        <option value="">Select...</option>
-        <option value="Math">Math</option>
-        <option value="French">French</option>
-        <option value="Spanish">Spanish</option>
-        <select>
-            <br><br>
-            <div id="Math" class="inv">
-                <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>&nbsp;
-                <!--&nbsp; provides a space between each button-->
-                <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>&nbsp;
-                <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
-            </div>
-            <div id="French" class="inv">
 
-            </div>
-            <div id="Spanish" class="inv">
+<body>
+    <main>
+        <h2>Symbols & Accents' Copier</h2>
+        <!--Add more specific instructions below-->
+        <p>Click a button to copy the letter to your clipboard!</p>
+        <br>
+        <select id="target">
+            <option value="">Select...</option>
+            <option value="Math">Math</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+            <select>
+                <div id="Math" class="inv">
+                    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+                    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+                    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+                </div>
+                <div id="French" class="inv">
 
-            </div>
-            <br>
-            <div id="result"></div>
-</main>
+                </div>
+                <div id="Spanish" class="inv">
+
+                </div>
+                <br>
+                <div id="result"></div>
+    </main>
+</body>
 <!--Scripts-->
 <script src="dist/clipboard.min.js"></script>
 <script type="text/javascript" src="popup_Script.js"> </script>
