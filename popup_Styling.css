@@ -3,10 +3,10 @@ class .darkMode {
   font-family: Arial, Helvetica, sans-serif;
 }
 body {
-  width: 200px;
-  height: 200px;
   overflow-x: hidden; /* Hide horizontal scrollbar */
   overflow-y: scroll; /* Add vertical scrollbar */
+  width: 200px;
+  height: 200px;
 }
 .inv {
   display: none;
