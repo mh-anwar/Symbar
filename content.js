@@ -1,7 +1,17 @@
 console.log("Content Script is running, SIR!");
 
-var div = document.createElement("div");
+function addStuff(type, text) {
+  var type = document.createElement(type);
 
-document.body.appendChild(div);
+  document.body.appendChild(type);
 
-div.innerText = "<h1>WGAT NANDATO!<h1>";
+  type.innerHTML = text;
+}
+
+document.addEventListener("click", (e) => {
+  var div = document.createElement(div);
+
+  document.body.appendChild(div);
+
+  div.innerHTML = "<h1>HELLOW WORLD.<h1>";
+});
