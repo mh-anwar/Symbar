@@ -3,7 +3,7 @@
     "name":"Symbols & Accents Copier",
     "version":"0.0.1",
     "description": "An extension that copies special chracters to your clipboard.",
-    "options_page": "userOptions.html",
+    "options_page": "settings_Basic.html",
     "action":{
         "default_popup": "popup.html"
     },
