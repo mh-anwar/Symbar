@@ -5,7 +5,8 @@
     "description": "An extension that copies special characters to your clipboard.",
     "options_page": "settings_Basic.html",
     "action":{
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_title": "Accents and symbols MAKE THIS RELEVANT LATER"
     },
     "icons": { 
         "16": "test_Extension_Image.png",
