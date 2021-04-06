@@ -10,7 +10,7 @@
     },
     "icons": { 
         "16": "test_Extension_Image.png",
-        "32":"test_Extension_Image.png",
+        "32": "test_Extension_Image.png",
         "48": "test_Extension_Image.png",
        "128": "test_Extension_Image.png"
     },
