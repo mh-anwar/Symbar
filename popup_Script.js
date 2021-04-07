@@ -22,17 +22,12 @@ document.getElementById("target").addEventListener("change", function () {
   }
 });
 
-function openSettings() {
-  window.open(
-    "chrome-extension://ggciefihpaiebbpaonohfndmollfiglp/userOptions.html"
-  );
-}
 //Options page opener
 document.querySelector("#go-to-options").addEventListener("click", function () {
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
   } else {
-    window.open(chrome.runtime.getURL("userOptions.html"));
+    window.open(chrome.runtime.getURL("settings_Basic.html"));
   }
 });
 

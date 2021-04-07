@@ -1,15 +1,16 @@
 {
     "manifest_version":3,
-    "name":"Symbols & Accents Copier",
+    "name":"Symbols Extension",
     "version":"0.0.1",
     "description": "An extension that copies special characters to your clipboard.",
     "options_page": "settings_Basic.html",
     "action":{
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_title": "Accents and symbols MAKE THIS RELEVANT LATER"
     },
     "icons": {
         "16": "test_Extension_Image.png",
-        "32":"test_Extension_Image.png",
+        "32": "test_Extension_Image.png",
         "48": "test_Extension_Image.png",
        "128": "test_Extension_Image.png"
     },
