@@ -10,6 +10,8 @@ body {
 }
 .inv {
   display: none;
+  overflow-y: scroll;
+  height:100%;
 }
 class .dropdown {
   border: 3px;
