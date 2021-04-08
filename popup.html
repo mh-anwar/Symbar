@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="en-US" nonce="2726c7f26c">
 
 <head>
     <!--Connected sheets-->
@@ -7,39 +7,48 @@
 
 <body>
     <main>
-        <h2>Symbols & Accents' Copier</h2>
+        <h2>Symbol Copier</h2>
         <!--Add more specific instructions below-->
         <p>Click a button to copy the letter to your clipboard!</p>
         <br>
-        <select id="target">
+        <select id="selection_Form">
             <option value="">Select...</option>
             <option value="Math">Math</option>
             <option value="French">French</option>
             <option value="Spanish">Spanish</option>
             <select>
                 <div id="Math" class="inv">
-                    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
-                    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
-                    <button class="btn" data-clipboard-text="&#8486;">&#8486;</button>
+                    <!--<button class="btn" data-clipboard-text="&#8486;">&#8486;</button>-->
+                    <!--<script src="dist/clipboard.min.js"></script>-->
+                    <!--Old Button, leave for rn-->
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
                 </div>
                 <div id="French" class="inv">
-
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
                 </div>
                 <div id="Spanish" class="inv">
-
+                    <button id="copy_Button" class="copyButton" name="&#8486;">&#8486;</button>
                 </div>
                 <br>
                 <div id="result"></div>
     </main>
     <br>
 
-    <button id="go-to-options">Settings</button>
+    <button id="go-to-options" class="actionButton">Settings</button>
     <!--Will be connected to toolbar later-->
-    <button id="open-bar">Open toolbar</button>
+    <button id="open-bar" class="actionButton">Open Toolbar</button>
+    <!--Scripts-->
+    <link rel="stylesheet" type="text/css" href="popup_Styling.css">
+    <script nonce="2726c7f26c" type="text/javascript" src="popup_Script.js"> </script>
 </body>
-<!--Scripts-->
-<script src="dist/clipboard.min.js"></script>
-<link rel="stylesheet" type="text/css" href="popup_Styling.css">
-<script type="text/javascript" src="popup_Script.js"> </script>
 
 </html>
