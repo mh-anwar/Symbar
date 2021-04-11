@@ -12,6 +12,15 @@ document.addEventListener("click", (e) => {
   document.body.appendChild(div);
   //div.innerHTML = "<h1>HELLO WORLD.<h1>";
 });
+const tabId = getTabId();
+chrome.scripting.executeScript(
+  {
+    target: { tabId: tabId },
+    files: ['script.js'],
+  },
+  () => { });
+
+
 /* setInterval(viewPortChecker(), 30000);
 more html injection code, do not remove yet, in case we need it
 function viewPortChecker() {
