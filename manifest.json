@@ -3,10 +3,10 @@
     "name":"Symbols Extension",
     "version":"0.0.1",
     "description": "An extension that copies special characters to your clipboard.",
-    "options_page": "settingsBasic.html",
+    "options_page": "settingsPage/settingsBasic.html",
     "minimum_chrome_version": "46",
     "action":{
-        "default_popup": "popup.html",
+        "default_popup": "popup/popup.html",
         "default_title": "Accents and symbols MAKE THIS RELEVANT LATER"
     },
     "icons": {
