@@ -7,11 +7,17 @@
 
 <body>
     <main>
-        <h2>Symbol Copier</h2>
         <!--Add more specific instructions below-->
-        <p>Click a button to copy the letter to your clipboard!</p>
+        <div class="headerContainer">
+            <div>
+                <p>Click a button to copy the letter to your clipboard!</p>
+            </div>
+            <div>
+                <image class="logoImg" src="testImage.png"></image>
+            </div>
+        </div>
         <br>
-        <select id="selection_Form">
+        <select id="selectionForm" class="selectionForm">
             <option value="">Select...</option>
             <option value="Math">Math</option>
             <option value="French">French</option>
@@ -38,9 +44,8 @@
                 <div id="result"></div>
     </main>
     <br>
-
-    <button id="go-to-options" class="actionButton">Settings</button>
-    <button id="open-bar" class="actionButton">Open Toolbar</button>
+    <button id="optionOpenerButton" class="actionButton">Settings</button>
+    <button id="openToolBar" class="actionButton">Open Toolbar</button>
     <!--Will be connected to toolbar later-->
 </body>
 <!--Scripts-->

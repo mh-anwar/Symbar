@@ -1,6 +1,6 @@
 //Below is the code for the buttons within the dropdowns
 document
-  .getElementById("selection_Form")
+  .getElementById("selectionForm")
   .addEventListener("change", function () {
     "use strict";
     var vis = document.querySelector(".vis"),
@@ -14,7 +14,7 @@ document
   });
 
 //Options page opener
-document.querySelector("#go-to-options").addEventListener("click", function () {
+document.querySelector("#optionOpenerButton").addEventListener("click", function () {
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
   } else {
@@ -22,7 +22,7 @@ document.querySelector("#go-to-options").addEventListener("click", function () {
   }
 });
 
-//The Copy Function
+//The Copy Function (TCF)
 var classes = document.getElementsByClassName("copyButton");
 console.log(classes.length)
 console.log(classes[0])
@@ -36,8 +36,14 @@ for (var i = 0; i < classes.length; i++) {
   });
 }
 
-/* .then( function () { console.log("YES"); }, function () {
-  alert("Hmm..There seems to be an issue on your end.");
- } ); */
+//Code to send message from popup to content to open toolbar
+let userClickForToolbar = document.getElementById('openToolBar');
+userClickForToolbar.addEventListener("click", function () {
+  var toolbarButtonState = 1;
+  console.log("You clicked the 'Open Toolbar' Button! Why tho?")
+  console.log(toolbarButtonState)
+  chrome.tabs.sendMessage(tabs[0].id, toolbarButtonState);
+})
+
 
 //Come to the dark side, we use cookies!
