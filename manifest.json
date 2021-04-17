@@ -1,35 +1,41 @@
 {
-    "manifest_version":3,
-    "name":"Symbols Extension",
-    "version":"0.0.1",
-    "description": "An extension that copies special characters to your clipboard.",
+    "manifest_version": 3,
+    "name": "Symbols & Accents Toolkit",
+    "version": "0.0.2",
+    "description": "An extension that copies symbols and accents to your clipboard.",
+    "offline_enabled": false,
     "options_page": "settingsPage/settingsBasic.html",
     "minimum_chrome_version": "46",
-    "action":{
+    "action": {
         "default_popup": "popup/popup.html",
-        "default_title": "Accents and symbols MAKE THIS RELEVANT LATER"
+        "default_title": "Symbols & Accents Toolkit"
     },
     "icons": {
         "16": "testImage.png",
         "32": "testImage.png",
         "48": "testImage.png",
-       "128": "testImage.png"
+        "128": "testImage.png"
     },
-    "background":{
-        "service_worker":"worker.js"
+    "background": {
+        "service_worker": "worker.js"
     },
-    "permissions":[
+    "permissions": [
         "activeTab",
-        "tab",
+        "tabs",
         "storage",
         "scripting"
     ],
     "content_scripts": [
         {
-          "matches": ["<all_urls>"],
-          "js": ["content.js"],
-          "css":["toolbar/contentStyle.css"]
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "toolbar/contentStyle.css"
+            ]
         }
-      ]
-
+    ]
 }

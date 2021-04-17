@@ -7,17 +7,21 @@ function addStuff(type, text) {
   document.body.appendChild(type);
   type.innerHTML = text;
 }
-//HTML Injection (you should see "HELLOW WORLD." at the bottom of a page (after you click))
+//HTML Injection (you should see a toolbar after you open it through the popup)
+chrome.runtime.onMessage.addListener(gotMessage);
+function gotMessage(message) {
+  console.log(message);
+  if (message === "turnToolbarOn") {
+    var div = document.createElement(div);
+    const style = document.createElement('style');
+    div.className = "divr"
+    document.body.appendChild(div);
+    div.innerHTML = "<h1>HELLOW WORLD. Basic Toolbar<h1>";
+  }
+}
 
-document.addEventListener("scroll", (e) => {
-  var div = document.createElement(div);
-  const style = document.createElement('style');
-  div.className = "divr"
-  document.body.appendChild(div);
-  div.innerHTML = "<h1>HELLOW WORLD. Basic Toolbar<h1>";
-});
-
-//below is code to find the view port, may be needed for html injection
+//OLD CODE, DO NOT REMOVE!!!
+//below is code to find the view port,DO NOT REMOVE
 //DO NOT DELETE!
 /* setInterval(viewPortChecker(), 3000);
   function viewPortChecker() {
@@ -32,3 +36,11 @@ document.addEventListener("scroll", (e) => {
       }
     }
   } */
+//original code for HTML injection, DO NOT REMOVE
+/* document.addEventListener("click", (e) => {
+var div = document.createElement(div);
+const style = document.createElement('style');
+div.className = "divr"
+document.body.appendChild(div);
+div.innerHTML = "<h1>HELLOW WORLD. Basic Toolbar<h1>";
+}); */

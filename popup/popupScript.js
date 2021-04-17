@@ -1,4 +1,4 @@
-//Below is the code for the buttons within the dropdowns
+//Code for the dropdown to show the copy buttons
 document
   .getElementById("selectionForm")
   .addEventListener("change", function () {
@@ -6,44 +6,52 @@ document
     var vis = document.querySelector(".vis"),
       target = document.getElementById(this.value);
     if (vis !== null) {
-      vis.className = "inv";
+      vis.className = "buttonsDiv";
     }
     if (target !== null) {
       target.className = "vis";
     }
   });
 
-//Options page opener
+//Code to open the options page (through button in popup)
 document.querySelector("#optionOpenerButton").addEventListener("click", function () {
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
   } else {
-    window.open(chrome.runtime.getURL("settings_Basic.html"));
+    window.open(chrome.runtime.getURL("settingsBasic.html"));
   }
 });
 
-//The Copy Function (TCF)
+//Code for the Copy Function (for the copy buttons)
 var classes = document.getElementsByClassName("copyButton");
-console.log(classes.length)
-console.log(classes[0])
+console.log(classes.length);
+console.log(classes[0]);
 for (var i = 0; i < classes.length; i++) {
   classes[i].addEventListener("click", function (e) {
-    console.log("yaa");
-    console.log(e);
-    console.log(e.target.id);
     var to_Copy = e.target.id;
     navigator.clipboard.writeText(to_Copy);
   });
 }
 
-//Code to send message from popup to content to open toolbar
+//Code to send message from popup to content to open toolbar #WIP
 let userClickForToolbar = document.getElementById('openToolBar');
-userClickForToolbar.addEventListener("click", function () {
-  var toolbarButtonState = 1;
-  console.log("You clicked the 'Open Toolbar' Button! Why tho?")
-  console.log(toolbarButtonState)
-  chrome.tabs.sendMessage(tabs[0].id, toolbarButtonState);
-})
+userClickForToolbar.addEventListener("click", messenger);
 
+function messenger() {
+  let params = {
+    active: true,
+    currentWindow: true
+  }
+  chrome.tabs.query(params, gotTabs);
+  function gotTabs(tabs) {
+    var toolbarButtonState = "turnToolbarOn";
+    let msg = toolbarButtonState;
+    chrome.tabs.sendMessage(tabs[0].id, msg)
+  }
+}
 
 //Come to the dark side, we use cookies!
+
+//Debugging for copy to clipboard:
+//console.log(e);
+//console.log(e.target.id);
