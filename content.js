@@ -15,8 +15,15 @@ function gotMessage(message) {
     var div = document.createElement(div);
     const style = document.createElement('style');
     div.className = "divr"
+    div.setAttribute("id", "toolbar")
     document.body.appendChild(div);
     div.innerHTML = "<h1>HELLOW WORLD. Basic Toolbar<h1>";
+    //var openCloseButton = document.createElement(button)
+    //.setAttribute("id", "openCloseButton")
+    //document.body.appendChild(openCloseButton)
+  }
+  if (message === "turnToolbarOff") {
+    document.getElementById('toolbar').remove()
   }
 }
 

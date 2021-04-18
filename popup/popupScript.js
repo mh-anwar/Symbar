@@ -36,7 +36,7 @@ for (var i = 0; i < classes.length; i++) {
 //Code to send message from popup to content to open toolbar #WIP
 let userClickForToolbar = document.getElementById('openToolBar');
 userClickForToolbar.addEventListener("click", messenger);
-
+var onOrOff = 0;
 function messenger() {
   let params = {
     active: true,
@@ -44,10 +44,22 @@ function messenger() {
   }
   chrome.tabs.query(params, gotTabs);
   function gotTabs(tabs) {
-    var toolbarButtonState = "turnToolbarOn";
-    let msg = toolbarButtonState;
-    chrome.tabs.sendMessage(tabs[0].id, msg)
+    if (onOrOff % 2 == 0) {
+      var toolbarButtonState = "turnToolbarOn";
+      let msg = toolbarButtonState;
+      chrome.tabs.sendMessage(tabs[0].id, msg)
+      var toolbar = document.getElementById('openToolBar');
+      toolbar.textContent = 'Close Toolbar';
+    }
+    if (onOrOff % 2 == 1) {
+      var toolbarButtonState = "turnToolbarOff";
+      let msg = toolbarButtonState;
+      chrome.tabs.sendMessage(tabs[0].id, msg)
+      var toolbar = document.getElementById('openToolBar');
+      toolbar.textContent = 'Open Toolbar';
+    }
   }
+  onOrOff++;
 }
 
 //Come to the dark side, we use cookies!
