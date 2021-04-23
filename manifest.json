@@ -3,7 +3,7 @@
     "name": "Symbols & Accents Toolkit",
     "version": "0.0.2",
     "description": "An extension that copies symbols and accents to your clipboard.",
-    "offline_enabled": false,
+    "offline_enabled": true,
     "options_page": "settingsPage/settingsBasic.html",
     "minimum_chrome_version": "46",
     "action": {
