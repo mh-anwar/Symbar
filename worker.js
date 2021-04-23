@@ -13,7 +13,8 @@ chrome.runtime.onInstalled.addListener(() => {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        //if (sender)
+        //if (sender) -- check sender
+        console.log("test");
         if (request == "We need the variable.") {
             looper++
             sendResponse({ response: onOrOff });
