@@ -24,8 +24,9 @@ document.querySelector("#optionOpenerButton").addEventListener("click", function
 
 //Code for the Copy Function (for the copy buttons)
 var classes = document.getElementsByClassName("copyButton");
-console.log(classes.length);
-console.log(classes[0]);
+//debuggers:
+//console.log(classes.length);
+//console.log(classes[0]);
 for (var i = 0; i < classes.length; i++) {
   classes[i].addEventListener("click", function (e) {
     var to_Copy = e.target.id;
@@ -35,16 +36,37 @@ for (var i = 0; i < classes.length; i++) {
 
 //Code to send message from popup to content to open toolbar #WIP
 let userClickForToolbar = document.getElementById('openToolBar');
+
+var onOrOff;
+var stateOfButton = {};
+stateOfButton['buttonState'];
+userClickForToolbar.addEventListener("load", function () {
+  console.log("loaded");
+});
 userClickForToolbar.addEventListener("click", messenger);
-var onOrOff = 0;
+
 function messenger() {
   let params = {
     active: true,
     currentWindow: true
   }
-  chrome.tabs.query(params, gotTabs);
+
+  // Send message to background:
+  var request = "We need the variable."
+
+  chrome.runtime.sendMessage(request, function (response) {
+    console.log(`got a msg from worker: ${JSON.stringify(response)}`)
+    chrome.storage.sync.get('buttonState', function (data) {
+      onOrOff = data['buttonState'];
+      console.log('(in the message sender): Set onOrOFf' + onOrOff)
+      chrome.tabs.query(params, gotTabs);
+    });
+  });
+
   function gotTabs(tabs) {
+    console.log('Set onOrOFf' + onOrOff)
     if (onOrOff % 2 == 0) {
+      console.log("toolbar is now on" + stateOfButton['buttonState'])
       var toolbarButtonState = "turnToolbarOn";
       let msg = toolbarButtonState;
       chrome.tabs.sendMessage(tabs[0].id, msg)
@@ -52,6 +74,7 @@ function messenger() {
       toolbar.textContent = 'Close Toolbar';
     }
     if (onOrOff % 2 == 1) {
+      console.log("toolbar is now off" + stateOfButton['buttonState'])
       var toolbarButtonState = "turnToolbarOff";
       let msg = toolbarButtonState;
       chrome.tabs.sendMessage(tabs[0].id, msg)
@@ -59,11 +82,31 @@ function messenger() {
       toolbar.textContent = 'Open Toolbar';
     }
   }
-  onOrOff++;
 }
+
+
 
 //Come to the dark side, we use cookies!
 
 //Debugging for copy to clipboard:
 //console.log(e);
 //console.log(e.target.id);
+/*
+var onOrOff = 1;
+var stateOfButton = {};
+stateOfButton['buttonState'] = onOrOff;
+chrome.storage.sync.set(stateOfButton, function () {
+  // this called after the save
+  console.log("now we have set the state to 1")
+});
+
+chrome.storage.sync.get('buttonState', function (data) {
+      // this is called after the retrieve.
+      onOrOff = data['buttonState'];
+      console.log(stateOfButton)
+    });
+  stateOfButton['buttonState'] = onOrOff;
+  chrome.storage.sync.set(stateOfButton, function () {
+    // this called after the save
+  });
+*/
