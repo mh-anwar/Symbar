@@ -11,10 +11,10 @@
         "default_title": "Symbols & Accents Toolkit"
     },
     "icons": {
-        "16": "testImage.png",
-        "32": "testImage.png",
-        "48": "testImage.png",
-        "128": "testImage.png"
+        "16": "images/icon_16.png",
+        "32": "images/icon_32.png",
+        "48": "images/icon_48.png",
+        "128": "images/icon_128.png"
     },
     "background": {
         "service_worker": "worker.js"
