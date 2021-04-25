@@ -27,5 +27,19 @@ chrome.runtime.onMessage.addListener(
         } else {
             sendResponse({ result: "error", message: `Invalid 'cmd'` });
         }
+
+        if (request == "mode") {
+            looper++
+            sendResponse({ response: onOrOff });
+            onOrOff++;
+            stateOfButton['buttonState'] = onOrOff;
+            chrome.storage.sync.set(stateOfButton, function () {
+                // this called after the save
+                console.log("worker set buttonState to smth")
+            });
+        } else {
+            sendResponse({ result: "error", message: `Invalid 'cmd'` });
+        }
+
         return true;
     });

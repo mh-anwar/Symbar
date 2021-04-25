@@ -11,8 +11,12 @@ body {
 /*Each div for the copy buttons*/
 .buttonsDiv {
   display: none;
-  overflow-y: scroll;
-  height: 100%;
+}
+/*backdrop and scroll for buttons*/
+.buttonsInventory {
+    overflow-y:scroll;
+    background-color:gainsboro;
+    height: 100%;
 }
 /*All the buttons that copy to clipboard*/
 .copyButton {
