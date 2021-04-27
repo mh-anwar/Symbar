@@ -40,22 +40,20 @@ let userClickForToolbar = document.getElementById('openToolBar');
 var onOrOff;
 var stateOfButton = {};
 stateOfButton['buttonState'];
-userClickForToolbar.addEventListener("load", function () {
+/* userClickForToolbar.addEventListener("load", function () {
   console.log("loaded");
-});
+}); */
 userClickForToolbar.addEventListener("click", messenger);
 
 function messenger() {
+  // Send message to background:
+  const request = "Toolbar State."
   let params = {
     active: true,
     currentWindow: true
   }
-
-  // Send message to background:
-  var request = "We need the variable."
-
   chrome.runtime.sendMessage(request, function (response) {
-    console.log(`got a msg from worker: ${JSON.stringify(response)}`)
+    console.log(response);
     chrome.storage.sync.get('buttonState', function (data) {
       onOrOff = data['buttonState'];
       console.log('(in the message sender): Set onOrOFf' + onOrOff)
@@ -66,12 +64,12 @@ function messenger() {
   function gotTabs(tabs) {
     console.log('Set onOrOFf' + onOrOff)
     if (onOrOff % 2 == 0) {
-      console.log("toolbar is now on" + stateOfButton['buttonState'])
       var toolbarButtonState = "turnToolbarOn";
       let msg = toolbarButtonState;
       chrome.tabs.sendMessage(tabs[0].id, msg)
       var toolbar = document.getElementById('openToolBar');
       toolbar.textContent = 'Close Toolbar';
+      console.log(onOrOff);
     }
     if (onOrOff % 2 == 1) {
       console.log("toolbar is now off" + stateOfButton['buttonState'])
@@ -84,6 +82,27 @@ function messenger() {
   }
 }
 
+window.onload = function () {
+  console.log("the window has loaded now onto looper")
+  var looper = 0;
+  //if (looper > 0) {
+  const request = "Onload - Toolbar State."
+
+  chrome.runtime.sendMessage(request, function (response) {
+    console.log(response);
+
+    chrome.storage.sync.get('buttonState', function (data) {
+      onOrOff = data['buttonState'];
+      console.log('Onload - Got the state and set it to ' + onOrOff);
+      if (onOrOff % 2 == 0) {
+        var toolbar = document.getElementById('openToolBar');
+        toolbar.textContent = 'Close Toolbar';
+      }
+    });
+  });
+  //}
+  looper++;
+};
 
 
 //Come to the dark side, we use cookies!
