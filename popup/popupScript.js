@@ -23,12 +23,9 @@ document.querySelector("#optionOpenerButton").addEventListener("click", function
 });
 
 //Code for the Copy Function (for the copy buttons)
-var classes = document.getElementsByClassName("copyButton");
-//debuggers:
-//console.log(classes.length);
-//console.log(classes[0]);
-for (var i = 0; i < classes.length; i++) {
-  classes[i].addEventListener("click", function (e) {
+var copyButtonClass = document.getElementsByClassName("copyButton");
+for (var i = 0; i < copyButtonClass.length; i++) {
+  copyButtonClass[i].addEventListener("click", function (e) {
     var to_Copy = e.target.id;
     navigator.clipboard.writeText(to_Copy);
   });
@@ -40,9 +37,7 @@ let userClickForToolbar = document.getElementById('openToolBar');
 var onOrOff;
 var stateOfButton = {};
 stateOfButton['buttonState'];
-/* userClickForToolbar.addEventListener("load", function () {
-  console.log("loaded");
-}); */
+
 userClickForToolbar.addEventListener("click", messenger);
 
 function messenger() {
@@ -62,14 +57,12 @@ function messenger() {
   });
 
   function gotTabs(tabs) {
-    console.log('Set onOrOFf' + onOrOff)
     if (onOrOff % 2 == 0) {
       var toolbarButtonState = "turnToolbarOn";
       let msg = toolbarButtonState;
       chrome.tabs.sendMessage(tabs[0].id, msg)
       var toolbar = document.getElementById('openToolBar');
       toolbar.textContent = 'Close Toolbar';
-      console.log(onOrOff);
     }
     if (onOrOff % 2 == 1) {
       console.log("toolbar is now off" + stateOfButton['buttonState'])
@@ -83,14 +76,8 @@ function messenger() {
 }
 
 window.onload = function () {
-  console.log("the window has loaded now onto looper")
-  var looper = 0;
-  //if (looper > 0) {
   const request = "Onload - Toolbar State."
-
-  chrome.runtime.sendMessage(request, function (response) {
-    console.log(response);
-
+  chrome.runtime.sendMessage(request, function () {
     chrome.storage.sync.get('buttonState', function (data) {
       onOrOff = data['buttonState'];
       console.log('Onload - Got the state and set it to ' + onOrOff);
@@ -100,8 +87,6 @@ window.onload = function () {
       }
     });
   });
-  //}
-  looper++;
 };
 
 
@@ -110,22 +95,3 @@ window.onload = function () {
 //Debugging for copy to clipboard:
 //console.log(e);
 //console.log(e.target.id);
-/*
-var onOrOff = 1;
-var stateOfButton = {};
-stateOfButton['buttonState'] = onOrOff;
-chrome.storage.sync.set(stateOfButton, function () {
-  // this called after the save
-  console.log("now we have set the state to 1")
-});
-
-chrome.storage.sync.get('buttonState', function (data) {
-      // this is called after the retrieve.
-      onOrOff = data['buttonState'];
-      console.log(stateOfButton)
-    });
-  stateOfButton['buttonState'] = onOrOff;
-  chrome.storage.sync.set(stateOfButton, function () {
-    // this called after the save
-  });
-*/

@@ -43,6 +43,7 @@ function gotMessage(message) {
       }
     }
   } */
+
 //original code for HTML injection, DO NOT REMOVE
 /* document.addEventListener("click", (e) => {
 var div = document.createElement(div);

@@ -41,22 +41,3 @@ var checkbox = document.getElementById("modeSwitch");
 checkbox.addEventListener('change', function () {
     theme();
 });
-
-//Navigation bar code
-var xy = 0;
-document.getElementById("test").addEventListener("click", function openNav() {
-    if (xy % 2 == 0) {
-        document.getElementById("sideNav").style.width = "250px";
-        document.getElementById("settings").style.marginLeft = "250px";
-    }
-    else if (xy % 2 == 1) {
-        document.getElementById("sideNav").style.width = "0";
-        document.getElementById("settings").style.marginLeft = "0";
-    }
-    xy++;
-})
-
-document.getElementById("navCloseButton").addEventListener("click", function openNav() {
-    document.getElementById("sideNav").style.width = "0";
-    document.getElementById("settings").style.marginLeft = "0";
-})
