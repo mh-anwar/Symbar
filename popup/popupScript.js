@@ -1,3 +1,4 @@
+//Remember https://imgflip.com/i/57j1ib
 //Code for the dropdown to show the copy buttons
 document
   .getElementById("selectionForm")
@@ -18,7 +19,7 @@ document.querySelector("#optionOpenerButton").addEventListener("click", function
   if (chrome.runtime.openOptionsPage) {
     chrome.runtime.openOptionsPage();
   } else {
-    window.open(chrome.runtime.getURL("settingsBasic.html"));
+    window.open(chrome.runtime.getURL("../settingsPage/settingsBasic.html"));
   }
 });
 
@@ -26,7 +27,8 @@ document.querySelector("#optionOpenerButton").addEventListener("click", function
 var copyButtonClass = document.getElementsByClassName("copyButton");
 for (var i = 0; i < copyButtonClass.length; i++) {
   copyButtonClass[i].addEventListener("click", function (e) {
-    var to_Copy = e.target.id;
+    var to_Copy = e.target.textContent;
+    //console.log(e.target.textContent);
     navigator.clipboard.writeText(to_Copy);
   });
 }
