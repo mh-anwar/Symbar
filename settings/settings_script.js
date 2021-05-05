@@ -1,4 +1,24 @@
 console.log("Settings script operational, SIR!")
+//Code to open Basic Settings dropdown automatically
+var dropdown = document.getElementsByClassName("dropdown");
+for (var i = 0; i < dropdown.length; i++) {
+    var panel = dropdown[i].nextElementSibling;
+    if (dropdown[i].id == "basic_settings") {
+        panel.style.display = "block";
+    }
+}
+//Code to get the dropdowns to open and close on click
+for (var i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
+}
 
 function bakeCookie(cname, cvalue, exdays) { //sets the cookie name, the cookie itself, and the days until expiry
     var d = new Date(); //makes new date function

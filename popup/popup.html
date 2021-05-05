@@ -2,51 +2,75 @@
 <html lang="en-US">
 
 <body>
-    <!--Add more specific instructions below-->
-    <div class="headerContainer">
+    <div class="header">
         <div>
-            <p>Click a button to copy the letter to your clipboard!</p>
+            <image class="header__logo" src="../images/icon_32.png"></image>
         </div>
-        <div>
-            <image class="logoImg" src="../images/icon_32.png"></image>
-        </div>
-    </div>
-    <br>
-    <main>
-        <select id="selectionForm" class="selectionForm">
+        <select id="select_form" class="header-select-form header-select-form__arrow">
             <option value="">Select...</option>
             <option value="Math">Math</option>
             <option value="French">French</option>
             <option value="Spanish">Spanish</option>
             <option value="Greek">Greek</option>
         </select>
-        <div class="buttonsInventory">
-            <div id="Math" class="buttonsDiv">
-                <button id="&#8486;" class="copyButton">&#8486;</button>
-                <button class="copyButton">&#969;</button>
-                <button class="copyButton">&#0609;</button>
-            </div>
-            <div id="French" class="buttonsDiv">
-                <button class="copyButton">&#8486;</button>
-                <button class="copyButton">&#969;</button>
-            </div>
-            <div id="Spanish" class="buttonsDiv">
-                <button class="copyButton">&#8486;</button>
-                <button class="copyButton">&#969;</button>
-            </div>
-            <div id="Greek" class="buttonsDiv">
-                <button class="copyButton">&#8486;</button>
-                <button class="copyButton">&#969;</button>
-            </div>
-            <div id="result"></div>
+    </div>
+    <div class="button__list--copy">
+        <div id="Math" class="button__list--div">
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+            <button class="button button--copy">&#0609;</button>
+            <button class="button button--copy">&#8486;</button>
         </div>
-    </main>
-    <br>
-    <button id="optionOpenerButton" class="actionButton">Settings</button>
-    <button id="openToolBar" class="actionButton">Open Toolbar</button>
+        <div id="French" class="button__list--div">
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+        </div>
+        <div id="Spanish" class="button__list--div">
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+        </div>
+        <div id="Greek" class="button__list--div">
+            <button class="button button--copy">&#8486;</button>
+            <button class="button button--copy">&#969;</button>
+        </div>
+    </div>
+    <div>
+        <button id="options_button" class="button button--action">Settings</button>
+        <button id="open_toolbar" class="button button--action">Open Toolbar</button>
+    </div>
 </body>
 <!--Scripts-->
-<link rel="stylesheet" type="text/css" href="popupStyling.css">
-<script type="text/javascript" src="popupScript.js"> </script>
+<link rel="stylesheet" type="text/css" href="popup_styling.css">
+<script type="text/javascript" src="popup_script.js"> </script>
 
 </html>

@@ -1,0 +1,61 @@
+body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  min-width: 250px;
+  max-height: 250px;
+  background-color: aliceblue;
+}
+.button {
+  display: inline-block;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+/*All the buttons that copy to clipboard*/
+.button--copy {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+/*potential removal*/
+.button__list--copy {
+  max-height: 100px;
+  overflow-y: auto;
+}
+/*Each div for the copy buttons*/
+.button__list--div {
+  display: none;
+}
+/*Action buttons are buttons that do stuff, such as opening a page*/
+.button--action {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  margin-left: 0px;
+}
+/*The instructions and the logo image container*/
+.header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+/*Our logo image on the popup*/
+.header__logo {
+  margin-top: 10px;
+  margin-right: 10px;
+  height: 35px;
+  width: 35px;
+}
+/*Select Form*/
+.header-select-form {
+  display: inline-table;
+  margin-top: 10px;
+  margin-right: 10px;
+  max-width: 85px;
+  max-height: 25px;
+}
+.header-select-form:hover {
+  background-color: whitesmoke;
+}
+.header-select-form__arrow {
+  display: inline-block;
+  padding: 3px;
+}

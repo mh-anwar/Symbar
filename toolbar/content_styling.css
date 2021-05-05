@@ -1,0 +1,57 @@
+.toolbar_base {
+  color: black;
+  background-color: rgb(197, 196, 196);
+  position: fixed;
+  bottom: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 200px;
+  opacity: 0.5;
+}
+.toolbar_base:hover {
+  opacity: 1;
+}
+/*CSS for toolbar content*/
+/*The instructions and the logo image container*/
+.header__toolbar {
+  display: flex;
+  flex-direction: row;
+}
+/*Select Form*/
+.select-form {
+  display: inline-table;
+  vertical-align: top;
+  width: 85px;
+}
+.select-form:hover {
+  background-color: whitesmoke;
+}
+.button__toolbar {
+  display: inline-block;
+  margin-top: 5px;
+  margin-right: 10px;
+  min-height: 20px;
+  min-width: 20px;
+}
+/*All the buttons that copy to clipboard*/
+.button--copy {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+/*potential removal*/
+.button__list--copy {
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+/*Each div for the copy buttons*/
+.button__list--div {
+  display: none;
+}
+/*Action buttons are buttons that do stuff, such as opening a page*/
+.button--action {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-right: 2px;
+  margin-left: 2px;
+}
