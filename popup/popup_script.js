@@ -1,4 +1,16 @@
 //Remember https://imgflip.com/i/57j1ib
+window.onload = function () {
+  const request = "Onload - Toolbar State."
+  chrome.runtime.sendMessage(request, function () {
+    chrome.storage.sync.get('toolbar_state', function (data) {
+      toolbar_state = data['toolbar_state'];
+      //console.log('Onload - Got the state and set it to ' + toolbar_state);
+      if (toolbar_state % 2 == 0) {
+        toolbar.textContent = 'Close Toolbar';
+      }
+    });
+  });
+};
 //Code for the dropdown to show the copy buttons
 document
   .getElementById("select_form")
@@ -65,19 +77,6 @@ function worker_messenger() {
     }
   }
 }
-
-window.onload = function () {
-  const request = "Onload - Toolbar State."
-  chrome.runtime.sendMessage(request, function () {
-    chrome.storage.sync.get('toolbar_state', function (data) {
-      toolbar_state = data['toolbar_state'];
-      //console.log('Onload - Got the state and set it to ' + toolbar_state);
-      if (toolbar_state % 2 == 0) {
-        toolbar.textContent = 'Close Toolbar';
-      }
-    });
-  });
-};
 
 
 //Come to the dark side, we use cookies!

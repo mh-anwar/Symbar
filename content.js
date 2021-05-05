@@ -59,7 +59,9 @@ function toolbar_injector(message) {
   } else if (message === "toolbar_off") {
     document.getElementById('copy_toolbar').remove()
   }
+  return true
 }
+
 chrome.runtime.onMessage.addListener(toolbar_injector);
 
 /*
