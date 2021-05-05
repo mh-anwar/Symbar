@@ -1,9 +1,0 @@
-.divr {
-  color: black;
-  background-color: rgb(197, 196, 196);
-  position: fixed;
-  bottom: 0;
-  z-index: 10000;
-  width: 100%;
-  height: 200px;
-}

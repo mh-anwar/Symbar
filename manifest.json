@@ -4,7 +4,7 @@
     "version": "0.1.1",
     "description": "An extension that copies symbols and accents to your clipboard.",
     "offline_enabled": true,
-    "options_page": "settingsPage/settingsBasic.html",
+    "options_page": "settings/settings.html",
     "minimum_chrome_version": "46",
     "action": {
         "default_popup": "popup/popup.html",
@@ -34,8 +34,12 @@
                 "content.js"
             ],
             "css": [
-                "toolbar/contentStyle.css"
+                "toolbar/content_styling.css"
             ]
         }
-    ]
+    ],
+    "web_accessible_resources": [{
+        "resources": ["content_injection.html"],
+        "matches": ["<all_urls>"]
+      }]
 }
