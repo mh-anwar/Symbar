@@ -10,7 +10,7 @@ function toolbar_injector(message) {
     div.setAttribute("id", "copy_toolbar")
     document.body.appendChild(div);
 
-    fetch(chrome.runtime.getURL('content_injection.html'))
+    fetch(chrome.runtime.getURL('toolbar/content_injection.html'))
       .then(response => response.text())
       .then(data => {
         document.getElementById('copy_toolbar').innerHTML = data;

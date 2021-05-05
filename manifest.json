@@ -39,7 +39,7 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources": ["content_injection.html"],
+        "resources": ["toolbar/content_injection.html"],
         "matches": ["<all_urls>"]
       }]
 }
