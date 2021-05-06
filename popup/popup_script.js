@@ -1,12 +1,19 @@
 //Remember https://imgflip.com/i/57j1ib
 window.onload = function () {
-  const request = "Onload - Toolbar State."
-  chrome.runtime.sendMessage(request, function () {
+  let request = "popup_loaded_send_toolbar_state";
+  console.log("HERE");
+  chrome.runtime.sendMessage(request, function (response) {
+    console.log(response)
+    console.log("now here");
     chrome.storage.sync.get('toolbar_state', function (data) {
+      console.log("now here and syncingggg");
       toolbar_state = data['toolbar_state'];
-      //console.log('Onload - Got the state and set it to ' + toolbar_state);
+      console.log('Onload - Got the state and set it to ' + toolbar_state);
       if (toolbar_state % 2 == 0) {
         toolbar.textContent = 'Close Toolbar';
+      }
+      if (toolbar_state % 2 == 1) {
+        toolbar.textContent = 'Open Toolbar (CTRL+Q)';
       }
     });
   });
@@ -54,8 +61,7 @@ toolbar.addEventListener("click", worker_messenger);
 
 function worker_messenger() {
   // Send message to background:
-  const request = "Toolbar State."
-
+  let request = "toolbar_state"
   chrome.runtime.sendMessage(request, function (response) {
     console.log(response);
     chrome.storage.sync.get('toolbar_state', function (data) {
@@ -76,7 +82,5 @@ function worker_messenger() {
       toolbar.textContent = 'Open Toolbar';
     }
   }
-}
+};
 
-
-//Come to the dark side, we use cookies!

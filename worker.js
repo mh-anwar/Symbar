@@ -4,21 +4,14 @@ var states_of_buttons = {};
 states_of_buttons['toolbar_state'] = onOrOff;
 
 chrome.runtime.onInstalled.addListener((details) => {
-    const currentVersion = chrome.runtime.getManifest().version
-    const previousVersion = details.previousVersion
     const reason = details.reason
-
-    console.log('Previous Version: ${previousVersion }')
-    console.log('Current Version: ${currentVersion }')
-
     switch (reason) {
         case 'install':
             chrome.tabs.create({ url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" })
             //replace with tutorial
             break;
         case 'update':
-            console.log('User has updated their extension.')
-            chrome.tabs.create({ url: "https://github.com/mh-anwar/CopyThat/releases" })
+            //chrome.tabs.create({ url: "https://github.com/mh-anwar/CopyThat/releases" })
             chrome.tabs.create({ url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" })
             //remove after t-(rick)-rolling eseer
             break;
@@ -29,31 +22,50 @@ chrome.runtime.onInstalled.addListener((details) => {
         console.log("On Install: state is set to 1")
     });
 });
-
 chrome.runtime.setUninstallURL("https://forms.gle/MC9oZ2kpMdz8w2Me8")
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        if (request == "Toolbar State.") {
+        //sender parameter is MANDATORY
+        if (request == "toolbar_state") {
             sendResponse(onOrOff);
             onOrOff++;
             states_of_buttons['toolbar_state'] = onOrOff;
-            chrome.storage.sync.set(states_of_buttons, function () {
-                //console.log("Worker set toolbar_state to " + onOrOff);
-            });
+            chrome.storage.sync.set(states_of_buttons, function () { });
         }
-        else if (request == "Onload - Toolbar State.") {
+        if (request == "popup_loaded_send_toolbar_state") {
+            console.log("Sending stuff to you know who")
+            sendResponse("saving state")
             states_of_buttons['toolbar_state'] = onOrOff;
             chrome.storage.sync.set(states_of_buttons, function () { });
         }
-        else if (request == "Content Script - Toolbar State Changed.") {
-            //states_of_buttons['toolbar_state'] = onOrOff;]
+        else if (request == "toolbar_state_changed") {
             sendResponse("message recieved")
             chrome.storage.sync.get(states_of_buttons, function () { });
         }
         else {
             sendResponse({ result: "error", message: `Invalid 'cmd'` });
         }
-
         return true;
     });
+
+/*
+https://developer.chrome.com/docs/extensions/reference/commands/
+chrome.commands.onCommand.addListener(function (command) {
+if (command === "toggle-toolbar") {
+    console.log('Command:');
+
+}
+console.log('Command:');
+"commands": {
+    "toggle-toolbar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "windows": "Ctrl+Shift+O"
+      },
+      "description": "Toggle feature foo",
+      "global": true
+    }
+  }
+});
+*/

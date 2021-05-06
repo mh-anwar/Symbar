@@ -7,21 +7,23 @@
     <meta name="robots" content="nofollow">
     <meta name="description" content="FAQ">
 </head>
+<header class="header">
+    <div>
+        <h1>Frequently Asked Questions</h1>
+    </div>
+    <div class="header__nav">
+        <a class="header__nav-links" href="settings.html">Settings</a>
+        <a class="header__nav-links header__nav--active-page">FAQ</a>
+        <a class="header__nav-links" target="_blank" href="https://forms.gle/P5SEnApNni7RQFbf7">Send us
+            Feedback</a>
+        <a class="header__nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/issues">Report
+            a Bug</a>
+        <a class="header__nav-links" target="_blank" href="https://youtu.be/dQw4w9WgXcQ?t=1">Tutorial</a>
+        <a class="header__nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/releases">Changelog</a>
+    </div>
+</header>
 
 <body>
-    <header class="header">
-        <h1>Symbols & Accents Toolkit Settings</h1>
-    </header>
-    <div class="navigation">
-        <a class="navigation__hyperlinks" href="settings.html">Settings</a>
-        <a class="navigation__hyperlinks navigation__hyperlinks--activePage">FAQ</a>
-        <a class="navigation__hyperlinks" target="_blank" href="https://forms.gle/P5SEnApNni7RQFbf7">Send us
-            Feedback</a>
-        <a class="navigation__hyperlinks" target="_blank" href="https://github.com/mh-anwar/CopyThat/issues">Report a
-            Bug</a>
-        <a class="navigation__hyperlinks" target="_blank"
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Tutorial</a>
-    </div>
     <h2>Do you collect/sell my browsing history, location, etc?</h2>
     <p>We belive in user privacy and so we do not insert ads into our content, sell your data or collect your data,
         and we never will.</p>
@@ -29,6 +31,22 @@
     <p>Yes, currently our extension is availible in all Chromium based browsers (Microsoft Edge, Brave, etc). Currently
         we are working on building a Firefox Add-On. Want our extension in a specific browser? <a target="_blank"
             href="https://forms.gle/P5SEnApNni7RQFbf7">Send us a Message</a></p>
+
+    <h2>What permissions do you use, and why do you use them?</h2>
+    <p>We use the following permissions:
+    <blockquote>
+        "permissions": [
+        "activeTab",
+        "tabs",
+        "storage"
+        ],
+    </blockquote>
+    We use these permissions to improve your experience.
+    The "activeTab", "tabs" and "storage" permissions allows us to display the toolbar. The "storage" permission
+    also allows us
+    to save your preferences to your computer so that you don't have to constantly set them.
+    </p>
+
 </body>
 <link rel="stylesheet" type="text/css" href="../settings/settings_styling.css">
 <script src="../settings/settings_script.js"></script>

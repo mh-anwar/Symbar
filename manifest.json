@@ -22,8 +22,7 @@
     "permissions": [
         "activeTab",
         "tabs",
-        "storage",
-        "scripting"
+        "storage"
     ],
     "content_scripts": [
         {
@@ -39,7 +38,11 @@
         }
     ],
     "web_accessible_resources": [{
-        "resources": ["toolbar/content_injection.html"],
+        "resources": [
+            "toolbar/content_injection.html",
+            "toolbar/minimize_injection.html",
+            "toolbar/content_script.js"
+        ],
         "matches": ["<all_urls>"]
       }]
 }
