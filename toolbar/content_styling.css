@@ -1,11 +1,11 @@
 .toolbar_base {
-  color: black;
-  background-color: rgb(197, 196, 196);
+  color: white;
+  background-color: rgb(36, 36, 36);
   position: fixed;
   bottom: 0;
   z-index: 10000;
-  width: 100%;
-  height: 200px;
+  width: 99.7%;
+  height: 150px;
   opacity: 0.5;
   display: block;
 }
@@ -34,6 +34,7 @@
   display: inline-table;
   vertical-align: top;
   width: 85px;
+  margin-left: 5px;
 }
 .toolbar__select-form:hover {
   background-color: whitesmoke;
@@ -49,6 +50,8 @@
 .toolbar__button--copy {
   margin-top: 5px;
   margin-right: 10px;
+
+  margin-left: 2px;
 }
 /*potential removal*/
 .toolbar__button-list--copy {
@@ -65,5 +68,5 @@
   margin-top: 2px;
   margin-bottom: 2px;
   margin-right: 2px;
-  margin-left: 2px;
+  margin-left: 5px;
 }
