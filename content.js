@@ -9,6 +9,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
     console.log(changes.toolbar_height?.newValue);
     toolbar_height = changes.toolbar_height?.newValue + '%'
     var toolbar = document.getElementById('copy_toolbar');
+    //UPDATE to document.contains yee
     if (typeof (toolbar) != 'undefined' && toolbar != null) {
       document.getElementById('copy_toolbar').style.height = toolbar_height;
     }
