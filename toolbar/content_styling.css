@@ -5,9 +5,11 @@
   bottom: 0;
   z-index: 10000;
   width: 99.7%;
-  height: 150px;
-  opacity: 0.5;
+  height: 20%;
+  opacity: 0.9;
   display: block;
+  border: 0.2px solid transparent;
+  border-radius: 5px 5px 0px 0px;
 }
 .toolbar_base--minimized {
   color: white;

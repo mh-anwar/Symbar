@@ -1,5 +1,8 @@
 console.log('Settings script operational, SIR!')
 //Code to open Basic Settings dropdown automatically
+let toolbar_height_slider = document.getElementById("toolbar_height");
+let toolbar_height_value_output = document.getElementById("toolbar_height_value");
+
 var dropdown = document.getElementsByClassName('dropdown');
 for (var i = 0; i < dropdown.length; i++) {
     var panel = dropdown[i].nextElementSibling;
@@ -62,9 +65,15 @@ checkbox.addEventListener('change', function () {
     theme();
 });
 
-
-let toolbar_height = document.getElementById('toolbar_height')
 toolbar_height.addEventListener('input', function () {
-    chrome.storage.sync.set({ 'toolbar_height': toolbar_height.value }, function () {
-    });
+    chrome.storage.sync.set({ 'toolbar_height': toolbar_height_slider.value });
+    toolbar_height_value_output.innerHTML = toolbar_height_slider.value + "%";
 })
+
+window.onload = function () {
+    chrome.storage.sync.get('toolbar_height', function (data) {
+        toolbar_height_slider.value = data.toolbar_height;
+        console.log("SET THE VALUE")
+        toolbar_height_value_output.innerHTML = data.toolbar_height + "%";
+    })
+}

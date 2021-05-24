@@ -19,6 +19,8 @@ chrome.runtime.onInstalled.addListener((details) => {
     };
     chrome.storage.sync.set(states_of_buttons);
     //Above we set the state of the toolbar to 0 (on install, that is)
+    chrome.storage.sync.set({ 'toolbar_height': 20 })
+    //Above we set the toolbar height
 });
 
 chrome.runtime.setUninstallURL('https://forms.gle/MC9oZ2kpMdz8w2Me8');

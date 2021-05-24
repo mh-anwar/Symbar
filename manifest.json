@@ -40,8 +40,7 @@
     "web_accessible_resources": [{
         "resources": [
             "toolbar/content_injection.html",
-            "toolbar/minimize_injection.html",
-            "toolbar/content_script.js"
+            "toolbar/minimize_injection.html"
         ],
         "matches": ["<all_urls>"]
       }]
