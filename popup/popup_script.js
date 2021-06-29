@@ -51,7 +51,6 @@ function toolbar_opener(state, tabs) {
 }
 //Code for the dropdown to show the copy buttons
 select_form.addEventListener('change', function () {
-  'use strict';
   var buttons_toggle = document.querySelector('.buttons_toggle'),
     target = document.getElementById(this.value);
   if (buttons_toggle !== null) {
