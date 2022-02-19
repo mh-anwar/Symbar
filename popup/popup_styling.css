@@ -4,11 +4,24 @@ body {
   min-width: 250px;
   max-height: 250px;
   background-color: aliceblue;
+  padding: 1%;
+}
+.recently-used {
+  display: flex;
+  flex-direction: column;
+}
+.recently-used__title {
+  font-size: 16px;
+  margin: 1%;
+  margin-left: none;
 }
 .button {
   display: inline-block;
   margin-top: 5px;
   margin-right: 10px;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  padding: 7px;
 }
 /*All the buttons that copy to clipboard*/
 .button--copy {
@@ -36,6 +49,7 @@ body {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  align-items: center;
 }
 /*Our logo image on the popup*/
 .header__logo {

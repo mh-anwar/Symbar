@@ -1,47 +1,40 @@
 {
-    "manifest_version": 3,
-    "name": "Symbols & Accents Toolkit",
-    "version": "0.1.1",
-    "description": "An extension that copies symbols and accents to your clipboard.",
-    "offline_enabled": true,
-    "options_page": "settings/settings.html",
-    "minimum_chrome_version": "46",
-    "action": {
-        "default_popup": "popup/popup.html",
-        "default_title": "Symbols & Accents Toolkit"
-    },
-    "icons": {
-        "16": "images/icon_16.png",
-        "32": "images/icon_32.png",
-        "48": "images/icon_48.png",
-        "128": "images/icon_128.png"
-    },
-    "background": {
-        "service_worker": "worker.js"
-    },
-    "permissions": [
-        "activeTab",
-        "tabs",
-        "storage"
-    ],
-    "content_scripts": [
-        {
-            "matches": [
-                "<all_urls>"
-            ],
-            "js": [
-                "content.js"
-            ],
-            "css": [
-                "toolbar/content_styling.css"
-            ]
-        }
-    ],
-    "web_accessible_resources": [{
-        "resources": [
-            "toolbar/content_injection.html",
-            "toolbar/minimize_injection.html"
-        ],
-        "matches": ["<all_urls>"]
-      }]
+  "manifest_version": 3,
+  "name": "Symbols & Accents Toolkit",
+  "version": "0.1.1",
+  "description": "An extension that copies symbols and accents to your clipboard.",
+  "offline_enabled": true,
+  "options_page": "settings/settings.html",
+  "minimum_chrome_version": "46",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Symbols & Accents Toolkit"
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "background": {
+    "service_worker": "worker.js"
+  },
+  "permissions": ["activeTab", "tabs", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["toolbar/content_styling.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "toolbar/content_injection.html",
+        "toolbar/minimize_injection.html"
+      ],
+      "matches": ["<all_urls>"],
+      "exclude_matches": ["chrome:*", "brave:*"]
+    }
+  ]
 }

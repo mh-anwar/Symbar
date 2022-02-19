@@ -9,20 +9,25 @@ Use single quotes (instead of double quotes) where necessary
 let toolbar = document.getElementById('open_toolbar');
 let select_form = document.getElementById('select_form');
 let options_button = document.getElementById('options_button');
-let copyButtonClass = document.getElementsByClassName('button--copy');
-
+let copy_button_class = document.getElementsByClassName('button--copy');
+let recent_button_container = document.getElementById(
+  'recent_buttons_container'
+);
 //Sends message to the tab then calls a function to run
 async function content_script_messenger(function_to_run) {
   let tabs_info = await get_current_tab();
-  console.log(tabs_info);
   let content_script_message = 'state_of_toolbar';
-  chrome.tabs.sendMessage(
-    tabs_info.id,
-    content_script_message,
-    function (response) {
-      function_to_run(response, tabs_info);
-    }
-  );
+  if (tabs_info.url.match('^chrome:') === null) {
+    chrome.tabs.sendMessage(
+      tabs_info.id,
+      content_script_message,
+      function (response) {
+        if (response !== undefined) {
+          function_to_run(response, tabs_info);
+        }
+      }
+    );
+  }
 }
 //Gets tab data
 async function get_current_tab() {
@@ -59,13 +64,15 @@ function toolbar_opener(response, tabs_info) {
 
 //Code for the dropdown to show the copy buttons
 function show_copy_buttons() {
-  let buttons_toggle = document.querySelector('.buttons_toggle'),
+  let toggled_div = document.querySelector('.toggled_div'),
     target = document.getElementById(this.value);
-  if (buttons_toggle !== null) {
-    buttons_toggle.className = 'button__list--div';
+  if (toggled_div !== null) {
+    toggled_div.className = 'button__list--div';
+    recent_button_container.style.display = 'flex';
   }
   if (target !== null) {
-    target.className = 'buttons_toggle';
+    target.className = 'toggled_div';
+    recent_button_container.style.display = 'none';
   }
 }
 
@@ -80,12 +87,33 @@ function open_options() {
 
 function attach_copy_buttons() {
   //Code for the Copy Function (for the copy buttons)
-  for (let i = 0; i < copyButtonClass.length; i++) {
-    copyButtonClass[i].addEventListener('click', function (event) {
+  for (let i = 0; i < copy_button_class.length; i++) {
+    copy_button_class[i].addEventListener('click', function (event) {
       let text_to_copy = event.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
     });
   }
+}
+
+function populate_dropdowns() {
+  let language_buttons = {
+    Math: ['&#969;', '&#8486'],
+    French: ['breh', 'to'],
+    Spanish: ['t'],
+    Greek: ['&#880;', '&#881;', '&#882;'],
+  };
+  for (let language in language_buttons) {
+    document.getElementById(language).innerHTML = language_buttons[
+      language
+    ].map((text) => `<button class="button button--copy">${text}</button>`);
+  }
+}
+
+function show_recently_used() {
+  let recently_used = ['#34335;'];
+  document.getElementById('recently_used').innerHTML = recently_used.map(
+    (text) => `<button class="button button--copy">${text}</button>`
+  );
 }
 
 function execute_popup_funcs() {
@@ -96,6 +124,8 @@ function execute_popup_funcs() {
     content_script_messenger(toolbar_opener)
   );
   options_button.addEventListener('click', open_options);
+  populate_dropdowns();
+  show_recently_used();
 }
 
 document.addEventListener('readystatechange', (event) => {
