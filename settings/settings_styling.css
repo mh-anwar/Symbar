@@ -1,11 +1,16 @@
 body {
   font-size: medium;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.dark-mode__page {
+  background-color: #161616;
+  color: white !important;
 }
 .header {
-  background-color: rgb(255, 58, 58);
+  background-color: inherit;
+  color: inherit;
   width: 100%;
-  color: black;
   display: flex;
   position: sticky;
   display: flex;
@@ -17,6 +22,8 @@ body {
   border-radius: 5px;
 }
 .header__nav {
+  background-color: inherit;
+  color: inherit;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -26,7 +33,7 @@ body {
 
 .header__nav-links {
   float: left;
-  color: black;
+  color: inherit;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -47,8 +54,8 @@ body {
 }
 
 .dropdown {
-  background-color: #eee;
-  color: #444;
+  background-color: inherit;
+  color: inherit;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -69,12 +76,15 @@ body {
 }
 
 .dropdown__panel {
+  background-color: inherit;
+  color: inherit;
   padding: 0px 0px 20px 20px;
   display: none;
-  background-color: white;
   overflow: hidden;
 }
 .dropdown__arrow {
+  background-color: inherit;
+  color: inherit;
   border: solid black;
   border-width: 0 4px 4px 0;
   display: inline-block;
@@ -83,6 +93,8 @@ body {
 }
 
 .dropdown__arrow--down {
+  background-color: inherit;
+  color: inherit;
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
 }

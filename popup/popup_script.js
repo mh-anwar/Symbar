@@ -1,6 +1,5 @@
-//Remember https://imgflip.com/i/57j1ib
 /*
-Please remember to use proper formatting:
+Remember to use proper formatting:
 ID's and names should be using 'snake_case' 
 Classes should be using 'BEM'
 Add a semicolon to the appropriate lines
@@ -13,6 +12,12 @@ let copy_button_class = document.getElementsByClassName('button--copy');
 let recent_button_container = document.getElementById(
   'recent_buttons_container'
 );
+var language_buttons = {
+  Math: ['&#969;', '&#8486'],
+  French: ['breh', 'to'],
+  Spanish: ['t'],
+  Greek: ['&#880;', '&#881;', '&#882;'],
+};
 //Sends message to the tab then calls a function to run
 async function content_script_messenger(function_to_run) {
   let tabs_info = await get_current_tab();
@@ -86,6 +91,7 @@ function open_options() {
 }
 
 function attach_copy_buttons() {
+  let copy_button_class = document.getElementsByClassName('button--copy');
   //Code for the Copy Function (for the copy buttons)
   for (let i = 0; i < copy_button_class.length; i++) {
     copy_button_class[i].addEventListener('click', function (event) {
@@ -96,16 +102,14 @@ function attach_copy_buttons() {
 }
 
 function populate_dropdowns() {
-  let language_buttons = {
-    Math: ['&#969;', '&#8486'],
-    French: ['breh', 'to'],
-    Spanish: ['t'],
-    Greek: ['&#880;', '&#881;', '&#882;'],
-  };
   for (let language in language_buttons) {
-    document.getElementById(language).innerHTML = language_buttons[
-      language
-    ].map((text) => `<button class="button button--copy">${text}</button>`);
+    document.getElementById(language).innerHTML += `<div>
+          ${language_buttons[language]
+            .map(
+              (text) => `<button class="button button--copy">${text}</button>`
+            )
+            .join(' ')}
+       </div>`;
   }
 }
 
@@ -119,12 +123,12 @@ function show_recently_used() {
 function execute_popup_funcs() {
   content_script_messenger(toolbar_button_textcontent);
   select_form.addEventListener('change', show_copy_buttons);
-  attach_copy_buttons();
   toolbar.addEventListener('click', () =>
     content_script_messenger(toolbar_opener)
   );
   options_button.addEventListener('click', open_options);
   populate_dropdowns();
+  attach_copy_buttons();
   show_recently_used();
 }
 
