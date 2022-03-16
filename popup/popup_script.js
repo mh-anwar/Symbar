@@ -13,10 +13,117 @@ let recent_button_container = document.getElementById(
   'recent_buttons_container'
 );
 var language_buttons = {
-  Math: ['&#969;', '&#8486'],
-  French: ['breh', 'to'],
-  Spanish: ['t'],
-  Greek: ['&#880;', '&#881;', '&#882;'],
+  Math: [
+    '&#43;',
+    '&#45;',
+    '&#0215;',
+    '&#0247;',
+    '&#37;',
+    '&#0137;',
+    '&#40;',
+    '&#41;',
+    '&#241;',
+    '&#47;',
+    '&#0188;',
+    '&#0189;',
+    '&#0190;',
+    '&#46;',
+    '&#240;',
+    '&#61;',
+    '&#247;',
+    '&#60;',
+    '&#62;',
+    '&#242;',
+    '&#243;',
+    '&#251;',
+    '&#252;',
+    '&#0185;',
+    '&#0178;',
+    '&#0179;',
+    '&#227;',
+    '&#248;',
+    '&#45;',
+    '&#236;',
+    '&#230;',
+    '&#228;',
+    '&#239;',
+    '&#244;',
+    '&#245;',
+  ],
+  French: [
+    '&#0192;',
+    '&#0224;',
+    '&#0193;',
+    '&#0225;',
+    '&#0194;',
+    '&#0226;',
+    '&#0195;',
+    '&#0227;',
+    '&#0196;',
+    '&#0228;',
+    '&#0199;',
+    '&#0231;',
+    '&#0200;',
+    '&#0232;',
+    '&#0201;',
+    '&#0233;',
+    '&#0202;',
+    '&#0234;',
+    '&#0203;',
+    '&#0235;',
+    '&#0204;',
+    '&#0236;',
+    '&#0205;',
+    '&#0237;',
+    '&#0206;',
+    '&#0238;',
+    '&#0207;',
+    '&#0239;',
+    '&#165;',
+    '&#164;',
+    '&#0210;',
+    '&#0242;',
+    '&#0211;',
+    '&#0243;',
+    '&#0212;',
+    '&#0244;',
+    '&#0213;',
+    '&#0245;',
+    '&#0214;',
+    '&#0246;',
+    '&#0138;',
+    '&#0154;',
+    '&#0218;',
+    '&#0249;',
+    '&#0219;',
+    '&#0250;',
+    '&#0220;',
+    '&#0251;',
+    '&#0217;',
+    '&#0252;',
+    '&#0221;',
+    '&#0253;',
+    '&#0159;',
+    '&#0255;',
+    '&#0142;',
+    '&#0158;',
+  ],
+  Greek: [
+    '&#224;',
+    '&#225;',
+    '&#226;',
+    '&#235;',
+    '&#238;',
+    '&#233;',
+    '&#227;',
+    '&#230;',
+    '&#228;',
+    '&#229;',
+    '&#231;',
+    '&#232;',
+    '&#237;',
+    '&#234;',
+  ],
 };
 //Sends message to the tab then calls a function to run
 async function content_script_messenger(function_to_run) {
@@ -97,6 +204,13 @@ function attach_copy_buttons() {
     copy_button_class[i].addEventListener('click', function (event) {
       let text_to_copy = event.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
+      chrome.storage.sync.get('recently_used', function (data) {
+        console.log(data);
+        data.recently_used.push(text_to_copy);
+        console.log(data);
+        chrome.storage.sync.set({ recently_used: data.recently_used });
+        console.log(data);
+      });
     });
   }
 }
@@ -114,10 +228,11 @@ function populate_dropdowns() {
 }
 
 function show_recently_used() {
-  let recently_used = ['#34335;'];
-  document.getElementById('recently_used').innerHTML = recently_used.map(
-    (text) => `<button class="button button--copy">${text}</button>`
-  );
+  chrome.storage.sync.get('recently_used', function (data) {
+    document.getElementById('recently_used').innerHTML = data.recently_used.map(
+      (text) => `<button class="button button--copy">${text}</button>`
+    );
+  });
 }
 
 function execute_popup_funcs() {
@@ -128,8 +243,8 @@ function execute_popup_funcs() {
   );
   options_button.addEventListener('click', open_options);
   populate_dropdowns();
-  attach_copy_buttons();
   show_recently_used();
+  attach_copy_buttons();
 }
 
 document.addEventListener('readystatechange', (event) => {

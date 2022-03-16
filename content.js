@@ -1,5 +1,4 @@
-console.log('Content Script is running, SIR!');
-//Apr 05, 09:41pm [YIP]: the content script is sandboxed to within the screen
+//Apr 05, 09:41pm: the content script is sandboxed to within the screen
 var state_of_toolbar = 0;
 let toolbar_height = '20%';
 
