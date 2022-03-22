@@ -1,4 +1,4 @@
-.toolbar_base {
+.copythat_toolbar_base {
   color: white;
   background-color: rgb(36, 36, 36);
   position: fixed;
@@ -11,7 +11,7 @@
   border: 0.2px solid transparent;
   border-radius: 5px 5px 0px 0px;
 }
-.toolbar_base--minimized {
+.copythat_toolbar_base--minimized {
   color: white;
   background-color: rgb(36, 36, 36);
   position: fixed;
@@ -22,7 +22,7 @@
   opacity: 1;
   display: block;
 }
-.mini_toolbar {
+.mini_copythat_toolbar {
   color: white;
   background-color: rgb(36, 36, 36);
   position: fixed;
@@ -35,26 +35,26 @@
   border: 0.2px solid transparent;
   border-radius: 5px 5px 5px 5px;
 }
-.toolbar_base:hover {
+.copythat_toolbar_base:hover {
   opacity: 1;
 }
-/*CSS for toolbar content*/
+/*CSS for copythat_toolbar content*/
 /*The instructions and the logo image container*/
-.toolbar__header {
+.copythat_toolbar__header {
   display: flex;
   flex-direction: row;
 }
 /*Select Form*/
-.toolbar__select-form {
+.copythat_toolbar__select-form {
   display: inline-table;
   vertical-align: top;
   width: 85px;
   margin-left: 5px;
 }
-.toolbar__select-form:hover {
+.copythat_toolbar__select-form:hover {
   background-color: whitesmoke;
 }
-.toolbar__button {
+.copythat_toolbar__button {
   display: inline-block;
   margin-top: 5px;
   margin-right: 10px;
@@ -62,24 +62,23 @@
   min-width: 20px;
 }
 /*All the buttons that copy to clipboard*/
-.toolbar__button--copy {
+.copythat_toolbar__button--copy {
   margin-top: 5px;
   margin-right: 10px;
-
   margin-left: 2px;
 }
 /*potential removal*/
-.toolbar__button-list--copy {
+.copythat_toolbar__button-list--copy {
   max-height: 100px;
   overflow-y: auto;
 }
 
 /*Each div for the copy buttons*/
-.toolbar__button-list--div {
+.copythat_toolbar__button-list--div {
   display: none;
 }
 /*Action buttons are buttons that do stuff, such as opening a page*/
-.toolbar__button--action {
+.copythat_toolbar__button--action {
   margin-top: 2px;
   margin-bottom: 2px;
   margin-right: 2px;

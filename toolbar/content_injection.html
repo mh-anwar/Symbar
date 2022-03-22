@@ -1,38 +1,38 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
+<!--ID's and classnames should be VERY unique so as to 
+    not interfere with the page the element is being 
+    inserted onto-->
 
 <body>
     <div class="toolbar__header">
         <div>
-            <button id="close_toolbar" class="toolbar__button--action">Close Toolbar</button>
-            <button id="minimize_toolbar" class="toolbar__button--action">Minimize Toolbar</button>
+            <button id="copythat_close_toolbar" class="toolbar__button--action">Close Toolbar</button>
+            <button id="copythat_minimize_toolbar" class="toolbar__button--action">Minimize Toolbar</button>
+            <button id="options_button" class="button button--action">Settings</button>
         </div>
     </div>
-    <select id="toolbar__select-form" class="toolbar__select-form">
-        <option value="">Select...</option>
-        <option value="Math">Math</option>
-        <option value="French">French</option>
-        <option value="Spanish">Spanish</option>
-        <option value="Greek">Greek</option>
-    </select>
-    <div class="toolbar__button-list--copy">
-        <div id="Math" class="toolbar__button-list--div">
-            <button class="toolbar__button toolbar__button--copy">&#8486;</button>
-            <button class="toolbar__button toolbar__button--copy">&#969;</button>
-        </div>
-        <div id="French" class="toolbar__button-list--div">
-            <button class="toolbar__button toolbar__button--copy">&#0609;</button>
-            <button class="toolbar__button toolbar__button--copy">&#8486;</button>
-        </div>
-        <div id="Spanish" class="toolbar__button-list--div">
-            <button class="toolbar__button toolbar__button--copy">&#0609;</button>
-            <button class="toolbar__button toolbar__button--copy">&#8486;</button>
-        </div>
-        <div id="Greek" class="toolbar__button-list--div">
-            <button class="toolbar__button toolbar__button--copy">&#0609;</button>
-            <button class="toolbar__button toolbar__button--copy">&#8486;</button>
-        </div>
+
+
+    <div class="header">
+        <select id="select_form" class="header-select-form header-select-form__arrow">
+            <option value="">Recently Used</option>
+            <option value="Math">Math</option>
+            <option value="French">French</option>
+
+            <option value="Greek">Greek</option>
+        </select>
     </div>
+    <div class="recently-used" id="recent_buttons_container">
+        <div id="recently_used"></div>
+    </div>
+    <div class="button__list--copy">
+        <div id="Math" class="button__list--div"></div>
+        <div id="French" class="button__list--div"></div>
+        <div id="Greek" class="button__list--div"></div>
+    </div>
+    <div>
+
 </body>
 
 </html>

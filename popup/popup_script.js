@@ -229,9 +229,9 @@ function populate_dropdowns() {
 
 function show_recently_used() {
   chrome.storage.sync.get('recently_used', function (data) {
-    document.getElementById('recently_used').innerHTML = data.recently_used.map(
-      (text) => `<button class="button button--copy">${text}</button>`
-    );
+    document.getElementById('recently_used').innerHTML = data.recently_used
+      .map((text) => `<button class="button button--copy">${text}</button>`)
+      .join(' ');
   });
 }
 
@@ -245,6 +245,11 @@ function execute_popup_funcs() {
   populate_dropdowns();
   show_recently_used();
   attach_copy_buttons();
+  chrome.storage.sync.get('mode', function (data) {
+    if (data.mode == 'dark') {
+      document.body.classList.add('dark__mode');
+    }
+  });
 }
 
 document.addEventListener('readystatechange', (event) => {
