@@ -235,6 +235,14 @@ function show_recently_used() {
   });
 }
 
+function set_dark_mode_var() {
+  let root = document.querySelector(':root');
+  var rs = getComputedStyle(root);
+  root.style.setProperty('--back', '#000509');
+  root.style.setProperty('--fore', '#0d1117');
+  root.style.setProperty('--color', '#c2cad2');
+}
+
 function execute_popup_funcs() {
   content_script_messenger(toolbar_button_textcontent);
   select_form.addEventListener('change', show_copy_buttons);
@@ -247,7 +255,8 @@ function execute_popup_funcs() {
   attach_copy_buttons();
   chrome.storage.sync.get('mode', function (data) {
     if (data.mode == 'dark') {
-      document.body.classList.add('dark__mode');
+      set_dark_mode_var();
+      document.body.classList.add('dark-mode__page');
     }
   });
 }

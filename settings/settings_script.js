@@ -28,14 +28,29 @@ for (var i = 0; i < dropdown.length; i++) {
 //Set document theme/mode automatically
 function set_mode(event) {
   if (event.target.checked) {
-    chrome.storage.sync.set({ mode: 'dark' });
+    set_dark_mode_var();
     document.body.classList.add('dark-mode__page');
+    chrome.storage.sync.set({ mode: 'dark' });
   } else {
-    chrome.storage.sync.set({ mode: 'light' });
+    set_light_mode_var();
     document.body.classList.remove('dark-mode__page');
+    chrome.storage.sync.set({ mode: 'light' });
   }
 }
-
+function set_dark_mode_var() {
+  let root = document.querySelector(':root');
+  var rs = getComputedStyle(root);
+  root.style.setProperty('--back', '#000509');
+  root.style.setProperty('--fore', '#0d1117');
+  root.style.setProperty('--color', '#c2cad2');
+}
+function set_light_mode_var() {
+  let root = document.querySelector(':root');
+  var rs = getComputedStyle(root);
+  root.style.setProperty('--back', 'aliceblue');
+  root.style.setProperty('--fore', 'rgb(172, 169, 169)');
+  root.style.setProperty('--color', 'black');
+}
 checkbox.addEventListener('change', set_mode);
 
 toolbar_height.addEventListener('input', function () {
@@ -50,6 +65,7 @@ window.onload = function () {
   });
   chrome.storage.sync.get('mode', function (data) {
     if (data.mode == 'dark') {
+      set_dark_mode_var();
       document.body.classList.add('dark-mode__page');
       let is_checked = checkbox.getAttribute('checked');
       if (!is_checked) {

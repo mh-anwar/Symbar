@@ -1,14 +1,18 @@
+:root {
+  --back: aliceblue;
+  --fore: rgb(172, 169, 169);
+  --color: black;
+}
 body {
   overflow-x: hidden;
   overflow-y: scroll;
   min-width: 250px;
   max-height: 250px;
-  background-color: aliceblue;
+  background-color: var(--back);
+  color: var(--color);
   padding: 1%;
 }
-.dark__mode {
-  background-color: #0d1117;
-}
+
 .recently-used {
   display: flex;
   flex-direction: column;
@@ -28,15 +32,18 @@ body {
 }
 /*All the buttons that copy to clipboard*/
 .button--copy {
+  background-color: var(--fore);
+  border: 1.5px solid white;
+  color: inherit;
   margin-top: 5px;
   margin-right: 10px;
   margin-bottom: 5px;
   min-width: 30px;
   min-height: 20px;
+  opacity: 0.9;
 }
-.dark__mode .button--copy {
-  background-color: #1a1e24;
-  color: #c7cfd6;
+.button--copy:hover {
+  opacity: 1;
 }
 /*potential removal*/
 .button__list--copy {
@@ -49,22 +56,20 @@ body {
 }
 /*Action buttons are buttons that do stuff, such as opening a page*/
 .button--action {
+  background-color: var(--fore);
+  border: 1.5px solid white;
+  color: inherit;
   margin-top: 15px;
   margin-bottom: 5px;
   margin-right: 10px;
   margin-left: 0px;
 }
-/*The instructions and the logo image container*/
-.header {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-  align-items: center;
-}
+
 /*Select Form*/
-.header-select-form {
-  display: inline-table;
-  background-color: white;
+.select-form {
+  display: block;
+  background-color: var(--back);
+  color: var(--color);
   margin-top: 10px;
   margin-right: 10px;
   width: 100%;
@@ -75,14 +80,17 @@ body {
   /*For some weird reason padding fails 
   to work without !important property*/
   padding: 3% !important;
+  margin: 1px;
+  margin-bottom: 10px;
+  opacity: 0.8;
 }
-.dark__mode .header-select-form {
+.select-form:hover {
+  opacity: 1;
+}
+.dark__mode .select-form {
   background-color: #1a1e24;
 }
-.header-select-form:hover {
-  background-color: whitesmoke;
-}
-.header-select-form__arrow {
+.select-form__arrow {
   display: inline-block;
   padding: 3px;
 }

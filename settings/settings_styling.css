@@ -1,15 +1,19 @@
+:root {
+  --back: aliceblue;
+  --fore: rgb(172, 169, 169);
+  --color: black;
+}
 body {
   font-size: medium;
   font-family: 'Times New Roman', Times, serif;
+  background-color: var(--back);
+  color: var(--color);
 }
 
-.dark-mode__page {
-  background-color: #161616;
-  color: white !important;
-}
 .header {
-  background-color: inherit;
-  color: inherit;
+  background-color: var(--fore);
+  color: var(--color);
+  border: 2px solid white;
   width: 100%;
   display: flex;
   position: sticky;
@@ -17,13 +21,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-style: none;
-  border-width: 1px;
   border-radius: 5px;
 }
 .header__nav {
   background-color: inherit;
-  color: inherit;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -33,7 +34,7 @@ body {
 
 .header__nav-links {
   float: left;
-  color: inherit;
+  color: var(--color);
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -54,8 +55,9 @@ body {
 }
 
 .dropdown {
-  background-color: inherit;
+  background-color: var(--fore);
   color: inherit;
+  border: 1.5px solid white;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -76,7 +78,7 @@ body {
 }
 
 .dropdown__panel {
-  background-color: inherit;
+  background-color: var(--fore);
   color: inherit;
   padding: 0px 0px 20px 20px;
   display: none;
