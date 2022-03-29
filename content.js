@@ -108,8 +108,12 @@ function toolbar_minimizer() {
       state_of_toolbar = 0;
     });
 }
-
+function autotype(letter) {
+  let active_element = document.activeElement;
+  console.log(active_element);
+}
 function message_parser(message, sender, sendResponse) {
+  autotype('t');
   var toolbar = document.getElementById('copy_toolbar');
   var minimized_toolbar = document.getElementById('minimized_toolbar');
   if (message === 'state_of_toolbar') {
