@@ -4,7 +4,12 @@ chrome.runtime.onInstalled.addListener((details) => {
   const reason = details.reason;
   switch (reason) {
     case 'install':
-      chrome.tabs.create({ url: 'https://google.com' });
+      chrome.tabs.create({
+        url: './settings/welcome.html',
+      });
+      chrome.tabs.create({
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      });
       //replace with tutorial
       chrome.storage.sync.set({ toolbar_height: 20 });
       //Above we set the inital toolbar height
@@ -14,10 +19,8 @@ chrome.runtime.onInstalled.addListener((details) => {
     case 'update':
       //chrome.tabs.create({ url: 'https://github.com/mh-anwar/CopyThat/releases' })
       //Add once extension rolls out
-      //TODO Add greeting page with warning to reload all pages
       break;
-    //case 'chrome_update':
-    //^^^Yuse that case to detect when a user has updated their chrome browser
+    //case 'chrome_update': use to detect browser update
   }
   var states_of_buttons = {
     toolbar_state: 0,

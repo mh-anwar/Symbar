@@ -3,32 +3,36 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="popup_styling.css">
-    <script type="text/javascript" src="popup_script.js" async></script>
+    <script defer src="../accents.js"></script>
+    <script defer src="popup_script.js"></script>
+
 </head>
 
 <body>
-
-    <select id="select_form" class="select-form select-form__arrow">
+    <select id="select_form" class="select-form select-form-arrow">
         <option value="">Recently Used</option>
         <option value="Math">Math</option>
         <option value="French">French</option>
-
         <option value="Greek">Greek</option>
     </select>
 
     <div class="recently-used" id="recent_buttons_container">
-
         <div id="recently_used"></div>
     </div>
-    <div class="button__list--copy">
-        <div id="Math" class="button__list--div"></div>
-        <div id="French" class="button__list--div"></div>
-        <div id="Greek" class="button__list--div"></div>
-    </div>
+
+    <div id="Math" class="button-list"></div>
+    <div id="French" class="button-list"></div>
+    <div id="Greek" class="button-list"></div>
+
     <div>
-        <button id="options_button" class="button button--action">Settings</button>
-        <button id="open_toolbar" class="button button--action">Open Toolbar</button>
+        <button id="options_button" class="button action-button">Settings</button>
+        <button id="open_toolbar" class="button action-button">Open Toolbar</button>
     </div>
+    <input type="checkbox" id="autotype" name="autotype" value="False">
+    <label for="autotype">Autotype</label><br>
+
+    <div id="button_snackbar">Letter copied!</div>
+    <noscript> Something went wrong...JavaScript is required to run this extension but is not running...</noscript>
 </body>
 
 </html>

@@ -3,6 +3,8 @@
 <!--ID's and classnames should be VERY unique so as to 
     not interfere with the page the element is being 
     inserted onto-->
+<link rel="stylesheet" href="./content_styling.css">
+
 
 <body>
     <div class="toolbar__header">
@@ -14,24 +16,25 @@
     </div>
 
 
-    <div class="header">
-        <select id="select_form" class="header-select-form header-select-form__arrow">
-            <option value="">Recently Used</option>
-            <option value="Math">Math</option>
-            <option value="French">French</option>
-
-            <option value="Greek">Greek</option>
-        </select>
+    <div class="copythat_toolbar_main-box">
+        <div class="copythat_toolbar_select-box">
+            <select id="toolbar__select_form" class="header-select-form header-select-form__arrow">
+                <option value="Math">Math</option>
+                <option value="French">French</option>
+                <option value="Greek">Greek</option>
+            </select>
+            <div class="button__list--copy">
+                <div id="Math" class="button__list--div">ggg</div>
+                <div id="French" class="button__list--div"></div>
+                <div id="Greek" class="button__list--div"></div>
+            </div>
+        </div>
+        <div class="copythat_toolbar_recently-used-box">
+            <div class="recently-used" id="recent_buttons_container">
+                <div id="recently_used"></div>
+            </div>
+        </div>
     </div>
-    <div class="recently-used" id="recent_buttons_container">
-        <div id="recently_used"></div>
-    </div>
-    <div class="button__list--copy">
-        <div id="Math" class="button__list--div"></div>
-        <div id="French" class="button__list--div"></div>
-        <div id="Greek" class="button__list--div"></div>
-    </div>
-    <div>
 
 </body>
 

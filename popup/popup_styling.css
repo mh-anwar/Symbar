@@ -3,6 +3,7 @@
   --fore: rgb(172, 169, 169);
   --color: black;
 }
+
 body {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -11,17 +12,11 @@ body {
   background-color: var(--back);
   color: var(--color);
   padding: 1%;
-}
-
-.recently-used {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
-.recently-used__title {
-  font-size: 16px;
-  margin: 1%;
-  margin-left: none;
-}
+
 .button {
   display: inline-block;
   margin-top: 5px;
@@ -30,49 +25,52 @@ body {
   border-radius: 0.3rem;
   padding: 7px;
 }
+
 /*All the buttons that copy to clipboard*/
-.button--copy {
+.copy-button {
   background-color: var(--fore);
   border: 1.5px solid white;
   color: inherit;
-  margin-top: 5px;
-  margin-right: 10px;
-  margin-bottom: 5px;
+  margin: 5px;
   min-width: 30px;
-  min-height: 20px;
+  min-height: 30px;
   opacity: 0.9;
+  border-radius: 0.3rem;
 }
-.button--copy:hover {
+
+.copy-button:hover {
   opacity: 1;
 }
-/*potential removal*/
-.button__list--copy {
-  max-height: 100px;
-  overflow-y: auto;
-}
+
 /*Each div for the copy buttons*/
-.button__list--div {
+.button-list {
   display: none;
 }
+
+/*This class cannot be found in the
+  HTML, used to add scrolling to div
+*/
+.toggled-button-div {
+  display: flex;
+  flex-direction: row;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
 /*Action buttons are buttons that do stuff, such as opening a page*/
-.button--action {
+.action-button {
   background-color: var(--fore);
   border: 1.5px solid white;
   color: inherit;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  margin-right: 10px;
-  margin-left: 0px;
+  margin: 10px;
 }
 
 /*Select Form*/
 .select-form {
-  display: block;
   background-color: var(--back);
   color: var(--color);
-  margin-top: 10px;
-  margin-right: 10px;
-  width: 100%;
+  text-align: center;
+  width: 95%;
   height: 10%;
   outline: none;
   border: 2px solid rgb(146, 146, 146);
@@ -80,17 +78,107 @@ body {
   /*For some weird reason padding fails 
   to work without !important property*/
   padding: 3% !important;
-  margin: 1px;
-  margin-bottom: 10px;
   opacity: 0.8;
+  margin-bottom: 3px;
 }
+
 .select-form:hover {
   opacity: 1;
 }
-.dark__mode .select-form {
+
+/*Used in JS to set body to dark*/
+.dark-mode .select-form {
   background-color: #1a1e24;
 }
-.select-form__arrow {
+
+.select-form-arrow {
   display: inline-block;
-  padding: 3px;
+  padding: 5px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 5px 5px 5px 5px var(--fore);
+  border: 2px solid var(--fore);
+  border-radius: 5%;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(38, 41, 44);
+  border-radius: 10%;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(65, 68, 75);
+}
+
+#button_snackbar {
+  visibility: hidden;
+  width: 150px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 15px;
+  position: fixed;
+  z-index: 1;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#button_snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }

@@ -1,7 +1,7 @@
 //Apr 05, 09:41pm: the content script is sandboxed to within the screen
 var state_of_toolbar = 0;
 let toolbar_height = '20%';
-
+//Always be checking if toolbar height is changed
 chrome.storage.onChanged.addListener((changes, area) => {
   if (changes.toolbar_height?.newValue) {
     console.log(changes.toolbar_height?.newValue);
@@ -15,7 +15,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 //injection function
 function toolbar_inserter() {
   var div = document.createElement(div);
-  div.className = 'toolbar_base';
+  div.className = 'copythat_toolbar_base';
   div.id = 'copy_toolbar';
   document.body.appendChild(div);
   fetch(chrome.runtime.getURL('toolbar/content_injection.html'))
@@ -38,7 +38,7 @@ function toolbar_inserter() {
 }
 function toolbar_closer() {
   document
-    .getElementById('close_toolbar')
+    .getElementById('copythat_close_toolbar')
     .addEventListener('click', function () {
       chrome.storage.sync.get('toolbar_state', function (data) {
         chrome.storage.sync.set({ toolbar_state: (data.toolbar_state += 1) });
@@ -62,7 +62,7 @@ function toolbar_copier() {
 
 function toolbar_select_form_populator() {
   document
-    .getElementById('toolbar__select-form')
+    .getElementById('toolbar__select_form')
     .addEventListener('change', function () {
       var buttons_toggle = document.querySelector('.buttons_toggle'),
         target = document.getElementById(this.value);
@@ -91,7 +91,7 @@ function toolbar_minimized_remover() {
 }
 function toolbar_minimizer() {
   document
-    .getElementById('minimize_toolbar')
+    .getElementById('copythat_minimize_toolbar')
     .addEventListener('click', function () {
       var div = document.createElement(div);
       div.className = 'toolbar_base--minimized';

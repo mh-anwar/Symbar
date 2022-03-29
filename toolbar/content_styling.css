@@ -10,6 +10,7 @@
   display: block;
   border: 0.2px solid transparent;
   border-radius: 5px 5px 0px 0px;
+  position: fixed;
 }
 .copythat_toolbar_base--minimized {
   color: white;
@@ -21,6 +22,7 @@
   height: 30px;
   opacity: 1;
   display: block;
+  position: fixed;
 }
 .mini_copythat_toolbar {
   color: white;
@@ -34,6 +36,7 @@
   display: block;
   border: 0.2px solid transparent;
   border-radius: 5px 5px 5px 5px;
+  position: fixed;
 }
 .copythat_toolbar_base:hover {
   opacity: 1;
@@ -43,6 +46,18 @@
 .copythat_toolbar__header {
   display: flex;
   flex-direction: row;
+}
+.copythat_toolbar_main-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.copythat_toolbar_select-box {
+  display: inline-block;
+  background-color: inherit;
+  color: inherit;
+}
+.copythat_toolbar_recently-used-box {
 }
 /*Select Form*/
 .copythat_toolbar__select-form {
