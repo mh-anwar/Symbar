@@ -9,6 +9,5 @@ function set_dark_mode_var() {
 chrome.storage.sync.get('mode', function (data) {
   if (data.mode == 'dark') {
     set_dark_mode_var();
-    document.body.classList.add('dark-mode__page');
   }
 });
