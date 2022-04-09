@@ -6,44 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="nofollow">
     <meta name="description" content="Settings for Symbols & Accents Copier">
+    <link rel="stylesheet" type="text/css" href="../settings/settings_styling.css">
+    <script src="../settings/settings_script.js"></script>
 </head>
 
 <body>
     <header class="header">
-        <div>
-            <h1>Settings</h1>
-        </div>
         <div class="header__nav">
-            <a class="header__nav-links header__nav--active-page">Settings</a>
-            <a class="header__nav-links" href="faq.html">FAQ</a>
-            <a class="header__nav-links" target="_blank" href="https://forms.gle/P5SEnApNni7RQFbf7">Send us
+            <a class="nav-links nav-active-link">Settings</a>
+            <a class="nav-links">FAQ</a>
+            <a class="nav-links" target="_blank" href="https://forms.gle/P5SEnApNni7RQFbf7">Send us
                 Feedback</a>
-            <a class="header__nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/issues">Report
+            <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/issues">Report
                 a
                 Bug</a>
-            <a class="header__nav-links" target="_blank"
-                href="https://github.com/mh-anwar/CopyThat/releases">Changelog</a>
+            <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/releases">Changelog</a>
         </div>
     </header>
 
-    <button id="basic_settings" class="dropdown"><i class="dropdown__arrow dropdown__arrow--down"></i> Basic
-        Settings</button>
-    <div class="dropdown__panel">
-        <h3>Theme</h3>
-        <input type="checkbox" id="modeSwitch" value="Dark mode">Dark mode<br>
-    </div>
+    <div id="settings_tab" class="tab active-tab">
+        <div class="switch__container">
 
-    <button class="dropdown"><i class="dropdown__arrow dropdown__arrow--down"></i> Advanced Settings</button>
-    <div class="dropdown__panel">
-        <h3>Toolbar Height (% of page toolbar covers)</h3>
-        <input type="range" id="toolbar_height" min="5" max="99"><span id="toolbar_height_value"></span>
+            <label for="mode_checkbox" class="switch">
+                <input type="checkbox" id="mode_checkbox" value="Dark mode">
+                <span class="slider"></span>
+            </label>
+            <p>Dark Mode</p>
+        </div>
+        <div class="switch__container">
+
+            <label for="autotype_checkbox" class="switch">
+                <input type="checkbox" id="autotype_checkbox" value="Autotype">
+                <span class="slider"></span>
+            </label>
+            <p>Autotype (WARNING: This is untested <b>beta</b> functionality that can cause issues)</p>
+        </div>
+        <div class="switch__container">
+            <input type="range" id="toolbar_height" min="5" max="99"><span id="toolbar_height_value"></span>
+            <p>of page covered</p>
+        </div>
+
         <!--
             https://www.w3schools.com/howto/howto_js_rangeslider.asp
             Edit range slider to show current value and look better
         -->
+
+    </div>
+    <div id="faq_tab" class="tab">
+        <h2>Do you collect/sell my browsing history, location, etc?</h2>
+        <p>We believe in user privacy and so we do not insert ads into our content, sell your data or collect your data,
+            and we <b>never</b> will.</p>
+        <h2>Does this extension exist in other browsers?</h2>
+        <p>Currently the extension is only availible in all Chromium based browsers (Microsoft Edge, Brave, etc).</p>
+
+        <h2>What permissions do you use, and why do you use them?</h2>
+        <p>We use the following permissions:
+        <blockquote>
+            "permissions": [
+            "activeTab",
+            "tabs",
+            "storage"
+            ],
+        </blockquote>
+        We use these permissions to improve your experience.
+        The "activeTab", "tabs" and "storage" permissions allows us to display the toolbar. The "storage" permission
+        also allows us
+        to save your preferences to your computer so that you don't have to constantly set them.
+        </p>
     </div>
 </body>
-<link rel="stylesheet" type="text/css" href="../settings/settings_styling.css">
-<script src="../settings/settings_script.js"></script>
+
 
 </html>
