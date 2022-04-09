@@ -7,35 +7,27 @@
 
 
 <body>
-    <div class="toolbar__header">
-        <div>
-            <button id="copythat_close_toolbar" class="toolbar__button--action">Close Toolbar</button>
-            <button id="copythat_minimize_toolbar" class="toolbar__button--action">Minimize Toolbar</button>
-            <button id="options_button" class="button button--action">Settings</button>
-        </div>
+    <div class="copythat-toolbar-children">
+        <select id="copythat_select_form" class="copythat-toolbar-select-form select-form-arrow">
+            <option value=""></option>
+            <option value="Math">Math</option>
+            <option value="French">French</option>
+            <option value="Greek">Greek</option>
+        </select>
+
+        <div id="Math" class="copythat-toolbar-hidden-btn-box">TEST</div>
+        <div id="French" class="copythat-toolbar-hidden-btn-box"></div>
+        <div id="Greek" class="copythat-toolbar-hidden-btn-box"></div>
+
     </div>
-
-
-    <div class="copythat_toolbar_main-box">
-        <div class="copythat_toolbar_select-box">
-            <select id="toolbar__select_form" class="header-select-form header-select-form__arrow">
-                <option value="Math">Math</option>
-                <option value="French">French</option>
-                <option value="Greek">Greek</option>
-            </select>
-            <div class="button__list--copy">
-                <div id="Math" class="button__list--div">ggg</div>
-                <div id="French" class="button__list--div"></div>
-                <div id="Greek" class="button__list--div"></div>
-            </div>
-        </div>
-        <div class="copythat_toolbar_recently-used-box">
-            <div class="recently-used" id="recent_buttons_container">
-                <div id="recently_used"></div>
-            </div>
-        </div>
+    <div class="copythat-toolbar-children copythat_toolbar_recently_used">
+        Recently used
     </div>
-
+    <div class="copythat-toolbar-children">
+        <button>Minimise Toolbar</button>
+        <button>Close Toolbar</button>
+        <button>Open Settings</button>
+    </div>
 </body>
 
 </html>

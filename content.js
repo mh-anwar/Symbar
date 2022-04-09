@@ -15,21 +15,28 @@ chrome.storage.onChanged.addListener((changes, area) => {
 //injection function
 function toolbar_inserter() {
   var div = document.createElement(div);
-  div.className = 'copythat_toolbar_base';
+  div.className = 'copythat-toolbar-base';
   div.id = 'copy_toolbar';
   document.body.appendChild(div);
   fetch(chrome.runtime.getURL('toolbar/content_injection.html'))
     .then((response) => response.text())
     .then((data) => {
       document.getElementById('copy_toolbar').innerHTML = data;
+      document
+        .getElementById('copythat_select_form')
+        .addEventListener('change', toolbar_select_form_populator);
+
       //Call the function that populates the select form
-      toolbar_select_form_populator();
+      //toolbar_select_form_populator();
+
       //Call the function that allows buttons to copy
-      toolbar_copier();
+      //toolbar_copier();
+
       //Call toolbar closer function
-      toolbar_closer();
+      //toolbar_closer();
+
       //Call the toolbar minimizer function
-      toolbar_minimizer();
+      //toolbar_minimizer();
       chrome.storage.sync.get('toolbar_height', function (data) {
         toolbar_height = data.toolbar_height + '%';
         document.getElementById('copy_toolbar').style.height = toolbar_height;
@@ -61,19 +68,18 @@ function toolbar_copier() {
 }
 
 function toolbar_select_form_populator() {
-  document
-    .getElementById('toolbar__select_form')
-    .addEventListener('change', function () {
-      var buttons_toggle = document.querySelector('.buttons_toggle'),
-        target = document.getElementById(this.value);
-      if (buttons_toggle !== null) {
-        buttons_toggle.className = 'toolbar__button-list--div';
-      }
-      if (target !== null) {
-        target.className = 'buttons_toggle';
-      }
-    });
+  var buttons_toggle = document.querySelector(
+      '.copythat-toolbar-toggled-btn-box'
+    ),
+    target = document.getElementById(this.value);
+  if (buttons_toggle !== null) {
+    buttons_toggle.className = 'copythat-toolbar-hidden-btn-box';
+  }
+  if (target !== null) {
+    target.className = 'copythat-toolbar-toggled-btn-box';
+  }
 }
+
 function toolbar_maximizer() {
   var maximize_toolbar = document.getElementById('maximize_toolbar');
   maximize_toolbar.addEventListener('click', function () {
