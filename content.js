@@ -109,14 +109,20 @@ function toolbar_minimizer() {
     });
 }
 function autotype(letter) {
-  let active_element = document.activeElement;
-  console.log(active_element);
+  /*Autotype is supposedly as simple as this!
+    Note autotype doesn't work on Google, etc
+    Google Docs has a billion iframes, with div's all over..
+    few extensions, like Grammarly, actually work in Google Docs
+  */
+  console.log(document.activeElement);
+  document.activeElement.value += letter.toString();
 }
 function message_parser(message, sender, sendResponse) {
-  autotype('t');
   var toolbar = document.getElementById('copy_toolbar');
   var minimized_toolbar = document.getElementById('minimized_toolbar');
-  if (message === 'state_of_toolbar') {
+  if (typeof message === 'object') {
+    autotype(message.autotype);
+  } else if (message === 'state_of_toolbar') {
     if (document.contains(toolbar)) {
       sendResponse({ state: 1 });
     } else if (document.contains(minimized_toolbar)) {
@@ -136,6 +142,8 @@ function message_parser(message, sender, sendResponse) {
       document.getElementById('minimized_toolbar').remove();
     }
     state_of_toolbar = 0;
+  } else if (message === 'autotype') {
+    autotype;
   }
   //returning true is MANDATORY, becuase the function may send a response back
   return true;

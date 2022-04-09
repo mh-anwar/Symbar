@@ -13,6 +13,7 @@ let copy_button_class = document.getElementsByClassName('copy-button');
 let recent_button_container = document.getElementById(
   'recent_buttons_container'
 );
+let autotype = false;
 //Gets tab data
 async function get_current_tab() {
   let queryOptions = { active: true, currentWindow: true };
@@ -39,7 +40,19 @@ async function content_script_messenger(function_to_run) {
     );
   }
 }
-
+//Autotype
+async function autotype_symbol(symbol) {
+  let tabs_info = await get_current_tab();
+  let message = { autotype: symbol };
+  //Make sure that this is not running on chrome native (?) tabs
+  if (tabs_info.url.match('^chrome:') === null) {
+    chrome.tabs.sendMessage(tabs_info.id, message, function (response) {
+      if (response !== undefined) {
+        console.log('response');
+      }
+    });
+  }
+}
 //Changes the text content of the Toolbar Button based on it's state
 function toolbar_button_textcontent(response, tabs_info) {
   if (typeof response != 'undefined' && response != null) {
@@ -87,7 +100,16 @@ function open_options() {
     window.open(chrome.runtime.getURL('../settings/settings.html'));
   }
 }
-
+//TODO fix this function
+function add_recently_used(symbol) {
+  chrome.storage.sync.get('recently_used', function (data) {
+    if (recently_used.length > 10) {
+      recently_used[-1].remove();
+    }
+    data.recently_used.push(symbol);
+    chrome.storage.sync.set({ recently_used: data.recently_used });
+  });
+}
 function attach_copy_buttons() {
   let copy_button_class = document.getElementsByClassName('copy-button');
   //Code for the Copy Function (for the copy buttons)
@@ -95,11 +117,12 @@ function attach_copy_buttons() {
     copy_button_class[i].addEventListener('click', function (event) {
       let text_to_copy = event.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
-      chrome.storage.sync.get('recently_used', function (data) {
-        data.recently_used.push(text_to_copy);
-        chrome.storage.sync.set({ recently_used: data.recently_used });
-      });
+      add_recently_used(text_to_copy);
       show_snackbar();
+      if (autotype === true) {
+        autotype_symbol(event.target.textContent);
+        console.log('Just autotyped');
+      }
     });
   }
 }
@@ -127,11 +150,11 @@ function populate_dropdowns() {
   }
 }
 
-function show_recently_used() {
-  chrome.storage.sync.get('recently_used', get_recently_used);
+function get_recently_used() {
+  chrome.storage.sync.get('recently_used', show_recently_used);
 }
 
-function get_recently_used(data) {
+function show_recently_used(data) {
   //Get recently used buttons and insert them into DOM
   document.getElementById('recently_used').innerHTML = data.recently_used
     .map((text) => `<button class="copy-button">${text}</button>`)
@@ -140,11 +163,11 @@ function get_recently_used(data) {
 
 function set_dark_mode_var() {
   let root = document.querySelector(':root');
-  var rs = getComputedStyle(root);
   root.style.setProperty('--back', '#000509');
   root.style.setProperty('--fore', '#0d1117');
   root.style.setProperty('--color', '#c2cad2');
 }
+
 function execute_popup_funcs() {
   content_script_messenger(toolbar_button_textcontent);
   toolbar.addEventListener('click', () =>
@@ -155,14 +178,20 @@ function execute_popup_funcs() {
   populate_dropdowns();
   attach_copy_buttons();
 
-  show_recently_used();
+  get_recently_used();
   chrome.storage.sync.get('mode', function (data) {
     if (data.mode == 'dark') {
       set_dark_mode_var();
       document.body.classList.add('dark-mode__page');
     }
   });
+  chrome.storage.sync.get('autotype', function (data) {
+    if (data.autotype === true) {
+      autotype = true;
+    }
+  });
 }
+
 document.addEventListener('readystatechange', (event) => {
   if (event.target.readyState === 'interactive') {
     execute_popup_funcs();
