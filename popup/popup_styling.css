@@ -87,7 +87,7 @@ body {
 }
 
 /*Used in JS to set body to dark*/
-.dark-mode .select-form {
+.dark-mode__page .select-form {
   background-color: #1a1e24;
 }
 

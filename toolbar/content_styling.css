@@ -1,6 +1,6 @@
 .copythat-toolbar-base {
-  color: white;
-  background-color: rgb(36, 36, 36);
+  background-color: whitesmoke;
+  color: black;
   position: fixed;
   bottom: 0;
   z-index: 1;
@@ -55,8 +55,8 @@
 }
 
 .copythat-toolbar-select-form {
-  background-color: var(--back);
-  color: var(--color);
+  background-color: inherit;
+  color: inherit;
   margin-top: 5px;
   text-align: center;
   width: 50%;
@@ -68,6 +68,12 @@
   to work without !important property*/
   padding: 3% !important;
   margin-bottom: 3px;
+}
+
+/*Horrible wayt to set bgcolor and color
+  but the only way to do so*/
+.dark-mode-page .copythat-toolbar-select-form {
+  background-color: #1a1e24;
 }
 
 .copythat_toolbar_recently_used {

@@ -2,7 +2,13 @@
   --back: aliceblue;
   --fore: rgb(172, 169, 169);
   --color: black;
+  --primary: #0175fe;
 }
+
+html {
+  width: 100%;
+}
+
 body {
   font-size: medium;
   font-family: 'Times New Roman', Times, serif;
@@ -14,25 +20,22 @@ body {
   background-color: var(--fore);
   color: var(--color);
   border: 1px solid rgb(31, 25, 25);
-  width: 100%;
   display: flex;
   position: sticky;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  gap: 5px 5px;
+  justify-content: flex-start;
+  align-items: baseline;
+  align-content: center;
   border-radius: 5px;
   padding: 1%;
 }
-.header__nav {
-  background-color: inherit;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 5px 5px;
+.logo {
+  float: left;
+  align-self: center;
+  padding-right: 1%;
 }
-
 .nav-links {
   float: left;
   color: var(--color);
@@ -65,66 +68,111 @@ body {
 .active-tab {
   display: block;
 }
-.switch input {
-  /*hide checkbox (html default)*/
-  opacity: 0;
-  width: 0;
-  height: 0;
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 1%;
+  margin-top: 1%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-.switch input {
-  /*hide checkbox (html default)*/
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
   opacity: 0;
-  width: 0;
+  cursor: pointer;
   height: 0;
+  width: 0;
 }
-.switch__container {
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #9a9b9e;
+  border-radius: 5px;
+  transition: background-color 0.4s;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: var(--primary);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid whitesmoke;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*Range slider containers*/
+.range-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   align-self: baseline;
-}
-.switch {
-  /*slider container*/
-  display: flex;
-  position: relative;
-  width: 60px;
-  height: 34px;
-  float: left;
-  margin-right: 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .slider {
-  position: absolute;
+  -webkit-appearance: none;
+  width: 15%;
+  height: 15px;
+  background: whitesmoke;
+  outline: none;
+  opacity: 0.8;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 20px;
+  border: 1px solid #9a9b9e;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: '';
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #4caf50;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  border-radius: 20px;
 }

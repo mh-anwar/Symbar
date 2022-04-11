@@ -18,41 +18,74 @@ function toolbar_inserter() {
   div.className = 'copythat-toolbar-base';
   div.id = 'copy_toolbar';
   document.body.appendChild(div);
+
+  fetch(chrome.runtime.getURL('./accents.json'))
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+
   fetch(chrome.runtime.getURL('toolbar/content_injection.html'))
     .then((response) => response.text())
-    .then((data) => {
-      document.getElementById('copy_toolbar').innerHTML = data;
+    .then((html_data) => {
+      var copy_toolbar = document.getElementById('copy_toolbar');
+      copy_toolbar.innerHTML = html_data;
+
+      chrome.storage.sync.get('mode', function (data) {
+        if (data.mode == 'dark') {
+          set_dark_mode();
+        }
+      });
+
       document
         .getElementById('copythat_select_form')
-        .addEventListener('change', toolbar_select_form_populator);
-
-      //Call the function that populates the select form
-      //toolbar_select_form_populator();
+        .addEventListener('change', toolbar_select_form_toggler);
 
       //Call the function that allows buttons to copy
       //toolbar_copier();
-
-      //Call toolbar closer function
       //toolbar_closer();
-
-      //Call the toolbar minimizer function
       //toolbar_minimizer();
-      chrome.storage.sync.get('toolbar_height', function (data) {
-        toolbar_height = data.toolbar_height + '%';
-        document.getElementById('copy_toolbar').style.height = toolbar_height;
-      });
+      chrome.storage.sync.get('toolbar_height', (data) =>
+        set_toolbar_height(data, copy_toolbar)
+      );
+      document
+        .getElementById('copythat_close_toolbar')
+        .addEventListener('click', toolbar_closer);
     });
 }
+
+function set_toolbar_height(data, copy_toolbar) {
+  let toolbar_height = data.toolbar_height + '%';
+  copy_toolbar.style.height = toolbar_height;
+}
+
+function set_dark_mode() {
+  copy_toolbar.classList.add('dark-mode-page');
+  copy_toolbar.style.backgroundColor = '#000408';
+  copy_toolbar.style.color = '#c2c3c5';
+}
+
 function toolbar_closer() {
-  document
-    .getElementById('copythat_close_toolbar')
-    .addEventListener('click', function () {
-      chrome.storage.sync.get('toolbar_state', function (data) {
-        chrome.storage.sync.set({ toolbar_state: (data.toolbar_state += 1) });
-      });
-      document.getElementById('copy_toolbar').remove();
-      state_of_toolbar = 0;
-    });
+  chrome.storage.sync.get('toolbar_state', function (data) {
+    chrome.storage.sync.set({ toolbar_state: (data.toolbar_state += 1) });
+  });
+  document.getElementById('copy_toolbar').remove();
+  state_of_toolbar = 0;
+}
+function toolbar_populate_dropdowns() {
+  /*This is messed up, accent_text is a constant
+  in another file(../accent_text.js) which should
+  be a JSON file, but JSON doesn't seem to be working
+  right now. Fix later*/
+  console.log('TTT');
+  let languages = accent_text;
+  for (let lang in languages) {
+    document.getElementById(lang).innerHTML += `<div>
+          ${languages[lang]
+            .map((text) => `<button class="copy-button">${text}</button>`)
+            .join(' ')}
+       </div>`;
+  }
 }
 
 function toolbar_copier() {
@@ -67,7 +100,7 @@ function toolbar_copier() {
   }
 }
 
-function toolbar_select_form_populator() {
+function toolbar_select_form_toggler() {
   var buttons_toggle = document.querySelector(
       '.copythat-toolbar-toggled-btn-box'
     ),

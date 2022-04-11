@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Symbols & Accents Toolkit",
+  "name": "CopyThat Symbol",
   "version": "0.2.1",
   "description": "An extension that copies symbols and accents to your clipboard.",
   "offline_enabled": true,
@@ -31,7 +31,8 @@
     {
       "resources": [
         "toolbar/content_injection.html",
-        "toolbar/minimize_injection.html"
+        "toolbar/minimize_injection.html",
+        "./accents.json"
       ],
       "matches": ["<all_urls>"],
       "exclude_matches": ["chrome:*", "brave:*"]

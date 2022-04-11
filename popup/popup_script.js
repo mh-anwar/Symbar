@@ -110,16 +110,18 @@ function add_recently_used(symbol) {
     chrome.storage.sync.set({ recently_used: data.recently_used });
   });
 }
+
 function attach_copy_buttons() {
-  let copy_button_class = document.getElementsByClassName('copy-button');
-  //Code for the Copy Function (for the copy buttons)
-  for (let i = 0; i < copy_button_class.length; i++) {
-    copy_button_class[i].addEventListener('click', function (event) {
+  const copy_btns = document.getElementsByClassName('copy-button');
+
+  for (let i = 0; i < copy_btns.length; i++) {
+    copy_btns[i].addEventListener('click', function (event) {
       let text_to_copy = event.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
       add_recently_used(text_to_copy);
       show_snackbar();
       if (autotype === true) {
+        console.log('autotyping');
         autotype_symbol(event.target.textContent);
         console.log('Just autotyped');
       }
@@ -136,18 +138,19 @@ function show_snackbar() {
 }
 
 function populate_dropdowns() {
-  /*This is messed up, accent_text is a constant
-  in another file(../accent_text.js) which should
-  be a JSON file, but JSON doesn't seem to be working
-  right now. Fix later*/
-  let languages = accent_text;
-  for (let lang in languages) {
-    document.getElementById(lang).innerHTML += `<div>
+  fetch(chrome.runtime.getURL('./accents.json'))
+    .then((response) => response.json())
+    .then((data) => {
+      let languages = data;
+      for (let lang in languages) {
+        document.getElementById(lang).innerHTML += `<div>
           ${languages[lang]
             .map((text) => `<button class="copy-button">${text}</button>`)
             .join(' ')}
        </div>`;
-  }
+      }
+    })
+    .then(() => attach_copy_buttons());
 }
 
 function get_recently_used() {
@@ -161,7 +164,7 @@ function show_recently_used(data) {
     .join(' ');
 }
 
-function set_dark_mode_var() {
+function set_dark_mode() {
   let root = document.querySelector(':root');
   root.style.setProperty('--back', '#000509');
   root.style.setProperty('--fore', '#0d1117');
@@ -176,12 +179,11 @@ function execute_popup_funcs() {
   select_form.addEventListener('change', show_copy_buttons);
   options_button.addEventListener('click', open_options);
   populate_dropdowns();
-  attach_copy_buttons();
 
   get_recently_used();
   chrome.storage.sync.get('mode', function (data) {
     if (data.mode == 'dark') {
-      set_dark_mode_var();
+      set_dark_mode();
       document.body.classList.add('dark-mode__page');
     }
   });

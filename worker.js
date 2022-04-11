@@ -1,5 +1,3 @@
-console.log('Service Worker (a.k.a Background Script) is running SIR!');
-
 chrome.runtime.onInstalled.addListener((details) => {
   const reason = details.reason;
   switch (reason) {
