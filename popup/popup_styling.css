@@ -5,37 +5,45 @@
 }
 
 body {
-  overflow-x: hidden;
-  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
   min-width: 250px;
   max-height: 250px;
   background-color: var(--back);
   color: var(--color);
-  padding: 1%;
-  display: flex;
-  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
   align-items: center;
+  justify-content: center;
 }
 
 .button {
   display: inline-block;
-  margin-top: 5px;
-  margin-right: 10px;
-  border: 1px solid black;
+  background-color: var(--fore);
+  color: inherit;
+  border: 1.5px solid white;
   border-radius: 0.3rem;
+  margin: 10px;
   padding: 7px;
+  opacity: 0.8;
+  transition: opacity 1s;
 }
-
+.button:hover {
+  opacity: 1;
+}
 /*All the buttons that copy to clipboard*/
 .copy-button {
+  width: 30px;
+  height: 30px;
   background-color: var(--fore);
-  border: 1.5px solid white;
   color: inherit;
-  margin: 5px;
-  min-width: 30px;
-  min-height: 30px;
-  opacity: 0.9;
+  border: 1.5px solid white;
   border-radius: 0.3rem;
+  margin: 0.3rem;
+  padding: 1px;
+  font-size: 17px;
+  opacity: 0.9;
+  transition: opactity 2s;
 }
 
 .copy-button:hover {
@@ -53,47 +61,69 @@ body {
 .toggled-button-div {
   display: flex;
   flex-direction: row;
-  max-height: 150px;
+  flex-wrap: wrap;
+  max-height: 200px;
+  width: 100%;
+  margin: 1px;
+  overflow-y: auto;
+}
+/* Recently used, is the same as
+  the class above. They are different
+  classes becuase of how they are used*/
+.recently-used {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-height: 200px;
+  width: 100%;
+  margin: 1px;
   overflow-y: auto;
 }
 
-/*Action buttons are buttons that do stuff, such as opening a page*/
-.action-button {
-  background-color: var(--fore);
-  border: 1.5px solid white;
-  color: inherit;
-  margin: 10px;
-}
-
-/*Select Form*/
-.select-form {
+/* The background image/position is 
+  to properly display dropdwown arrow*/
+select {
+  display: inline-block;
+  width: 100%;
+  height: 10%;
   background-color: var(--back);
   color: var(--color);
-  text-align: center;
-  width: 95%;
-  height: 10%;
-  outline: none;
+
+  /* styling */
   border: 2px solid rgb(146, 146, 146);
-  border-radius: 5px;
-  /*For some weird reason padding fails 
-  to work without !important property*/
-  padding: 3% !important;
+  border-radius: 0.3rem;
+  display: inline-block;
+  font: inherit;
+
+  margin: 3px;
+  padding: 0.5em 3.5em 0.5em 1em;
+  outline: none;
+  line-height: 1.5em;
+  text-align: center;
   opacity: 0.8;
-  margin-bottom: 3px;
+  transition: opacity 1s;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+  background-repeat: no-repeat;
 }
 
-.select-form:hover {
+select:hover {
   opacity: 1;
 }
 
 /*Used in JS to set body to dark*/
-.dark-mode .select-form {
+.dark-mode__page .select-form {
   background-color: #1a1e24;
-}
-
-.select-form-arrow {
-  display: inline-block;
-  padding: 5px;
 }
 
 /* width */
@@ -105,13 +135,14 @@ body {
 ::-webkit-scrollbar-track {
   box-shadow: inset 5px 5px 5px 5px var(--fore);
   border: 2px solid var(--fore);
-  border-radius: 5%;
+  border-radius: 0.3rem;
+  margin: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: rgb(38, 41, 44);
-  border-radius: 10%;
+  border-radius: 0.3rem;
 }
 
 /* Handle on hover */
@@ -120,17 +151,17 @@ body {
 }
 
 #button_snackbar {
-  visibility: hidden;
-  width: 150px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 15px;
   position: fixed;
-  z-index: 1;
+  width: 150px;
   bottom: 30px;
   font-size: 17px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 0.3rem;
+  padding: 15px;
+  z-index: 1;
+  text-align: center;
+  visibility: hidden;
 }
 
 #button_snackbar.show {

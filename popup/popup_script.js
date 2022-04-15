@@ -10,9 +10,7 @@ let toolbar = document.getElementById('open_toolbar');
 let select_form = document.getElementById('select_form');
 let options_button = document.getElementById('options_button');
 let copy_button_class = document.getElementsByClassName('copy-button');
-let recent_button_container = document.getElementById(
-  'recent_buttons_container'
-);
+let recent_button_container = document.getElementById('recently_used');
 let autotype = false;
 //Gets tab data
 async function get_current_tab() {
@@ -91,7 +89,6 @@ function show_copy_buttons() {
     recent_button_container.style.display = 'none';
   }
 }
-
 //Options is the same as settings
 function open_options() {
   if (chrome.runtime.openOptionsPage) {
@@ -110,16 +107,18 @@ function add_recently_used(symbol) {
     chrome.storage.sync.set({ recently_used: data.recently_used });
   });
 }
+
 function attach_copy_buttons() {
-  let copy_button_class = document.getElementsByClassName('copy-button');
-  //Code for the Copy Function (for the copy buttons)
-  for (let i = 0; i < copy_button_class.length; i++) {
-    copy_button_class[i].addEventListener('click', function (event) {
+  const copy_btns = document.getElementsByClassName('copy-button');
+
+  for (let i = 0; i < copy_btns.length; i++) {
+    copy_btns[i].addEventListener('click', function (event) {
       let text_to_copy = event.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
       add_recently_used(text_to_copy);
       show_snackbar();
       if (autotype === true) {
+        console.log('autotyping');
         autotype_symbol(event.target.textContent);
         console.log('Just autotyped');
       }
@@ -136,22 +135,19 @@ function show_snackbar() {
 }
 
 function populate_dropdowns() {
-  /*This is messed up, accent_text is a constant
-  in another file(../accent_text.js) which should
-  be a JSON file, but JSON doesn't seem to be working
-  right now. Fix later*/
-  let languages = accent_text;
-  for (let lang in languages) {
-    document.getElementById(lang).innerHTML += `<div>
-          ${languages[lang]
+  fetch(chrome.runtime.getURL('./accents.json'))
+    .then((response) => response.json())
+    .then((data) => {
+      for (let lang in data) {
+        let lang_div = document.getElementById(lang.toLowerCase());
+        lang_div.innerHTML += `
+          ${data[lang]
             .map((text) => `<button class="copy-button">${text}</button>`)
             .join(' ')}
-       </div>`;
-  }
-}
-
-function get_recently_used() {
-  chrome.storage.sync.get('recently_used', show_recently_used);
+      `;
+      }
+    })
+    .then(() => attach_copy_buttons());
 }
 
 function show_recently_used(data) {
@@ -161,41 +157,30 @@ function show_recently_used(data) {
     .join(' ');
 }
 
-function set_dark_mode_var() {
+function set_dark_mode() {
   let root = document.querySelector(':root');
   root.style.setProperty('--back', '#000509');
   root.style.setProperty('--fore', '#0d1117');
   root.style.setProperty('--color', '#c2cad2');
 }
 
-function execute_popup_funcs() {
-  content_script_messenger(toolbar_button_textcontent);
-  toolbar.addEventListener('click', () =>
-    content_script_messenger(toolbar_opener)
-  );
-  select_form.addEventListener('change', show_copy_buttons);
-  options_button.addEventListener('click', open_options);
-  populate_dropdowns();
-  attach_copy_buttons();
+content_script_messenger(toolbar_button_textcontent);
+toolbar.addEventListener('click', () =>
+  content_script_messenger(toolbar_opener)
+);
+select_form.addEventListener('change', show_copy_buttons);
+options_button.addEventListener('click', open_options);
+populate_dropdowns();
 
-  get_recently_used();
-  chrome.storage.sync.get('mode', function (data) {
-    if (data.mode == 'dark') {
-      set_dark_mode_var();
-      document.body.classList.add('dark-mode__page');
-    }
-  });
-  chrome.storage.sync.get('autotype', function (data) {
-    if (data.autotype === true) {
-      autotype = true;
-    }
-  });
-}
-
-document.addEventListener('readystatechange', (event) => {
-  if (event.target.readyState === 'interactive') {
-    execute_popup_funcs();
-  } else if (event.target.readyState === 'complete') {
-    execute_popup_funcs();
+chrome.storage.sync.get('recently_used', show_recently_used);
+chrome.storage.sync.get('mode', function (data) {
+  if (data.mode == 'dark') {
+    set_dark_mode();
+    document.body.classList.add('dark-mode__page');
+  }
+});
+chrome.storage.sync.get('autotype', function (data) {
+  if (data.autotype === true) {
+    autotype = true;
   }
 });

@@ -2,31 +2,28 @@
 <html lang="en-US">
 
 <head>
+    <title>CopyThat Symbol</title>
     <link rel="stylesheet" type="text/css" href="popup_styling.css">
-    <script defer src="../accents.js"></script>
     <script defer src="popup_script.js"></script>
-
 </head>
 
 <body>
-    <select id="select_form" class="select-form select-form-arrow">
-        <option value="">Recently Used</option>
-        <option value="Math">Math</option>
-        <option value="French">French</option>
-        <option value="Greek">Greek</option>
+    <select id="select_form">
+        <option>Recently Used</option>
+        <option value="math">Math</option>
+        <option value="french">French</option>
+        <option value="greek">Greek</option>
     </select>
 
-    <div class="recently-used" id="recent_buttons_container">
-        <div id="recently_used"></div>
-    </div>
+    <div id="recently_used" class="recently-used"></div>
 
-    <div id="Math" class="button-list"></div>
-    <div id="French" class="button-list"></div>
-    <div id="Greek" class="button-list"></div>
+    <div id="math" class="button-list"></div>
+    <div id="french" class="button-list"></div>
+    <div id="greek" class="button-list"></div>
 
     <div>
-        <button id="options_button" class="button action-button">Settings</button>
-        <button id="open_toolbar" class="button action-button">Open Toolbar</button>
+        <button id="options_button" class="button">Settings</button>
+        <button id="open_toolbar" class="button">Open Toolbar</button>
     </div>
 
 

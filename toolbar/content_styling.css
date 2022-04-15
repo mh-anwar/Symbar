@@ -1,46 +1,63 @@
+/*NOTE: Because this CSS is inserted directly into webpages
+  it is crtical to append "copythat-toolbar" to all
+  classes. As such, try to shorten words, such as button
+  to btn.*/
 .copythat-toolbar-base {
-  color: white;
-  background-color: rgb(36, 36, 36);
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  width: 100%;
-  height: 20%;
-  opacity: 0.9;
-  border: 0.2px solid transparent;
-  border-radius: 5px 5px 0px 0px;
   display: flex;
   flex-direction: row;
+  position: fixed;
+  width: 100%;
+  height: 20%;
+  background-color: whitesmoke;
+  color: black;
+  border: 0.2px solid transparent;
+  border-radius: 5px 5px 0px 0px;
+  bottom: 0;
+  left: 0;
+  /*Excessive, but necessary as it should be 
+  on top of all other elemts on the page*/
+  z-index: 100000000000;
   justify-content: space-around;
   align-items: center;
+  opacity: 0.9;
+  transition: opacity 2s;
 }
 
 .copythat-toolbar-base:hover {
   opacity: 1;
 }
 
-.copythat-toolbar-base div:nth-of-type(1) {
-  flex-grow: 3;
-}
-.copythat-toolbar-base div:nth-of-type(2) {
-  flex-grow: 2;
-}
-.copythat-toolbar-base div:nth-of-type(3) {
-  flex-grow: 1;
-}
-.copythat-toolbar-base button {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 3px;
-  width: 50%;
+.copythat-toolbar-base-minimized {
+  position: fixed;
+  width: 100%;
+  height: 7%;
+  color: white;
+  background-color: rgb(36, 36, 36);
+  border: 0.2px solid transparent;
+  border-radius: 5px 5px 0px 0px;
+  bottom: 0;
+  left: 0;
+  z-index: 100000000000;
+  opacity: 0.8;
+  transition: opacity 2s;
 }
 
-.copythat-toolbar-children {
+.copythat-toolbar-base-minimized:hover {
+  opacity: 1;
+}
+
+.copythat-toolbar-copy-btn-box {
   display: flex;
   flex-direction: column;
-
   height: 100%;
+  width: 80%;
+}
+
+.copythat-toolbar-btn-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 20%;
 }
 
 .copythat-toolbar-hidden-btn-box {
@@ -49,112 +66,86 @@
 
 .copythat-toolbar-toggled-btn-box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   max-height: 150px;
   overflow-y: auto;
 }
 
 .copythat-toolbar-select-form {
-  background-color: var(--back);
-  color: var(--color);
-  margin-top: 5px;
-  text-align: center;
-  width: 50%;
-  height: 5%;
-  outline: none;
-  border: 2px solid rgb(146, 146, 146);
-  border-radius: 5px;
-  /*For some weird reason padding fails 
-  to work without !important property*/
-  padding: 3% !important;
-  margin-bottom: 3px;
-}
-
-.copythat_toolbar_recently_used {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.copythat_toolbar_base--minimized {
-  color: white;
-  background-color: rgb(36, 36, 36);
-  position: fixed;
-  bottom: 0;
-  z-index: 10000;
-  width: 100%;
-  height: 20%;
-  opacity: 1;
-  position: fixed;
-}
-.mini_copythat_toolbar {
-  color: white;
-  background-color: rgb(36, 36, 36);
-  position: fixed;
-  bottom: 0;
-  z-index: 10000;
-  width: 99.7%;
-  height: 5%;
-  opacity: 1;
-  display: block;
-  border: 0.2px solid transparent;
-  border-radius: 5px 5px 5px 5px;
-  position: fixed;
-}
-
-/*CSS for copythat_toolbar content*/
-/*The instructions and the logo image container*/
-.copythat_toolbar__header {
-  display: flex;
-  flex-direction: row;
-}
-.copythat_toolbar_main-box {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.copythat_toolbar_select-box {
   display: inline-block;
+  width: 100%;
+  height: 25%;
+  background-color: inherit !important;
+  color: inherit;
+
+  /* styling */
+  border: 2px solid rgb(146, 146, 146);
+  border-radius: 0.3rem;
+  display: inline-block;
+  font: inherit;
+
+  margin: 3px;
+  padding: 0.5em 3.5em 0.5em 1em;
+  outline: none;
+  line-height: 1.5em;
+  text-align: center;
+  opacity: 0.8;
+  transition: opacity 1s;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+  background-repeat: no-repeat;
+}
+
+.copythat-toolbar-select-form:hover {
+  opacity: 1;
+}
+
+/*Horrible wayt to set bgcolor and color
+  but the only way to do so*/
+.dark-mode-page .copythat-toolbar-select-form {
+  background-color: #1a1e24;
+}
+
+.copythat-toolbar-recently-used {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.copythat-toolbar-btn {
   background-color: inherit;
   color: inherit;
-}
-.copy/*Select Form*/
-.copythat_toolbar__select-form {
-  display: inline-table;
-  vertical-align: top;
-  width: 85px;
-  margin-left: 5px;
-}
-.copythat_toolbar__select-form:hover {
-  background-color: whitesmoke;
-}
-.copythat_toolbar__button {
   display: inline-block;
-  margin-top: 5px;
-  margin-right: 10px;
-  min-height: 20px;
-  min-width: 20px;
-}
-/*All the buttons that copy to clipboard*/
-.copythat_toolbar__button--copy {
-  margin-top: 5px;
-  margin-right: 10px;
-  margin-left: 2px;
-}
-/*potential removal*/
-.copythat_toolbar__button-list--copy {
-  max-height: 100px;
-  overflow-y: auto;
+  border: 1.5px solid white;
+  border-radius: 0.3rem;
+  margin: 10px;
+  padding: 7px;
 }
 
-/*Each div for the copy buttons*/
-.copythat_toolbar__button-list--div {
-  display: none;
+/*All the buttons that copy to clipboard*/
+.copythat-toolbar-copy-btn {
+  background-color: inherit;
+  color: inherit;
+  min-width: 30px;
+  min-height: 30px;
+  border: 1.5px solid white;
+  border-radius: 0.3rem;
+  margin: 5px;
+  font-size: 17px;
+  opacity: 0.9;
+  transition: opactity 2s;
 }
-/*Action buttons are buttons that do stuff, such as opening a page*/
-.copythat_toolbar__button--action {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-right: 2px;
-  margin-left: 5px;
+
+.copythat-toolbar-copy-btn:hover {
+  opacity: 1;
 }

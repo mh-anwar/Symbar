@@ -1,4 +1,10 @@
 'use-strict';
+let mode_checkbox = document.getElementById('mode_checkbox');
+let autotype_checkbox = document.getElementById('autotype_checkbox');
+let toolbar_height_slider = document.getElementById('toolbar_height');
+let toolbar_height_value_output = document.getElementById(
+  'toolbar_height_value'
+);
 
 //Set document theme/mode automatically
 function set_mode(event) {
@@ -34,7 +40,7 @@ function set_toolbar_height() {
     'toolbar_height_value'
   );
   chrome.storage.sync.set({ toolbar_height: toolbar_height_slider.value });
-  toolbar_height_value_output.innerHTML = toolbar_height_slider.value + '%';
+  toolbar_height_value_output.innerHTML = toolbar_height_slider.value + '% ';
 }
 
 function set_autotype(event) {
@@ -63,49 +69,37 @@ function open_tab(event) {
   event.target.classList.add('nav-active-link');
 }
 
-function execute_funcs() {
-  let mode_checkbox = document.getElementById('mode_checkbox');
-  let autotype_checkbox = document.getElementById('autotype_checkbox');
-  let toolbar_height_slider = document.getElementById('toolbar_height');
-  let toolbar_height_value_output = document.getElementById(
-    'toolbar_height_value'
-  );
+//Attach event listeners
+mode_checkbox.addEventListener('change', set_mode);
+autotype_checkbox.addEventListener('change', set_autotype);
+toolbar_height.addEventListener('input', set_toolbar_height);
 
-  //Attach event listeners
-  mode_checkbox.addEventListener('change', set_mode);
-  autotype_checkbox.addEventListener('change', set_autotype);
-  toolbar_height.addEventListener('input', set_toolbar_height);
+//Synchronize page mode and mode checkbox state
+chrome.storage.sync.get('mode', function (data) {
+  if (data.mode == 'dark') {
+    set_dark_mode_var();
+    document.getElementById('mode_checkbox').setAttribute('checked', true);
+  }
+});
 
-  //Synchronize page mode and mode checkbox state
-  chrome.storage.sync.get('mode', function (data) {
-    if (data.mode == 'dark') {
-      set_dark_mode_var();
-      document.getElementById('mode_checkbox').setAttribute('checked', true);
-    }
-  });
+//Synchronize toolbar height to range slider
+chrome.storage.sync.get('toolbar_height', function (data) {
+  toolbar_height_slider.value = data.toolbar_height;
+  toolbar_height_value_output.innerHTML = data.toolbar_height + '% ';
+});
 
-  //Synchronize toolbar height to range slider
-  chrome.storage.sync.get('toolbar_height', function (data) {
-    toolbar_height_slider.value = data.toolbar_height;
-    toolbar_height_value_output.innerHTML = data.toolbar_height + '%';
-  });
+//Synchronize autotype state to autotype checkbox
+chrome.storage.sync.get('autotype', function (data) {
+  if (data.autotype === true) {
+    document.getElementById('autotype_checkbox').setAttribute('checked', true);
+  }
+});
 
-  //Synchronize autotype state to autotype checkbox
-  chrome.storage.sync.get('autotype', function (data) {
-    if (data.autotype === true) {
-      document
-        .getElementById('autotype_checkbox')
-        .setAttribute('checked', true);
-    }
-  });
-
-  //Allow page to open when navigation links are clicked
-  let nav_links = document.getElementsByClassName('nav-links');
-  for (let i = 0; i < nav_links.length; i++) {
-    //Only assign tab to buttons that aren't linked to webpage
-    if (!nav_links[i].href) {
-      nav_links[i].addEventListener('click', open_tab);
-    }
+//Allow page to open when navigation links are clicked
+let nav_links = document.getElementsByClassName('nav-links');
+for (let i = 0; i < nav_links.length; i++) {
+  //Only assign tab to buttons that aren't linked to webpage
+  if (!nav_links[i].href) {
+    nav_links[i].addEventListener('click', open_tab);
   }
 }
-document.addEventListener('DOMContentLoaded', execute_funcs, false);

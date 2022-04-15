@@ -7,55 +7,45 @@
     <meta name="robots" content="nofollow">
     <meta name="description" content="Settings for Symbols & Accents Copier">
     <link rel="stylesheet" type="text/css" href="../settings/settings_styling.css">
-    <script src="../settings/settings_script.js"></script>
+    <script defer src="../settings/settings_script.js"></script>
 </head>
 
 <body>
-    <header class="header">
-        <div class="header__nav">
-            <a class="nav-links nav-active-link">Settings</a>
-            <a class="nav-links">FAQ</a>
-            <a class="nav-links" target="_blank" href="https://forms.gle/P5SEnApNni7RQFbf7">Send us
-                Feedback</a>
-            <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/issues">Report
-                a
-                Bug</a>
-            <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/releases">Changelog</a>
-        </div>
+    <header>
+        <img class="logo" src="../images/icon_32.png" />
+        <a class="nav-links nav-active-link">Settings</a>
+        <a class="nav-links">FAQ</a>
+        <a class="nav-links" target="_blank" href="https://forms.gle/P5SEnApNni7RQFbf7">Send us
+            Feedback</a>
+        <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/issues">Report
+            an Issue</a>
+        <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/CopyThat/releases">Changelog</a>
     </header>
 
     <div id="settings_tab" class="tab active-tab">
-        <div class="switch__container">
 
-            <label for="mode_checkbox" class="switch">
-                <input type="checkbox" id="mode_checkbox" value="Dark mode">
-                <span class="slider"></span>
-            </label>
-            <p>Dark Mode</p>
-        </div>
-        <div class="switch__container">
+        <label class="container">
+            Dark Mode
+            <input type="checkbox" id="mode_checkbox" value="Dark mode">
+            <span class="checkmark"></span>
+        </label>
 
-            <label for="autotype_checkbox" class="switch">
-                <input type="checkbox" id="autotype_checkbox" value="Autotype">
-                <span class="slider"></span>
-            </label>
-            <p>Autotype (WARNING: This is untested <b>beta</b> functionality that can cause issues)</p>
-        </div>
-        <div class="switch__container">
-            <input type="range" id="toolbar_height" min="5" max="99"><span id="toolbar_height_value"></span>
+        <label class="container">
+            Autotype (WARNING: This is untested beta functionality that can cause issues)
+            <input type="checkbox" id="autotype_checkbox" value="Autotype">
+            <span class="checkmark"></span>
+        </label>
+
+        <div class="range-container">
+            <input type="range" id="toolbar_height" min="5" max="99" class="slider">
+            <span class="range-value" id="toolbar_height_value"></span>
             <p>of page covered</p>
         </div>
-
-        <!--
-            https://www.w3schools.com/howto/howto_js_rangeslider.asp
-            Edit range slider to show current value and look better
-        -->
 
     </div>
     <div id="faq_tab" class="tab">
         <h2>Do you collect/sell my browsing history, location, etc?</h2>
-        <p>We believe in user privacy and so we do not insert ads into our content, sell your data or collect your data,
-            and we <b>never</b> will.</p>
+        <p>We will <b>never</b> collect any data from you and since we wont have it, we will never sell it.</p>
         <h2>Does this extension exist in other browsers?</h2>
         <p>Currently the extension is only availible in all Chromium based browsers (Microsoft Edge, Brave, etc).</p>
 
@@ -70,8 +60,7 @@
         </blockquote>
         We use these permissions to improve your experience.
         The "activeTab", "tabs" and "storage" permissions allows us to display the toolbar. The "storage" permission
-        also allows us
-        to save your preferences to your computer so that you don't have to constantly set them.
+        also allows us to save your preferences to your Chrome Account so that you don't have to constantly set them.
         </p>
     </div>
 </body>
