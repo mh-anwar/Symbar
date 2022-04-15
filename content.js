@@ -19,12 +19,6 @@ function toolbar_inserter() {
   div.id = 'copy_toolbar';
   document.body.appendChild(div);
 
-  fetch(chrome.runtime.getURL('./accents.json'))
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
-
   fetch(chrome.runtime.getURL('toolbar/content_injection.html'))
     .then((response) => response.text())
     .then((html_data) => {
@@ -40,11 +34,10 @@ function toolbar_inserter() {
       document
         .getElementById('copythat_select_form')
         .addEventListener('change', toolbar_select_form_toggler);
+      toolbar_populate_dropdowns();
+      toolbar_copier();
+      toolbar_minimizer();
 
-      //Call the function that allows buttons to copy
-      //toolbar_copier();
-      //toolbar_closer();
-      //toolbar_minimizer();
       chrome.storage.sync.get('toolbar_height', (data) =>
         set_toolbar_height(data, copy_toolbar)
       );
@@ -72,25 +65,30 @@ function toolbar_closer() {
   document.getElementById('copy_toolbar').remove();
   state_of_toolbar = 0;
 }
+
 function toolbar_populate_dropdowns() {
-  /*This is messed up, accent_text is a constant
-  in another file(../accent_text.js) which should
-  be a JSON file, but JSON doesn't seem to be working
-  right now. Fix later*/
-  console.log('TTT');
-  let languages = accent_text;
-  for (let lang in languages) {
-    document.getElementById(lang).innerHTML += `<div>
+  fetch(chrome.runtime.getURL('./accents.json'))
+    .then((response) => response.json())
+    .then((data) => {
+      let languages = data;
+      for (let lang in languages) {
+        let lang_div = ('copythat_' + lang).toLowerCase();
+        document.getElementById(lang_div).innerHTML += `<div>
           ${languages[lang]
-            .map((text) => `<button class="copy-button">${text}</button>`)
+            .map(
+              (text) =>
+                `<button class="copythat-toolbar-copy-btn">${text}</button>`
+            )
             .join(' ')}
        </div>`;
-  }
+      }
+    })
+    .then(() => toolbar_copier());
 }
 
 function toolbar_copier() {
   var copyButtonClass = document.getElementsByClassName(
-    'toolbar__button--copy'
+    'copythat-toolbar-copy-btn'
   );
   for (var i = 0; i < copyButtonClass.length; i++) {
     copyButtonClass[i].addEventListener('click', function (e) {
@@ -101,12 +99,12 @@ function toolbar_copier() {
 }
 
 function toolbar_select_form_toggler() {
-  var buttons_toggle = document.querySelector(
+  let toggled_buttons = document.querySelector(
       '.copythat-toolbar-toggled-btn-box'
     ),
     target = document.getElementById(this.value);
-  if (buttons_toggle !== null) {
-    buttons_toggle.className = 'copythat-toolbar-hidden-btn-box';
+  if (toggled_buttons !== null) {
+    toggled_buttons.className = 'copythat-toolbar-hidden-btn-box';
   }
   if (target !== null) {
     target.className = 'copythat-toolbar-toggled-btn-box';
@@ -117,9 +115,10 @@ function toolbar_maximizer() {
   var maximize_toolbar = document.getElementById('maximize_toolbar');
   maximize_toolbar.addEventListener('click', function () {
     document.getElementById('minimized_toolbar').remove();
-    document.getElementById('copy_toolbar').style.display = 'block';
+    document.getElementById('copy_toolbar').style.display = 'flex';
   });
 }
+
 function toolbar_minimized_remover() {
   document
     .getElementById('close_minmized_toolbar')
@@ -128,12 +127,13 @@ function toolbar_minimized_remover() {
       document.getElementById('copy_toolbar').remove();
     });
 }
+
 function toolbar_minimizer() {
   document
     .getElementById('copythat_minimize_toolbar')
     .addEventListener('click', function () {
       var div = document.createElement(div);
-      div.className = 'toolbar_base--minimized';
+      div.className = 'copythat-toolbar-base-minimized ';
       div.id = 'minimized_toolbar';
       document.body.appendChild(div);
       document.getElementById('copy_toolbar').style.display = 'none';
@@ -147,6 +147,7 @@ function toolbar_minimizer() {
       state_of_toolbar = 0;
     });
 }
+
 function autotype(letter) {
   /*Autotype is supposedly as simple as this!
     Note autotype doesn't work on Google, etc
@@ -156,6 +157,7 @@ function autotype(letter) {
   console.log(document.activeElement);
   document.activeElement.value += letter.toString();
 }
+
 function message_parser(message, sender, sendResponse) {
   var toolbar = document.getElementById('copy_toolbar');
   var minimized_toolbar = document.getElementById('minimized_toolbar');
@@ -189,11 +191,3 @@ function message_parser(message, sender, sendResponse) {
 }
 
 chrome.runtime.onMessage.addListener(message_parser);
-
-/*
-DYANMIC element creation (makes a div lol)
-    var div = document.createElement(div);
-    div.className = 'toolbar_base'
-    div.id = 'test'
-    document.body.appendChild(div);
-*/

@@ -16,7 +16,7 @@ body {
   color: var(--color);
 }
 
-.header {
+header {
   background-color: var(--fore);
   color: var(--color);
   border: 1px solid rgb(31, 25, 25);
@@ -31,11 +31,13 @@ body {
   border-radius: 5px;
   padding: 1%;
 }
+
 .logo {
   float: left;
   align-self: center;
   padding-right: 1%;
 }
+
 .nav-links {
   float: left;
   color: var(--color);
@@ -150,6 +152,10 @@ body {
   user-select: none;
 }
 
+.range-value {
+  margin-left: 1%;
+  margin-right: 3px;
+}
 .slider {
   -webkit-appearance: none;
   width: 15%;

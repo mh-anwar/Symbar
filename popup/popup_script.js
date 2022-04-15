@@ -10,9 +10,7 @@ let toolbar = document.getElementById('open_toolbar');
 let select_form = document.getElementById('select_form');
 let options_button = document.getElementById('options_button');
 let copy_button_class = document.getElementsByClassName('copy-button');
-let recent_button_container = document.getElementById(
-  'recent_buttons_container'
-);
+let recent_button_container = document.getElementById('recently_used');
 let autotype = false;
 //Gets tab data
 async function get_current_tab() {
@@ -91,7 +89,6 @@ function show_copy_buttons() {
     recent_button_container.style.display = 'none';
   }
 }
-
 //Options is the same as settings
 function open_options() {
   if (chrome.runtime.openOptionsPage) {
@@ -141,20 +138,16 @@ function populate_dropdowns() {
   fetch(chrome.runtime.getURL('./accents.json'))
     .then((response) => response.json())
     .then((data) => {
-      let languages = data;
-      for (let lang in languages) {
-        document.getElementById(lang).innerHTML += `<div>
-          ${languages[lang]
+      for (let lang in data) {
+        let lang_div = document.getElementById(lang.toLowerCase());
+        lang_div.innerHTML += `
+          ${data[lang]
             .map((text) => `<button class="copy-button">${text}</button>`)
             .join(' ')}
-       </div>`;
+      `;
       }
     })
     .then(() => attach_copy_buttons());
-}
-
-function get_recently_used() {
-  chrome.storage.sync.get('recently_used', show_recently_used);
 }
 
 function show_recently_used(data) {
@@ -171,33 +164,23 @@ function set_dark_mode() {
   root.style.setProperty('--color', '#c2cad2');
 }
 
-function execute_popup_funcs() {
-  content_script_messenger(toolbar_button_textcontent);
-  toolbar.addEventListener('click', () =>
-    content_script_messenger(toolbar_opener)
-  );
-  select_form.addEventListener('change', show_copy_buttons);
-  options_button.addEventListener('click', open_options);
-  populate_dropdowns();
+content_script_messenger(toolbar_button_textcontent);
+toolbar.addEventListener('click', () =>
+  content_script_messenger(toolbar_opener)
+);
+select_form.addEventListener('change', show_copy_buttons);
+options_button.addEventListener('click', open_options);
+populate_dropdowns();
 
-  get_recently_used();
-  chrome.storage.sync.get('mode', function (data) {
-    if (data.mode == 'dark') {
-      set_dark_mode();
-      document.body.classList.add('dark-mode__page');
-    }
-  });
-  chrome.storage.sync.get('autotype', function (data) {
-    if (data.autotype === true) {
-      autotype = true;
-    }
-  });
-}
-
-document.addEventListener('readystatechange', (event) => {
-  if (event.target.readyState === 'interactive') {
-    execute_popup_funcs();
-  } else if (event.target.readyState === 'complete') {
-    execute_popup_funcs();
+chrome.storage.sync.get('recently_used', show_recently_used);
+chrome.storage.sync.get('mode', function (data) {
+  if (data.mode == 'dark') {
+    set_dark_mode();
+    document.body.classList.add('dark-mode__page');
+  }
+});
+chrome.storage.sync.get('autotype', function (data) {
+  if (data.autotype === true) {
+    autotype = true;
   }
 });

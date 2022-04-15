@@ -1,0 +1,20 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #00539cff;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.main-textbox {
+  display: flex;
+  flex-direction: column;
+  background-color: #eea47fff;
+  border: 2px solid black;
+  border-radius: 3rem;
+  padding: 3rem;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}

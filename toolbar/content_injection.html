@@ -4,32 +4,23 @@
     not interfere with the page the element is being 
     inserted onto-->
 
-
-<link rel="stylesheet" type="text/css" href="./content_styling.css">
-<script src="../accents.js"></script>
-
-
 <body>
-    <div class="copythat-toolbar-children">
-        <select id="copythat_select_form" class="copythat-toolbar-select-form select-form-arrow">
-            <option value=""></option>
-            <option value="Math">Math</option>
-            <option value="French">French</option>
-            <option value="Greek">Greek</option>
+    <div class="copythat-toolbar-copy-btn-box">
+        <select id="copythat_select_form" class="copythat-toolbar-select-form">
+            <option value="">Recently Used</option>
+            <option value="copythat_math">Math</option>
+            <option value="copythat_french">French</option>
+            <option value="copythat_greek">Greek</option>
         </select>
 
-        <div id="Math" class="copythat-toolbar-hidden-btn-box">TEST</div>
-        <div id="French" class="copythat-toolbar-hidden-btn-box"></div>
-        <div id="Greek" class="copythat-toolbar-hidden-btn-box"></div>
+        <div id="copythat_math" class="copythat-toolbar-hidden-btn-box"></div>
+        <div id="copythat_french" class="copythat-toolbar-hidden-btn-box"></div>
+        <div id="copythat_greek" class="copythat-toolbar-hidden-btn-box"></div>
 
     </div>
-    <div class="copythat-toolbar-children copythat_toolbar_recently_used">
-        Recently used
-    </div>
-    <div class="copythat-toolbar-children">
-        <button>Minimise Toolbar</button>
-        <button id="copythat_close_toolbar">Close Toolbar</button>
-        <button>Open Settings</button>
+    <div class="copythat-toolbar-btn-box">
+        <button id="copythat_minimize_toolbar" class="copythat-toolbar-btn">Minimise Toolbar</button>
+        <button id="copythat_close_toolbar" class="copythat-toolbar-btn">Close Toolbar</button>
     </div>
 </body>
 

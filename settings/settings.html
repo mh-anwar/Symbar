@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <header class="header">
+    <header>
         <img class="logo" src="../images/icon_32.png" />
         <a class="nav-links nav-active-link">Settings</a>
         <a class="nav-links">FAQ</a>
@@ -38,20 +38,14 @@
 
         <div class="range-container">
             <input type="range" id="toolbar_height" min="5" max="99" class="slider">
-            <span id="toolbar_height_value"></span>
+            <span class="range-value" id="toolbar_height_value"></span>
             <p>of page covered</p>
         </div>
-
-        <!--
-            https://www.w3schools.com/howto/howto_js_rangeslider.asp
-            Edit range slider to show current value and look better
-        -->
 
     </div>
     <div id="faq_tab" class="tab">
         <h2>Do you collect/sell my browsing history, location, etc?</h2>
-        <p>We believe in user privacy and so we do not insert ads into our content, sell your data or collect your data,
-            and we <b>never</b> will.</p>
+        <p>We will <b>never</b> collect any data from you and since we wont have it, we will never sell it.</p>
         <h2>Does this extension exist in other browsers?</h2>
         <p>Currently the extension is only availible in all Chromium based browsers (Microsoft Edge, Brave, etc).</p>
 
@@ -66,8 +60,7 @@
         </blockquote>
         We use these permissions to improve your experience.
         The "activeTab", "tabs" and "storage" permissions allows us to display the toolbar. The "storage" permission
-        also allows us
-        to save your preferences to your computer so that you don't have to constantly set them.
+        also allows us to save your preferences to your Chrome Account so that you don't have to constantly set them.
         </p>
     </div>
 </body>
