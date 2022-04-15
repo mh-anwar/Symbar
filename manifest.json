@@ -2,12 +2,12 @@
   "author": "Mohammad Anwar, Reese Chong & contributors",
   "manifest_version": 3,
   "name": "CopyThat Symbol",
-  "version": "0.3.1",
-  "version_name": "Talented Triceratops",
+  "version": "1.0.0",
+  "version_name": "Admirable Allosaurus",
   "description": "An easy way to access and copy symbols and accents.",
   "offline_enabled": true,
   "options_page": "settings/settings.html",
-  "minimum_chrome_version": "46",
+  "minimum_chrome_version": "88",
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "Copythat Symbol!"
