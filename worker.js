@@ -25,3 +25,23 @@ chrome.runtime.onInstalled.addListener((details) => {
 });
 
 chrome.runtime.setUninstallURL('https://forms.gle/mxBWcvDvmx1zgqeaA');
+chrome.action.onClicked.addListener((tab_info) => {
+  content_script_messenger(tab_info);
+});
+
+function open_toolbar(response, tabs_info) {
+  if (response.state === 0) {
+    chrome.tabs.sendMessage(tabs_info.id, 'toolbar_on');
+  } else if (response.state === 1) {
+    chrome.tabs.sendMessage(tabs_info.id, 'toolbar_off');
+  }
+}
+async function content_script_messenger(tab_info) {
+  //Make sure that this is not running on chrome native tabs
+  if (tab_info.url.match('^chrome:') === null) {
+    //First get the state of the toolbar, then open/close it
+    chrome.tabs.sendMessage(tab_info.id, 'state_of_toolbar', (response) => {
+      open_toolbar(response, tab_info);
+    });
+  }
+}

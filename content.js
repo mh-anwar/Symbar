@@ -12,6 +12,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
     }
   }
 });
+
 //injection function
 function toolbar_inserter() {
   var div = document.createElement(div);
@@ -35,7 +36,7 @@ function toolbar_inserter() {
         .getElementById('copythat_select_form')
         .addEventListener('change', toolbar_select_form_toggler);
       toolbar_populate_dropdowns();
-      toolbar_copier();
+
       toolbar_minimizer();
 
       chrome.storage.sync.get('toolbar_height', (data) =>
@@ -90,7 +91,9 @@ function toolbar_copier() {
   var copyButtonClass = document.getElementsByClassName(
     'copythat-toolbar-copy-btn'
   );
+  console.log(copyButtonClass);
   for (var i = 0; i < copyButtonClass.length; i++) {
+    console.log(i);
     copyButtonClass[i].addEventListener('click', function (e) {
       var text_to_copy = e.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
@@ -144,7 +147,8 @@ function toolbar_minimizer() {
           toolbar_maximizer();
           toolbar_minimized_remover();
         });
-      state_of_toolbar = 0;
+      //In the event that any function changed the state
+      state_of_toolbar = 1;
     });
 }
 
@@ -161,16 +165,8 @@ function autotype(letter) {
 function message_parser(message, sender, sendResponse) {
   var toolbar = document.getElementById('copy_toolbar');
   var minimized_toolbar = document.getElementById('minimized_toolbar');
-  if (typeof message === 'object') {
-    autotype(message.autotype);
-  } else if (message === 'state_of_toolbar') {
-    if (document.contains(toolbar)) {
-      sendResponse({ state: 1 });
-    } else if (document.contains(minimized_toolbar)) {
-      sendResponse({ state: 1 });
-    } else {
-      sendResponse({ state: 0 });
-    }
+  if (message === 'state_of_toolbar') {
+    sendResponse({ state: state_of_toolbar });
   } else if (message === 'toolbar_on') {
     //Call the function that inserts the toolbar
     toolbar_inserter();
@@ -183,10 +179,8 @@ function message_parser(message, sender, sendResponse) {
       document.getElementById('minimized_toolbar').remove();
     }
     state_of_toolbar = 0;
-  } else if (message === 'autotype') {
-    autotype;
   }
-  //returning true is MANDATORY, becuase the function may send a response back
+  //returning true is MANDATORY, because the function may send a response back
   return true;
 }
 
