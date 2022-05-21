@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       //Settings the inital state of recently used buttons
       break;
     case 'update':
-      //chrome.tabs.create({ url: 'https://github.com/mh-anwar/CopyThat/releases' })
+      //chrome.tabs.create({ url: 'https://github.com/mh-anwar/symbar/releases' })
       //Add once extension rolls out
       break;
     //case 'chrome_update': use to detect browser update

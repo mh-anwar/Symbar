@@ -16,7 +16,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 //injection function
 function toolbar_inserter() {
   var div = document.createElement(div);
-  div.className = 'copythat-toolbar-base';
+  div.className = 'symbar-toolbar-base';
   div.id = 'copy_toolbar';
   document.body.appendChild(div);
 
@@ -33,7 +33,7 @@ function toolbar_inserter() {
       });
 
       document
-        .getElementById('copythat_select_form')
+        .getElementById('symbar_select_form')
         .addEventListener('change', toolbar_select_form_toggler);
       toolbar_populate_dropdowns();
 
@@ -43,7 +43,7 @@ function toolbar_inserter() {
         set_toolbar_height(data, copy_toolbar)
       );
       document
-        .getElementById('copythat_close_toolbar')
+        .getElementById('symbar_close_toolbar')
         .addEventListener('click', toolbar_closer);
     });
 }
@@ -72,24 +72,40 @@ function toolbar_populate_dropdowns() {
     .then((response) => response.json())
     .then((data) => {
       let languages = data;
-      for (let lang in languages) {
-        let lang_div = ('copythat_' + lang).toLowerCase();
+      console.log('test');
+
+      /*let lang_div = ('symbar_' + lang).toLowerCase();
+               console.log(languages[lang]);
+        let entries = Object.entries(languages[lang]);
+        console.log(entries);
+        for (const [symbol, keywords] in languages[lang]) {
+          console.log(symbol);
+          console.log(typeof symbol);
+        } */
+      Object.keys(data).forEach((lang) => {
+        let lang_div = ('symbar_' + lang).toLowerCase();
+        Object.keys(data[lang]).forEach((symb) => {
+          document.getElementById(
+            lang_div
+          ).innerHTML += `<button class="symbar-toolbar-copy-btn">${symb}</button>`;
+        });
+      });
+      /*        let lang_div = ('symbar_' + lang).toLowerCase();
         document.getElementById(lang_div).innerHTML += `<div>
           ${languages[lang]
             .map(
               (text) =>
-                `<button class="copythat-toolbar-copy-btn">${text}</button>`
+                `<button class="symbar-toolbar-copy-btn">${text}</button>`
             )
             .join(' ')}
-       </div>`;
-      }
+       </div>`; */
     })
     .then(() => toolbar_copier());
 }
 
 function toolbar_copier() {
   var copyButtonClass = document.getElementsByClassName(
-    'copythat-toolbar-copy-btn'
+    'symbar-toolbar-copy-btn'
   );
   console.log(copyButtonClass);
   for (var i = 0; i < copyButtonClass.length; i++) {
@@ -103,14 +119,14 @@ function toolbar_copier() {
 
 function toolbar_select_form_toggler() {
   let toggled_buttons = document.querySelector(
-      '.copythat-toolbar-toggled-btn-box'
+      '.symbar-toolbar-toggled-btn-box'
     ),
     target = document.getElementById(this.value);
   if (toggled_buttons !== null) {
-    toggled_buttons.className = 'copythat-toolbar-hidden-btn-box';
+    toggled_buttons.className = 'symbar-toolbar-hidden-btn-box';
   }
   if (target !== null) {
-    target.className = 'copythat-toolbar-toggled-btn-box';
+    target.className = 'symbar-toolbar-toggled-btn-box';
   }
 }
 
@@ -133,10 +149,10 @@ function toolbar_minimized_remover() {
 
 function toolbar_minimizer() {
   document
-    .getElementById('copythat_minimize_toolbar')
+    .getElementById('symbar_minimize_toolbar')
     .addEventListener('click', function () {
       var div = document.createElement(div);
-      div.className = 'copythat-toolbar-base-minimized ';
+      div.className = 'symbar-toolbar-base-minimized ';
       div.id = 'minimized_toolbar';
       document.body.appendChild(div);
       document.getElementById('copy_toolbar').style.display = 'none';

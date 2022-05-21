@@ -48,6 +48,7 @@ header {
   border-style: hidden;
   border-width: 1px;
   border-radius: 5px;
+  user-select: none;
 }
 
 .nav-links:hover {

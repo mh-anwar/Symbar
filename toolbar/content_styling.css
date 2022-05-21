@@ -1,8 +1,8 @@
 /*NOTE: Because this CSS is inserted directly into webpages
-  it is crtical to append "copythat-toolbar" to all
+  it is crtical to append "symbar-toolbar" to all
   classes. As such, try to shorten words, such as button
   to btn.*/
-.copythat-toolbar-base {
+.symbar-toolbar-base {
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -23,11 +23,11 @@
   transition: opacity 2s;
 }
 
-.copythat-toolbar-base:hover {
+.symbar-toolbar-base:hover {
   opacity: 1;
 }
 
-.copythat-toolbar-base-minimized {
+.symbar-toolbar-base-minimized {
   position: fixed;
   width: 100%;
   height: 7%;
@@ -42,36 +42,37 @@
   transition: opacity 2s;
 }
 
-.copythat-toolbar-base-minimized:hover {
+.symbar-toolbar-base-minimized:hover {
   opacity: 1;
 }
 
-.copythat-toolbar-copy-btn-box {
+.symbar-toolbar-copy-btn-box {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 80%;
 }
 
-.copythat-toolbar-btn-box {
+.symbar-toolbar-btn-box {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 20%;
 }
 
-.copythat-toolbar-hidden-btn-box {
+.symbar-toolbar-hidden-btn-box {
   display: none;
 }
 
-.copythat-toolbar-toggled-btn-box {
+.symbar-toolbar-toggled-btn-box {
   display: flex;
-  flex-direction: column;
-  max-height: 150px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-height: 100%;
   overflow-y: auto;
 }
 
-.copythat-toolbar-select-form {
+.symbar-toolbar-select-form {
   display: inline-block;
   width: 100%;
   height: 25%;
@@ -106,23 +107,23 @@
   background-repeat: no-repeat;
 }
 
-.copythat-toolbar-select-form:hover {
+.symbar-toolbar-select-form:hover {
   opacity: 1;
 }
 
 /*Horrible wayt to set bgcolor and color
   but the only way to do so*/
-.dark-mode-page .copythat-toolbar-select-form {
+.dark-mode-page .symbar-toolbar-select-form {
   background-color: #1a1e24;
 }
 
-.copythat-toolbar-recently-used {
+.symbar-toolbar-recently-used {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.copythat-toolbar-btn {
+.symbar-toolbar-btn {
   background-color: inherit;
   color: inherit;
   display: inline-block;
@@ -133,11 +134,12 @@
 }
 
 /*All the buttons that copy to clipboard*/
-.copythat-toolbar-copy-btn {
+.symbar-toolbar-copy-btn {
+  display: inline-block;
   background-color: inherit;
   color: inherit;
-  min-width: 30px;
-  min-height: 30px;
+  width: 30px;
+  height: 30px;
   border: 1.5px solid white;
   border-radius: 0.3rem;
   margin: 5px;
@@ -146,6 +148,6 @@
   transition: opactity 2s;
 }
 
-.copythat-toolbar-copy-btn:hover {
+.symbar-toolbar-copy-btn:hover {
   opacity: 1;
 }

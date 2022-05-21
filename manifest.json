@@ -1,15 +1,14 @@
 {
   "author": "Mohammad Anwar",
   "manifest_version": 3,
-  "name": "CopyThat Symbol",
-  "version": "1.0.0",
-  "version_name": "Admirable Allosaurus",
+  "name": "Symbar",
+  "version": "0.2.0",
   "description": "An easy way to access and copy symbols and accents.",
   "offline_enabled": true,
   "options_page": "settings/settings.html",
-  "minimum_chrome_version": "88",
+
   "action": {
-    "default_title": "Copythat Symbol!"
+    "default_title": "Launch Symbar!"
   },
   "background": {
     "service_worker": "worker.js"
