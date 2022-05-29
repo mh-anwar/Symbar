@@ -1,5 +1,4 @@
-![](https://file%2B.vscode-resource.vscode-cdn.net/home/mohammad/Documents/Projects/CopyThat/images/icon_128.png?version%3D1653861068951)
-
+![](https://github.com/mh-anwar/symbar/blob/main/images/icon_128.png)
 # SymbolBar
 
 A clone of CopyThat which focusses specifically on providing users with a toolbar (instead of a popup) to easily access symbols and accents.
