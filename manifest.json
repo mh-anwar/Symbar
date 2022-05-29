@@ -3,12 +3,17 @@
   "manifest_version": 3,
   "name": "Symbar",
   "version": "0.2.0",
-  "description": "An easy way to access and copy symbols and accents.",
+  "description": "A toolbar to easily access and copy symbols.",
   "offline_enabled": true,
   "options_page": "settings/settings.html",
-
   "action": {
     "default_title": "Launch Symbar!"
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
   },
   "background": {
     "service_worker": "worker.js"
