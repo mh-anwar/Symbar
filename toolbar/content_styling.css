@@ -46,14 +46,18 @@
   opacity: 1;
 }
 
-.symbar-toolbar-copy-btn-box {
+.symbar-main-box {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 80%;
 }
-
-.symbar-toolbar-btn-box {
+.symbar-nav-box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.symbar-action-box {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -73,16 +77,13 @@
 }
 
 .symbar-toolbar-select-form {
-  display: inline-block;
-  width: 100%;
-  height: 25%;
+  width: 50%;
+  height: 40px;
   background-color: inherit !important;
   color: inherit;
 
-  /* styling */
   border: 2px solid rgb(146, 146, 146);
   border-radius: 0.3rem;
-  display: inline-block;
   font: inherit;
 
   margin: 3px;
@@ -92,32 +93,46 @@
   text-align: center;
   opacity: 0.8;
   transition: opacity 1s;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
-    linear-gradient(135deg, gray 50%, transparent 50%);
-  background-position: calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;
-  background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
-  background-repeat: no-repeat;
 }
-
+.symbar-toolbar-select-form option {
+  background-color: black;
+}
 .symbar-toolbar-select-form:hover {
   opacity: 1;
 }
-
 /*Horrible wayt to set bgcolor and color
   but the only way to do so*/
 .dark-mode-page .symbar-toolbar-select-form {
   background-color: #1a1e24;
 }
 
+.symbar-toolbar-search {
+  width: 50%;
+  height: 40px;
+  background-color: inherit !important;
+  color: inherit;
+
+  border: 2px solid rgb(146, 146, 146);
+  border-radius: 0.3rem;
+  font: inherit;
+
+  margin: 3px;
+  padding: 0.5em 3.5em 0.5em 1em;
+  outline: none;
+  line-height: 1.5em;
+  text-align: center;
+  opacity: 0.8;
+  transition: opacity 1s;
+}
+
+.symbar-search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .symbar-toolbar-recently-used {
+  height: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

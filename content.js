@@ -1,3 +1,4 @@
+'use strict';
 //Apr 05, 09:41pm: the content script is sandboxed to within the screen
 var state_of_toolbar = 0;
 let toolbar_height = '20%';
@@ -36,6 +37,34 @@ function toolbar_inserter() {
         .getElementById('symbar_select_form')
         .addEventListener('change', toolbar_select_form_toggler);
       toolbar_populate_dropdowns();
+      fetch(chrome.runtime.getURL('./accents.json'))
+        .then((response) => response.json())
+        .then((data) => {
+          document
+            .getElementById('symbar_search')
+            .addEventListener('input', (event) => {
+              console.time('Search');
+              const search_term = event.target.value;
+
+              if (search_term == '') {
+                document.getElementById('symbar_search_results').innerHTML = '';
+              } else {
+                let select_form = document.getElementById('symbar_select_form');
+                let selected_option =
+                  select_form.options[select_form.selectedIndex].text;
+                //use this for finer filtering
+                let symbols = search(search_term, data);
+                document.getElementById('symbar_search_results').innerHTML = '';
+                for (let i in symbols) {
+                  document.getElementById(
+                    'symbar_search_results'
+                  ).innerHTML += `<button class="symbar-toolbar-copy-btn">${symbols[i]}</button>`;
+                  console.log(document.getElementById('symbar_search'));
+                }
+              }
+              console.timeEnd('Search');
+            });
+        });
 
       toolbar_minimizer();
 
@@ -47,7 +76,21 @@ function toolbar_inserter() {
         .addEventListener('click', toolbar_closer);
     });
 }
-
+function search(search_term, data) {
+  var symbols = [];
+  Object.keys(data).forEach((lang) => {
+    Object.keys(data[lang]).forEach((symb) => {
+      for (let i in data[lang][symb]) {
+        let potential_term = data[lang][symb][i].toString().toLowerCase();
+        if (potential_term == search_term) {
+          symbols.push(symb);
+          break;
+        }
+      }
+    });
+  });
+  return symbols;
+}
 function set_toolbar_height(data, copy_toolbar) {
   let toolbar_height = data.toolbar_height + '%';
   copy_toolbar.style.height = toolbar_height;
@@ -71,17 +114,6 @@ function toolbar_populate_dropdowns() {
   fetch(chrome.runtime.getURL('./accents.json'))
     .then((response) => response.json())
     .then((data) => {
-      let languages = data;
-      console.log('test');
-
-      /*let lang_div = ('symbar_' + lang).toLowerCase();
-               console.log(languages[lang]);
-        let entries = Object.entries(languages[lang]);
-        console.log(entries);
-        for (const [symbol, keywords] in languages[lang]) {
-          console.log(symbol);
-          console.log(typeof symbol);
-        } */
       Object.keys(data).forEach((lang) => {
         let lang_div = ('symbar_' + lang).toLowerCase();
         Object.keys(data[lang]).forEach((symb) => {
@@ -90,15 +122,6 @@ function toolbar_populate_dropdowns() {
           ).innerHTML += `<button class="symbar-toolbar-copy-btn">${symb}</button>`;
         });
       });
-      /*        let lang_div = ('symbar_' + lang).toLowerCase();
-        document.getElementById(lang_div).innerHTML += `<div>
-          ${languages[lang]
-            .map(
-              (text) =>
-                `<button class="symbar-toolbar-copy-btn">${text}</button>`
-            )
-            .join(' ')}
-       </div>`; */
     })
     .then(() => toolbar_copier());
 }
@@ -107,9 +130,7 @@ function toolbar_copier() {
   var copyButtonClass = document.getElementsByClassName(
     'symbar-toolbar-copy-btn'
   );
-  console.log(copyButtonClass);
   for (var i = 0; i < copyButtonClass.length; i++) {
-    console.log(i);
     copyButtonClass[i].addEventListener('click', function (e) {
       var text_to_copy = e.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
@@ -196,8 +217,8 @@ function message_parser(message, sender, sendResponse) {
     }
     state_of_toolbar = 0;
   }
-  //returning true is MANDATORY, because the function may send a response back
-  return true;
+  //returning false to indicate end
+  return false;
 }
 
 chrome.runtime.onMessage.addListener(message_parser);

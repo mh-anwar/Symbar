@@ -1,21 +1,28 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-<!--ID's and classnames should be VERY unique so as to 
-    not interfere with the page the element is being 
-    inserted onto-->
+<!--ID's and classnames should be unique to not 
+    interfere with the page the toolbar is being 
+    inserted onto
+
+    Start all ID's and classnames with `symbar`
+-->
 
 <body>
-    <div class="symbar-toolbar-copy-btn-box">
-        <select id="symbar_select_form" class="symbar-toolbar-select-form">
-            <option value="">Recently Used</option>
-            <option value="symbar_math">Math</option>
+    <div class="symbar-main-box">
+        <div class="symbar-nav-box">
+            <select id="symbar_select_form" class="symbar-toolbar-select-form">
+                <option value="">Recently Used</option>
+                <option value="symbar_math">Math</option>
+                <option value="symbar_greek">Greek</option>
+            </select>
+            <input type="search" id="symbar_search" class="symbar-toolbar-search" placeholder="Choose a Category" />
+        </div>
 
-        </select>
-
+        <div id="symbar_search_results" class="symbar-search-results"></div>
         <div id="symbar_math" class="symbar-toolbar-hidden-btn-box"></div>
-
+        <div id="symbar_greek" class="symbar-toolbar-hidden-btn-box"></div>
     </div>
-    <div class="symbar-toolbar-btn-box">
+    <div class="symbar-action-box">
         <button id="symbar_minimize_toolbar" class="symbar-toolbar-btn">Minimise Toolbar</button>
         <button id="symbar_close_toolbar" class="symbar-toolbar-btn">Close Toolbar</button>
     </div>
