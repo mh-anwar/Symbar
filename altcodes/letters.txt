@@ -1,0 +1,16 @@
+<tr><td>¡</td><td>Inverted Exclamation Point</td><td>0161</td></tr>
+<tr><td>¿</td><td>Inverted Question Mark</td><td>0191</td></tr>
+<tr><td>Á</td><td>Uppercase Accent Acute (A)</td><td>0193</td></tr>
+<tr><td>É</td><td>Uppercase Accent Acute (E)</td><td>0201</td></tr>
+<tr><td>Í</td><td>Uppercase Accent Acute (I)</td><td>0205</td></tr>
+<tr><td>Ñ</td><td>Uppercase Ligature (NN)</td><td>0209</td></tr>
+<tr><td>Ó</td><td>Uppercase Accent Acute (O)</td><td>0211</td></tr>
+<tr><td>Ú</td><td>Uppercase Accent Acute (U)</td><td>0218</td></tr>
+<tr><td>Ü</td><td>Uppercase Accent Diaeresis (U)</td><td>0220</td></tr>
+<tr><td>á</td><td>Lowercase Accent Acute (a)</td><td>0225</td></tr>
+<tr><td>é</td><td>Lowercase Accent Acute (e)</td><td>0233</td></tr>
+<tr><td>í</td><td>Lowercase Accent Acute (i)</td><td>0237</td></tr>
+<tr><td>ñ</td><td>Lowecase Ligature (nn)</td><td>0241</td></tr>
+<tr><td>ó</td><td>Lowercase Accent Acute (o)</td><td>0243</td></tr>
+<tr><td>ú</td><td>Lowercase Accent Acute (a)</td><td>0250</td></tr>
+<tr><td>ü</td><td>Lowercase Accent Diaeresis (u)</td><td>0252</td></tr>
