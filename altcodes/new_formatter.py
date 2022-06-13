@@ -1,8 +1,5 @@
 import json
 
-
-import json
-
 new = {}
 file = open("./symbols.txt")
 lines = file.readlines()

@@ -13,9 +13,7 @@
     },
     "n": {
       "t": {
-        "i": {
-          "_end": ["some", "letters"]
-        }
+        "i": { "_end": ["some", "letters"] }
       }
     }
   }
