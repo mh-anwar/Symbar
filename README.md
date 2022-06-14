@@ -11,5 +11,6 @@ Currently the main branch is unstable and may contain bugs!
 - [ ] Search functionality
   - [ ] French, Spanish, etc to accents.json and labelled data
   - [ ] Trie to efficiently sort through data
+  - [ ] Reverse trie?
 - [ ] Recently Used to be updated every minute (storage listener)
 - [ ] Button to access Settings page
