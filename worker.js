@@ -10,6 +10,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       //Above we set the inital toolbar height
       chrome.storage.sync.set({ recently_used: [] });
       //Settings the inital state of recently used buttons
+      chrome.storage.sync.set({ mode: 'dark' });
       break;
     case 'update':
       //chrome.tabs.create({ url: 'https://github.com/mh-anwar/symbar/releases' })

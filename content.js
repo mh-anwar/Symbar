@@ -5,12 +5,13 @@ let toolbar_height = '20%';
 //Always be checking if toolbar height is changed
 chrome.storage.onChanged.addListener((changes, area) => {
   if (changes.toolbar_height?.newValue) {
-    console.log(changes.toolbar_height?.newValue);
     toolbar_height = changes.toolbar_height?.newValue + '%';
     var toolbar = document.getElementById('copy_toolbar');
     if (typeof toolbar != 'undefined' && toolbar != null) {
       document.getElementById('copy_toolbar').style.height = toolbar_height;
     }
+  } else if (changes.recently_used?.newValue) {
+    update_recent();
   }
 });
 
@@ -53,13 +54,14 @@ function toolbar_inserter() {
                 let selected_option =
                   select_form.options[select_form.selectedIndex].text;
                 //use this for finer filtering
+
                 let symbols = search(search_term, data);
+
                 document.getElementById('symbar_search_results').innerHTML = '';
                 for (let i in symbols) {
                   document.getElementById(
                     'symbar_search_results'
                   ).innerHTML += `<button class="symbar-toolbar-copy-btn">${symbols[i]}</button>`;
-                  console.log(document.getElementById('symbar_search'));
                 }
               }
               console.timeEnd('Search');
@@ -122,10 +124,32 @@ function toolbar_populate_dropdowns() {
           ).innerHTML += `<button class="symbar-toolbar-copy-btn">${symb}</button>`;
         });
       });
+      update_recent();
     })
     .then(() => toolbar_copier());
 }
 
+async function toolbar_add_recent(btn_text) {
+  let data = await chrome.storage.sync.get('recently_used');
+  data = data.recently_used;
+  if (data.length > 20) {
+    data.shift();
+  }
+  data.push(btn_text);
+
+  chrome.storage.sync.set({ recently_used: data });
+}
+async function update_recent() {
+  let recents = await chrome.storage.sync.get('recently_used');
+  recents = recents.recently_used;
+  let recent_node = document.getElementById('symbar_recent');
+  recent_node.innerHTML = '';
+  for (let i = 0; i < recents.length; i++) {
+    recent_node.innerHTML += `<button class="symbar-toolbar-copy-btn">${recents[i]}</button>`;
+  }
+  //dbl check that this isn't called double on old btns
+  toolbar_copier();
+}
 function toolbar_copier() {
   var copyButtonClass = document.getElementsByClassName(
     'symbar-toolbar-copy-btn'
@@ -134,6 +158,7 @@ function toolbar_copier() {
     copyButtonClass[i].addEventListener('click', function (e) {
       var text_to_copy = e.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
+      toolbar_add_recent(text_to_copy);
     });
   }
 }
@@ -143,11 +168,16 @@ function toolbar_select_form_toggler() {
       '.symbar-toolbar-toggled-btn-box'
     ),
     target = document.getElementById(this.value);
+  let recents = document.getElementById('symbar_recent');
   if (toggled_buttons !== null) {
     toggled_buttons.className = 'symbar-toolbar-hidden-btn-box';
   }
+
   if (target !== null) {
     target.className = 'symbar-toolbar-toggled-btn-box';
+    recents.style.display = 'none';
+  } else {
+    recents.style.display = 'block';
   }
 }
 
@@ -195,7 +225,6 @@ function autotype(letter) {
     Google Docs has a billion iframes, with div's all over..
     few extensions, like Grammarly, actually work in Google Docs
   */
-  console.log(document.activeElement);
   document.activeElement.value += letter.toString();
 }
 
