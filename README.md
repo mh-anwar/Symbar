@@ -4,8 +4,6 @@
 
 A clone of CopyThat which focusses specifically on providing users with a toolbar (instead of a popup) to easily access symbols and accents.
 
-Currently the main branch is unstable and may contain bugs!
-
 ## To Be Added
 
 - [ ] Search functionality
