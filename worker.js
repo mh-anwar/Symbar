@@ -46,3 +46,10 @@ async function content_script_messenger(tab_info) {
     });
   }
 }
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // 2. A page requested user data, respond with a copy of `user`
+  if (message === 'open-options') {
+    chrome.runtime.openOptionsPage();
+  }
+});

@@ -17,8 +17,17 @@ chrome.storage.onChanged.addListener((changes, area) => {
 
 //injection function
 function toolbar_inserter() {
-  var div = document.createElement(div);
-  div.className = 'symbar-toolbar-base';
+  let div = document.createElement('div');
+
+  chrome.storage.sync.get('mode', function (data) {
+    if (data.mode == 'dark') {
+      copy_toolbar.style.backgroundColor = 'var(--symbar-dbg)';
+      copy_toolbar.style.color = 'var(--symbar-dfg)';
+      div.className = 'symbar-toolbar-base dark-mode-page';
+    } else {
+      div.className = 'symbar-toolbar-base';
+    }
+  });
   div.id = 'copy_toolbar';
   document.body.appendChild(div);
 
@@ -28,16 +37,12 @@ function toolbar_inserter() {
       var copy_toolbar = document.getElementById('copy_toolbar');
       copy_toolbar.innerHTML = html_data;
 
-      chrome.storage.sync.get('mode', function (data) {
-        if (data.mode == 'dark') {
-          set_dark_mode();
-        }
-      });
-
       document
         .getElementById('symbar_select_form')
         .addEventListener('change', toolbar_select_form_toggler);
       toolbar_populate_dropdowns();
+
+      // Fetch accents and set up search
       fetch(chrome.runtime.getURL('./accents.json'))
         .then((response) => response.json())
         .then((data) => {
@@ -76,6 +81,9 @@ function toolbar_inserter() {
       document
         .getElementById('symbar_close_toolbar')
         .addEventListener('click', toolbar_closer);
+      document
+        .getElementById('symbar_options')
+        .addEventListener('click', toolbar_options);
     });
 }
 function search(search_term, data) {
@@ -98,10 +106,10 @@ function set_toolbar_height(data, copy_toolbar) {
   copy_toolbar.style.height = toolbar_height;
 }
 
-function set_dark_mode() {
+function set_dark_mode(copy_toolbar) {
   copy_toolbar.classList.add('dark-mode-page');
-  copy_toolbar.style.backgroundColor = '#000408';
-  copy_toolbar.style.color = '#c2c3c5';
+  //copy_toolbar.style.backgroundColor = '#000408';
+  //copy_toolbar.style.color = '#c2c3c5';
 }
 
 function toolbar_closer() {
@@ -110,6 +118,10 @@ function toolbar_closer() {
   });
   document.getElementById('copy_toolbar').remove();
   state_of_toolbar = 0;
+}
+
+function toolbar_options() {
+  chrome.runtime.sendMessage('open-options');
 }
 
 function toolbar_populate_dropdowns() {
@@ -139,6 +151,7 @@ async function toolbar_add_recent(btn_text) {
 
   chrome.storage.sync.set({ recently_used: data });
 }
+
 async function update_recent() {
   let recents = await chrome.storage.sync.get('recently_used');
   recents = recents.recently_used;
@@ -150,6 +163,7 @@ async function update_recent() {
   //dbl check that this isn't called double on old btns
   toolbar_copier();
 }
+
 function toolbar_copier() {
   var copyButtonClass = document.getElementsByClassName(
     'symbar-toolbar-copy-btn'
