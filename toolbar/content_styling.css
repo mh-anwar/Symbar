@@ -28,10 +28,11 @@
   --symbar-dselected: #90caf9;
 }
 
-/*NOTE: Because this CSS is inserted directly into webpages
-  it is crtical to append "symbar-toolbar" to all
-  classes. As such, try to shorten words, such as button
-  to btn.*/
+/* 
+  ! NOTE: Because this CSS is inserted directly into webpages
+  ! it is crtical to make classes unique, thus "symbar-toolbar"
+  ! is prepended to all classes.
+*/
 .symbar-toolbar-base {
   display: flex;
   flex-direction: row;
@@ -62,7 +63,7 @@
   width: 100%;
   height: 7%;
   color: white;
-  background-color: rgb(36, 36, 36);
+  background-color: var(--symbar-dbg);
   border: 0.2px solid transparent;
   border-radius: 5px 5px 0px 0px;
   bottom: 0;
@@ -282,6 +283,11 @@
 .dark-mode-page .symbar-toolbar-btn:active {
   border: 1.5px solid var(--symbar-dselected);
   box-shadow: 0 0;
+}
+
+.symbar-toolbar-icon-btn {
+  width: min-content;
+  align-self: center;
 }
 
 /*

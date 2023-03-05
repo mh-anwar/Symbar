@@ -47,9 +47,18 @@ async function content_script_messenger(tab_info) {
   }
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  // 2. A page requested user data, respond with a copy of `user`
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   if (message === 'open-options') {
     chrome.runtime.openOptionsPage();
+  } else if (message === 'change-mode') {
+    let mode;
+    await chrome.storage.sync.get('mode', function (data) {
+      mode = data.mode;
+      if (mode == 'dark') {
+        chrome.storage.sync.set({ mode: 'light' });
+      } else if (mode == 'light') {
+        chrome.storage.sync.set({ mode: 'dark' });
+      }
+    });
   }
 });

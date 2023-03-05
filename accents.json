@@ -1,4 +1,22 @@
 {
+  "French": {
+    "À": ["Accent", "Grave", "A"],
+    "Â": ["Accent", "Circonflex", "A"],
+    "Ä": ["Accent", "Tréma", "A"],
+    "Æ": ["Ligature", "AE"],
+    "Ç": ["Cedilla", "C"],
+    "È": ["Accent", "Grave", "E"],
+    "É": ["Accent", "Aigu", "E"],
+    "Ê": ["Accent", "Circonflex", "E"],
+    "Ë": ["Accent", "Tréma", "E"],
+    "Î": ["Accent", "Circonflex", "I"],
+    "Ï": ["Accent", "Tréma", "I"],
+    "Ô": ["Accent", "Circonflex", "O"],
+    "Œ": ["Ligature", "OE"],
+    "Ù": ["Accent", "Grave", "U"],
+    "Û": ["Accent", "Circonflex", "U"],
+    "Ü": ["Accent", "Tréma", "U"]
+  },
   "Math": {
     "π": ["Greek", "Small", "Letter", "Pi"],
     "∞": ["Infinity"],

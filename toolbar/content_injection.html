@@ -1,22 +1,20 @@
-<!--ID's and classnames should be unique to not 
-    interfere with the page the toolbar is being 
-    inserted onto
-
-    Start all ID's and classnames with `symbar`
--->
+<!--!ID's and classnames MUST be unique-->
 <div class="symbar-main-box">
     <div class="symbar-nav-box">
         <select id="symbar_select_form" class="symbar-toolbar-select-form">
             <option value="symbar_custom">Custom Symbols</option>
             <option value="">Recently Used</option>
+            <option value="symbar_french">French</option>
             <option value="symbar_math">Math</option>
             <option value="symbar_greek">Greek</option>
         </select>
         <input type="search" id="symbar_search" class="symbar-toolbar-search" placeholder="Search" />
+        <h3 style="text-align: center;">Press <code>Shift</code> for lowercase</h3>
     </div>
     <div id="symbar_recent" class="symbar-toolbar-toggled-btn-box"></div>
     <div id="symbar_custom" class="symbar-toolbar-toggled-btn-box"></div>
     <div id="symbar_search_results" class="symbar-search-results"></div>
+    <div id="symbar_french" class="symbar-toolbar-hidden-btn-box"></div>
     <div id="symbar_math" class="symbar-toolbar-hidden-btn-box"></div>
     <div id="symbar_greek" class="symbar-toolbar-hidden-btn-box"></div>
 </div>
@@ -24,4 +22,5 @@
     <button id="symbar_minimize_toolbar" class="symbar-toolbar-btn">Minimise Toolbar</button>
     <button id="symbar_close_toolbar" class="symbar-toolbar-btn">Close Toolbar</button>
     <button id="symbar_options" class="symbar-toolbar-btn">Create Custom Toolbar</button>
+    <button id="symbar_dark_mode" class="symbar-toolbar-btn symbar-toolbar-icon-btn">🌙</button>
 </div>

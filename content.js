@@ -12,14 +12,18 @@ chrome.storage.onChanged.addListener((changes, area) => {
     }
   } else if (changes.recently_used?.newValue) {
     update_recent();
+  } else if (changes.mode?.newValue) {
+    document.getElementById('copy_toolbar').remove();
+    toolbar_inserter();
   }
 });
 
 //injection function
 function toolbar_inserter() {
   let div = document.createElement('div');
-
+  let toolbar_mode;
   chrome.storage.sync.get('mode', function (data) {
+    toolbar_mode = data.mode;
     if (data.mode == 'dark') {
       copy_toolbar.style.backgroundColor = 'var(--symbar-dbg)';
       copy_toolbar.style.color = 'var(--symbar-dfg)';
@@ -84,6 +88,9 @@ function toolbar_inserter() {
       document
         .getElementById('symbar_options')
         .addEventListener('click', toolbar_options);
+      document.addEventListener('keydown', toolbar_implement_shift_effect);
+      document.addEventListener('keyup', toolbar_reset_shift_effect);
+      toolbar_dark_mode_btn(toolbar_mode);
     });
 }
 function search(search_term, data) {
@@ -101,15 +108,43 @@ function search(search_term, data) {
   });
   return symbols;
 }
+
 function set_toolbar_height(data, copy_toolbar) {
   let toolbar_height = data.toolbar_height + '%';
   copy_toolbar.style.height = toolbar_height;
 }
-
-function set_dark_mode(copy_toolbar) {
-  copy_toolbar.classList.add('dark-mode-page');
-  //copy_toolbar.style.backgroundColor = '#000408';
-  //copy_toolbar.style.color = '#c2c3c5';
+function toolbar_implement_shift_effect(e) {
+  if (e.shiftKey) {
+    let copy_buttons = document.getElementsByClassName(
+      'symbar-toolbar-copy-btn'
+    );
+    for (var i = 0; i < copy_buttons.length; i++) {
+      let initialText = copy_buttons[i].textContent;
+      copy_buttons[i].textContent = initialText.toLowerCase();
+    }
+  }
+}
+function toolbar_reset_shift_effect(e) {
+  if (e.key === 'Shift') {
+    let copy_buttons = document.getElementsByClassName(
+      'symbar-toolbar-copy-btn'
+    );
+    for (var i = 0; i < copy_buttons.length; i++) {
+      let initialText = copy_buttons[i].textContent;
+      copy_buttons[i].textContent = initialText.toUpperCase();
+    }
+  }
+}
+function toolbar_dark_mode_btn(mode) {
+  let mode_button = document.getElementById('symbar_dark_mode');
+  if (mode === 'dark') {
+    mode_button.textContent = '☀️';
+  } else {
+    mode_button.textContent = '🌙';
+  }
+  mode_button.addEventListener('click', (event) => {
+    chrome.runtime.sendMessage('change-mode');
+  });
 }
 
 function toolbar_closer() {
