@@ -6,9 +6,8 @@ A clone of CopyThat which focusses specifically on providing users with a toolba
 
 ## To Be Added
 
-- [ ] Search functionality
-  - [ ] French, Spanish, etc to accents.json and labelled data
-  - [ ] Trie to efficiently sort through data
-  - [ ] Reverse trie?
-- [ ] Recently Used to be updated every minute (storage listener)
-- [ ] Button to access Settings page
+- [x] Search functionality
+  - [x] Labelled data
+- [x] Recently Used to be updated every minute (storage listener)
+- [x] Button to access Settings page
+- [ ] Add Spanish, Arabic, Hindi symbols
