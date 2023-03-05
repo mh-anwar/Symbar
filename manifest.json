@@ -1,7 +1,7 @@
 {
   "author": "Mohammad Anwar",
   "manifest_version": 3,
-  "name": "Symbar",
+  "name": "Symbar - Accents Made Easy",
   "version": "1.1.0",
   "description": "A toolbar to easily access and copy symbols.",
   "offline_enabled": true,
