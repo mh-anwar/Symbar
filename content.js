@@ -91,6 +91,7 @@ function toolbar_inserter() {
       document.addEventListener('keydown', toolbar_implement_shift_effect);
       document.addEventListener('keyup', toolbar_reset_shift_effect);
       toolbar_dark_mode_btn(toolbar_mode);
+      toolbar_populate_custom();
     });
 }
 function search(search_term, data) {
@@ -113,6 +114,7 @@ function set_toolbar_height(data, copy_toolbar) {
   let toolbar_height = data.toolbar_height + '%';
   copy_toolbar.style.height = toolbar_height;
 }
+
 function toolbar_implement_shift_effect(e) {
   if (e.shiftKey) {
     let copy_buttons = document.getElementsByClassName(
@@ -124,6 +126,7 @@ function toolbar_implement_shift_effect(e) {
     }
   }
 }
+
 function toolbar_reset_shift_effect(e) {
   if (e.key === 'Shift') {
     let copy_buttons = document.getElementsByClassName(
@@ -135,6 +138,7 @@ function toolbar_reset_shift_effect(e) {
     }
   }
 }
+
 function toolbar_dark_mode_btn(mode) {
   let mode_button = document.getElementById('symbar_dark_mode');
   if (mode === 'dark') {
@@ -187,6 +191,18 @@ async function toolbar_add_recent(btn_text) {
   chrome.storage.sync.set({ recently_used: data });
 }
 
+async function toolbar_populate_custom() {
+  let data = await chrome.storage.sync.get('cust_btns');
+  console.log(data);
+  data = data.cust_btns;
+  for (let i = 0; i < data.length; i++) {
+    document.getElementById(
+      'symbar_custom'
+    ).innerHTML += `<button class="symbar-toolbar-copy-btn">${data[i]}</button>`;
+  }
+  console.log(data);
+  toolbar_copier();
+}
 async function update_recent() {
   let recents = await chrome.storage.sync.get('recently_used');
   recents = recents.recently_used;

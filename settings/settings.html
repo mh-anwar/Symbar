@@ -8,6 +8,7 @@
     <meta name="description" content="Settings for Symbar">
     <link rel="stylesheet" type="text/css" href="../settings/settings_styling.css">
     <script defer src="../settings/settings_script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
@@ -21,7 +22,7 @@
     </header>
 
     <div id="settings_tab" class="tab active-tab">
-
+        <h2>General Options</h2>
         <label class="container">
             Dark Mode
             <input type="checkbox" id="mode_checkbox" value="Dark mode">
@@ -33,17 +34,42 @@
             <input type="checkbox" id="autotype_checkbox" value="Autotype">
             <span class="checkmark"></span>
         </label>
-        <!--         <label class="container">
-            Position On Page (Coming Soon)
-            <input type="checkbox" id="mode_checkbox" value="Dark mode">
+
+        <label class="container">
+            Show Recently Used first
+            <input type="checkbox" id="display_opt" value="recently_used">
             <span class="checkmark"></span>
-        </label> -->
+        </label>
         <div class="range-container">
             <input type="range" id="toolbar_height" min="5" max="99" class="slider">
             <span class="range-value" id="toolbar_height_value"></span>
             <p>of page covered</p>
         </div>
 
+        <h2>Custom Buttons/Toolbar
+            <div class="tooltip">
+                <span class="material-symbols-outlined">info</span>
+                <div class="tooltiptext">
+                    <kbd>Enter</kbd> for new button
+                    <kbd>Shift + Backspace</kbd> to delete button
+                </div>
+            </div>
+
+        </h2>
+        <button id="add_cust_btn">
+            <span class="material-symbols-outlined">add</span>
+            Add Custom Button
+        </button>
+        <button id="save_cust_btn">
+            <span class="material-symbols-outlined">
+                save
+            </span>
+            Save Buttons
+        </button>
+        <div id="cust_btn_ui" class="cust-symbols-cont">
+            <div id="cust_btn_cont" class="cust-symbols-cont"></div>
+            <div id="cust_btn_prev" class="cust-symbols-prev"></div>
+        </div>
     </div>
     <div id="faq_tab" class="tab">
         <h2>Do you collect/sell my browsing history, location, etc?</h2>
