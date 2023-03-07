@@ -193,14 +193,12 @@ async function toolbar_add_recent(btn_text) {
 
 async function toolbar_populate_custom() {
   let data = await chrome.storage.sync.get('cust_btns');
-  console.log(data);
   data = data.cust_btns;
   for (let i = 0; i < data.length; i++) {
     document.getElementById(
       'symbar_custom'
     ).innerHTML += `<button class="symbar-toolbar-copy-btn">${data[i]}</button>`;
   }
-  console.log(data);
   toolbar_copier();
 }
 async function update_recent() {

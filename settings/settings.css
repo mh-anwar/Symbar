@@ -46,7 +46,7 @@ body {
 
 header {
   background-color: var(--bgsec);
-  color: var(--primary);
+  color: var(--fg);
   border: 1px solid rgb(31, 25, 25);
   display: flex;
   position: sticky;
@@ -81,25 +81,38 @@ h2 {
 
 .nav-links {
   float: left;
-  color: var(--color);
+  color: inherit;
   text-align: center;
-  padding: 14px 16px;
+  padding: 0.5em;
   text-decoration: none;
   font-size: 17px;
   border-style: hidden;
   border-width: 1px;
   border-radius: 5px;
   user-select: none;
+  transition: background-color 1.5s;
+  transition: color 1s;
 }
 
 .nav-links:hover {
-  background-color: black;
-  color: white;
+  background-color: var(--hover);
+  color: var(--dfg);
+  transition: background-color 2s;
+}
+
+.dark-mode-page.nav-links:hover {
+  background-color: var(--dhover);
+  color: var(--fg);
 }
 
 .nav-active-link {
-  background-color: black;
-  color: white;
+  background-color: var(--dselected);
+  color: var(--fg);
+}
+
+.dark-mode-page .nav-active-link {
+  background-color: var(--selected);
+  color: var(--fg);
 }
 
 .active:hover {
@@ -155,7 +168,7 @@ h2 {
 
 /* When the checkbox is checked, add a blue background */
 .container input:checked~.checkmark {
-  background-color: var(--primary);
+  background-color: var(--selected);
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */

@@ -70,7 +70,6 @@ function add_cust_button() {
     }
   });
   input.addEventListener('keydown', (e) => {
-    console.log(e);
     if (
       (e.code === 'Backspace' && e.shiftKey) ||
       (e.code === 'Backspace' && e.target.value === '')
