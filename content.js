@@ -222,6 +222,12 @@ function toolbar_copier() {
       var text_to_copy = e.target.textContent;
       navigator.clipboard.writeText(text_to_copy);
       toolbar_add_recent(text_to_copy);
+      document.getElementById('symbar_instructions').innerHTML = 'Copied!';
+      setTimeout(() => {
+        document.getElementById(
+          'symbar_instructions'
+        ).innerHTML = `Press <code>Shift</code> for lowercase`;
+      }, 5000);
     });
   }
 }

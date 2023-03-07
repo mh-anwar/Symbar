@@ -9,7 +9,7 @@
             <option value="symbar_greek">Greek</option>
         </select>
         <input type="search" id="symbar_search" class="symbar-toolbar-search" placeholder="Search" />
-        <h3 style="text-align: center;">Press <code>Shift</code> for lowercase</h3>
+
     </div>
     <div id="symbar_recent" class="symbar-toolbar-toggled-btn-box"></div>
     <div id="symbar_custom" class="symbar-toolbar-hidden-btn-box"></div>
@@ -19,8 +19,13 @@
     <div id="symbar_greek" class="symbar-toolbar-hidden-btn-box"></div>
 </div>
 <div class="symbar-action-box">
-    <button id="symbar_minimize_toolbar" class="symbar-toolbar-btn">Minimise Toolbar</button>
-    <button id="symbar_close_toolbar" class="symbar-toolbar-btn">Close Toolbar</button>
-    <button id="symbar_options" class="symbar-toolbar-btn">Create Custom Toolbar</button>
-    <button id="symbar_dark_mode" class="symbar-toolbar-btn symbar-toolbar-icon-btn">🌙</button>
+    <div class="symbar-main-actions">
+        <button id="symbar_minimize_toolbar" class="symbar-toolbar-btn">Minimize</button>
+        <button id="symbar_close_toolbar" class="symbar-toolbar-btn">Close</button>
+        <button id="symbar_options" class="symbar-toolbar-btn">Settings</button>
+        <button id="symbar_dark_mode" class="symbar-toolbar-btn symbar-toolbar-icon-btn">🌙</button>
+    </div>
+    <div class="symbar-toolbar-instructions" id="symbar_instructions">
+        <p>Press <code>Shift</code> for lowercase</p>
+    </div>
 </div>

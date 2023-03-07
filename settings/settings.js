@@ -59,9 +59,11 @@ function open_tab(event) {
   event.target.classList.add('nav-active-link');
 }
 
-function add_cust_button() {
+function add_cust_button(value = '') {
   let input = document.createElement('input');
   input.type = 'text';
+
+  input.value = value.target ? '' : value;
   input.className = 'cust-symbols';
   input.addEventListener('input', preview_cust_buttons);
   input.addEventListener('keypress', (e) => {
@@ -83,6 +85,7 @@ function add_cust_button() {
   input.focus();
 }
 
+// Display all custom buttons (from inputs)
 function preview_cust_buttons() {
   let symbols = document.getElementsByClassName('cust-symbols');
   document.getElementById('cust_btn_prev').innerHTML = '';
@@ -95,13 +98,23 @@ function preview_cust_buttons() {
   }
 }
 
+// Save custom buttons to storage
 function save_cust_buttons() {
   let symbols = document.getElementsByClassName('cust-symbols');
   let custom_buttons = [];
   for (let i = 0; i < symbols.length; i++) {
-    custom_buttons.push(symbols[i].value);
+    if (symbols[i].value !== '') {
+      custom_buttons.push(symbols[i].value);
+    }
   }
   chrome.storage.sync.set({ cust_btns: custom_buttons });
+}
+
+function populate_cust_buttons(data) {
+  for (let i = 0; i < data.length; i++) {
+    add_cust_button(data[i]);
+  }
+  preview_cust_buttons();
 }
 
 //Attach event listeners
@@ -110,7 +123,6 @@ autotype_checkbox.addEventListener('change', set_autotype);
 toolbar_height.addEventListener('input', set_toolbar_height);
 cust_btn_adder.addEventListener('click', add_cust_button);
 cust_save_btn.addEventListener('click', save_cust_buttons);
-add_cust_button();
 
 //Synchronize page mode and mode checkbox state
 chrome.storage.sync.get('mode', function (data) {
@@ -132,6 +144,14 @@ chrome.storage.sync.get('toolbar_height', function (data) {
 chrome.storage.sync.get('autotype', function (data) {
   if (data.autotype === true) {
     document.getElementById('autotype_checkbox').setAttribute('checked', true);
+  }
+});
+
+chrome.storage.sync.get('cust_btns', function (data) {
+  if (data.cust_btns) {
+    populate_cust_buttons(data.cust_btns);
+  } else {
+    add_cust_button();
   }
 });
 

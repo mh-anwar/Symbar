@@ -301,6 +301,7 @@ input[type="text"] {
   padding: 0.5em;
   border: 1.5px solid var(--border);
   outline: none;
+  max-width: 5em;
 }
 
 input[type="text"]:hover {
