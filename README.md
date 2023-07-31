@@ -1,7 +1,7 @@
 ![](https://github.com/mh-anwar/symbar/blob/main/images/icon_128.png)
 
 # [Symbar - Your personalized shortcut to symbols and accents!](https://chrome.google.com/webstore/detail/symbar-accents-symbols-ma/hljljfcdpdhjnclioogdnekngnnfhnnk)
-Symbar is a browser extension that allows users to easily access symbols and accents from a toolbar on any web page. It also provides the ability to add custom symbols and accents to the toolbar, making it a personalized tool for users. This project is a clone of the [CopyThat](https://github.com/mh-anwar/CopyThat) project.
+Symbar is a browser extension that allows users to easily access symbols and accents from a toolbar on any web page. It also provides the ability to add custom symbols and accents to the toolbar, making it a personalized tool for users. 
 
 ## Installation
 Visit the Chrome Webstore to install by clicking [here](https://chrome.google.com/webstore/detail/symbar-accents-symbols-ma/hljljfcdpdhjnclioogdnekngnnfhnnk). 
@@ -22,3 +22,4 @@ The extension is currently compatible with all Chromium browsers. Firefox is not
 
 ## Features In Progress
 - [ ] Spanish, Arabic, Hindi symbols
+- [ ] Fix search
