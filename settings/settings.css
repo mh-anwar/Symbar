@@ -1,0 +1,357 @@
+:root {
+  --back: aliceblue;
+  --fore: rgb(172, 169, 169);
+  --color: black;
+  --primary: #0175fe;
+
+  /*
+    ? Light Mode Variables
+  */
+  --bg: whitesmoke;
+  --bgsec: #f5f5f5;
+  --fg: #202020;
+
+  --border: #516d89;
+  --btnfg: #1e3246;
+
+  --unselected: #c4c4c4;
+  --hover: #212121;
+  --selected: #1873ce;
+  /*
+    ? Dark Mode Variables
+  */
+  --dbg: #0a1929;
+  --dbgsec: #1e1e1e;
+  --dfg: #e7ebf0;
+
+  --dborder: #4d7291;
+  --dpri: #86bde9;
+  --dbtnfg: #90caf9;
+
+  --dunselected: #434e5a;
+  --dhover: #c1c5c9;
+  --dselected: #90caf9;
+}
+
+html {
+  width: 100%;
+}
+
+body {
+  font-size: medium;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+header {
+  background-color: var(--bgsec);
+  color: var(--fg);
+  border: 1px solid rgb(31, 25, 25);
+  display: flex;
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  gap: 5px 5px;
+  justify-content: flex-start;
+  align-items: baseline;
+  align-content: center;
+  border-radius: 5px;
+  padding: 1%;
+}
+
+.dark-mode-page header {
+  background-color: var(--dbgsec);
+  color: var(--dfg);
+}
+
+h2 {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.logo {
+  float: left;
+  align-self: center;
+  padding-right: 1%;
+}
+
+.nav-links {
+  float: left;
+  color: inherit;
+  text-align: center;
+  padding: 0.5em;
+  text-decoration: none;
+  font-size: 17px;
+  border-style: hidden;
+  border-width: 1px;
+  border-radius: 5px;
+  user-select: none;
+  transition: background-color 1.5s;
+  transition: color 1s;
+}
+
+.nav-links:hover {
+  background-color: var(--hover);
+  color: var(--dfg);
+  transition: background-color 2s;
+}
+
+.dark-mode-page.nav-links:hover {
+  background-color: var(--dhover);
+  color: var(--fg);
+}
+
+.nav-active-link {
+  background-color: var(--dselected);
+  color: var(--fg);
+}
+
+.dark-mode-page .nav-active-link {
+  background-color: var(--selected);
+  color: var(--fg);
+}
+
+.active:hover {
+  background-color: rgb(194, 191, 191);
+}
+
+.tab {
+  display: none;
+}
+
+.active-tab {
+  display: block;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 1%;
+  margin-top: 1em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 1px solid #9a9b9e;
+  border-radius: 5px;
+  transition: background-color 0.4s;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
+  background-color: var(--selected);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid whitesmoke;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*Range slider containers*/
+.range-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: baseline;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.range-value {
+  margin-left: 1%;
+  margin-right: 3px;
+}
+
+.slider {
+  width: 15%;
+  height: 15px;
+  background: whitesmoke;
+  outline: none;
+  opacity: 0.8;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 20px;
+  border: 1px solid #9a9b9e;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+/* 
+* General Button
+*/
+button {
+  background-color: inherit;
+  color: inherit;
+  height: min-content;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+  border-radius: 0.5rem;
+  margin: 0.5em;
+  padding: 0.8em;
+  transition: box-shadow 0.3s;
+  border: 1.5px solid var(--border);
+  box-shadow: -1px 1px;
+}
+
+/* 
+? General Button - Light Mode
+*/
+
+button:hover {
+  border-width: 1px;
+  box-shadow: 1px -1px;
+}
+
+button:active {
+  border: 1.5px solid var(--selected);
+  box-shadow: 0 0;
+}
+
+/* 
+? General Button - Dark Mode
+*/
+.dark-mode-page button {
+  background-color: var(--dbg);
+  color: inherit;
+  border: 1.5px solid var(--dborder);
+  box-shadow: -1px 1px;
+}
+
+.dark-mode-page button:hover {
+  border-width: 1px;
+  box-shadow: 1px -1px;
+}
+
+.dark-mode-page button:active {
+  border: 1.5px solid var(--dselected);
+  box-shadow: 0 0;
+}
+
+input[type="text"] {
+  background-color: inherit;
+  color: inherit;
+  display: block;
+  border-radius: 0.3em;
+  margin: 0.5em;
+  padding: 0.5em;
+  border: 1.5px solid var(--border);
+  outline: none;
+  max-width: 5em;
+}
+
+input[type="text"]:hover {
+  border-width: 1px;
+}
+
+input[type="text"]:active {
+  border: 1.5px solid var(--selected);
+}
+
+input[type="text"]:focus {
+  border: 1.5px solid var(--selected);
+}
+
+.cust-symbols-cont {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.cust-symbols-prev {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 50;
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 10em;
+  background-color: var(--bgsec);
+  color: inherit;
+  text-align: center;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  font-size: inherit;
+  position: absolute;
+  z-index: 10;
+}
+
+.dark-mode-page .tooltiptext {
+  background-color: var(--dbgsec);
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

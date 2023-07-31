@@ -1,0 +1,385 @@
+:root {
+  /*
+    ? Light Mode Variables
+    */
+  --symbar-bg: whitesmoke;
+  --symbar-bgsec: #f5f5f5;
+  --symbar-fg: #202020;
+
+  --symbar-border: #516d89;
+  --symbar-btnfg: #1e3246;
+
+  --symbar-unselected: #c4c4c4;
+  --symbar-hover: #212121;
+  --symbar-selected: #1873ce;
+  /*
+    ? Dark Mode Variables
+    */
+  --symbar-dbg: #0a1929;
+  --symbar-dbgsec: #1e1e1e;
+  --symbar-dfg: #e7ebf0;
+
+  --symbar-dborder: #4d7291;
+  --symbar-dpri: #86bde9;
+  --symbar-dbtnfg: #90caf9;
+
+  --symbar-dunselected: #434e5a;
+  --symbar-dhover: #c1c5c9;
+  --symbar-dselected: #90caf9;
+}
+
+/* 
+  ! NOTE: Because this CSS is inserted directly into webpages
+  ! it is crtical to make classes unique, thus "symbar-toolbar"
+  ! is prepended to all classes.
+*/
+.symbar-toolbar-base {
+
+  all: unset;
+  display: flex;
+  flex-flow: row wrap;
+  position: fixed;
+  width: 100%;
+  height: 20%;
+  background-color: var(--symbar-bg);
+  color: var(--symbar-fg);
+  border: 0.2px solid transparent;
+  border-radius: 5px 5px 0px 0px;
+  bottom: 0;
+  left: 0;
+  /*Excessive, but necessary as it should be 
+  on top of all other elemts on the page*/
+  z-index: 100000000000;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0.9;
+  transition: opacity 2s;
+}
+
+.symbar-toolbar-base:hover {
+  opacity: 1;
+}
+
+.symbar-toolbar-base-minimized {
+  position: fixed;
+  width: 100%;
+  height: 7%;
+  color: white;
+  background-color: var(--symbar-dbg);
+  border: 0.2px solid transparent;
+  border-radius: 5px 5px 0px 0px;
+  bottom: 0;
+  left: 0;
+  z-index: 100000000000;
+  opacity: 0.8;
+  transition: opacity 2s;
+}
+
+.symbar-toolbar-base-minimized:hover {
+  opacity: 1;
+}
+
+.symbar-main-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 80;
+  border-right: 1px solid var(--symbar-border);
+  padding: 0.3em;
+}
+
+.symbar-nav-box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  gap: 0.3em;
+}
+
+.symbar-action-box {
+  height: 100%;
+  flex: 20;
+  padding: 0.3em;
+}
+
+.symbar-main-actions {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.symbar-toolbar-hidden-btn-box {
+  display: none;
+}
+
+.symbar-toolbar-toggled-btn-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.symbar-toolbar-select-form {
+  flex: 40;
+  height: 40px;
+  background-color: inherit !important;
+  color: inherit;
+  border: 2px solid var(--symbar-unselected);
+  border-radius: 0.3rem;
+  font: inherit;
+  margin: 3px;
+  padding: 0.5em 3.5em 0.5em 1em;
+  outline: none;
+  line-height: 1.5em;
+  text-align: center;
+  transition: border-color 1s;
+}
+
+/*
+* Select Form - Light Mode
+*/
+.symbar-toolbar-select-form:hover {
+  border-color: var(--symbar-hover)
+}
+
+.symbar-toolbar-select-form:active {
+  border-color: var(--symbar-selected)
+}
+
+/*
+* Select Form - Dark Mode
+*/
+.dark-mode-page .symbar-toolbar-select-form:hover {
+  border: 2px solid var(--symbar-dunselected);
+}
+
+.dark-mode-page .symbar-toolbar-select-form:hover {
+  border-color: var(--symbar-dhover)
+}
+
+.dark-mode-page .symbar-toolbar-select-form:active {
+  border-color: var(--symbar-dselected)
+}
+
+/*
+* Select Form Options
+*/
+.symbar-toolbar-select-form option {
+  background-color: var(--symbar-bgsec);
+  border: 2px solid transparent;
+  width: 100%;
+  margin: 0;
+}
+
+/*
+? Select Form - Dark mode
+*/
+.dark-mode-page .symbar-toolbar-select-form option {
+  background-color: var(--symbar-dbgsec);
+}
+
+/*
+* Search
+*/
+.symbar-toolbar-search {
+  flex: 40;
+  height: 40px;
+  background-color: inherit !important;
+  color: inherit;
+  border: 2px solid var(--symbar-unselected);
+  border-radius: 0.3rem;
+  font: inherit;
+  margin: 3px;
+  padding: 0.5em 3.5em 0.5em 1em;
+  outline: none;
+  line-height: 1.5em;
+  text-align: center;
+  transition: border-color 1s;
+}
+
+/*
+? Search - Light Mode
+*/
+.symbar-toolbar-search:hover {
+  border-color: var(--symbar-hover)
+}
+
+.symbar-toolbar-search:active {
+  border-color: var(--symbar-selected)
+}
+
+.symbar-toolbar-search:focus {
+  border-color: var(--symbar-selected)
+}
+
+/*
+? Search - Dark Mode
+*/
+.dark-mode-page .symbar-toolbar-search {
+  border: 2px solid var(--symbar-dunselected);
+}
+
+.dark-mode-page .symbar-toolbar-search:hover {
+  border-color: var(--symbar-dhover)
+}
+
+.dark-mode-page .symbar-toolbar-search:active {
+  border-color: var(--symbar-dselected)
+}
+
+.dark-mode-page .symbar-toolbar-search:focus {
+  border-color: var(--symbar-dselected)
+}
+
+.symbar-search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.symbar-toolbar-instructions {
+  flex: 30;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: medium;
+  align-content: flex-start;
+  justify-content: center;
+  text-align: center;
+}
+
+.symbar-toolbar-recently-used {
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* 
+* General Button
+*/
+.symbar-toolbar-btn {
+  background-color: inherit;
+  color: inherit;
+  display: inline-block;
+  border-radius: 0.5rem;
+  margin: 0.5em;
+  padding: 0.5em;
+  width: max-content;
+  transition: box-shadow 0.3s;
+}
+
+/* 
+? General Button - Light Mode
+*/
+.symbar-toolbar-btn {
+  border: 1.5px solid var(--symbar-border);
+  box-shadow: -1px 1px;
+}
+
+.symbar-toolbar-btn:hover {
+  border-width: 1px;
+  box-shadow: 1px -1px;
+}
+
+.symbar-toolbar-btn:active {
+  border: 1.5px solid var(--symbar-selected);
+  box-shadow: 0 0;
+}
+
+/* 
+? General Button - Dark Mode
+*/
+.dark-mode-page .symbar-toolbar-btn {
+  background-color: var(--symbar-dbg);
+  color: inherit;
+  border: 1.5px solid var(--symbar-dborder);
+  box-shadow: -1px 1px;
+}
+
+.dark-mode-page .symbar-toolbar-btn:hover {
+  border-width: 1px;
+  box-shadow: 1px -1px;
+}
+
+.dark-mode-page .symbar-toolbar-btn:active {
+  border: 1.5px solid var(--symbar-dselected);
+  box-shadow: 0 0;
+}
+
+.symbar-toolbar-icon-btn {
+  width: min-content;
+  align-self: center;
+}
+
+/*
+* Copy Button
+*/
+.symbar-toolbar-copy-btn {
+  display: inline-block;
+  background-color: inherit;
+  color: inherit;
+  min-width: 40px;
+  padding: 0.5rem;
+  border: 1.5px solid white;
+  box-shadow: 0px 1px;
+  border-radius: 0.5rem;
+  margin: 0.3rem;
+  font-size: 17px;
+  opacity: 0.9;
+  transition: opacity 2s;
+  transition: box-shadow 0.3s;
+}
+
+.symbar-toolbar-copy-btn:hover {
+  opacity: 1;
+}
+
+/*
+? Copy Button - Light Mode
+*/
+.symbar-toolbar-copy-btn {
+  background-color: var(--symbar-bg);
+  color: var(--symbar-btnfg);
+  border: 1.5px solid var(--symbar-border);
+}
+
+.symbar-toolbar-copy-btn:hover {
+  border: 1px solid var(--symbar-border);
+  box-shadow: 0px -1px;
+  opacity: 1;
+}
+
+/*
+? Copy Button - Dark Mode
+*/
+.dark-mode-page .symbar-toolbar-copy-btn {
+  background-color: var(--symbar-dbg);
+  color: var(--symbar-dbtnfg);
+  border: 1.5px solid var(--symbar-dborder);
+}
+
+.dark-mode-page .symbar-toolbar-copy-btn:hover {
+  border: 1px solid var(--symbar-dborder);
+  box-shadow: 0px -1px;
+  opacity: 1;
+}
+
+/*
+
+* Scroll Bars
+
+*/
+/* WebKit-based browsers */
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-track {
+  background-color: var(--symbar-dbgsec);
+  width: 10px;
+}
+
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
