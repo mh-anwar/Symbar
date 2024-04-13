@@ -8,90 +8,135 @@
     <meta name="description" content="Settings for Symbar">
     <link rel="stylesheet" type="text/css" href="./settings.css">
     <script defer src="./settings.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
     <header>
-        <img class="logo" src="../images/icon_32.png" />
-        <a class="nav-links nav-active-link">Settings</a>
-        <a class="nav-links">FAQ</a>
-        <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/symbar/issues">Report
-            an Issue</a>
-        <a class="nav-links" target="_blank" href="https://github.com/mh-anwar/symbar/releases">Changelog</a>
+        <img class="logo" src="../images/icon_32.png" alt="Symbar" />
+        <span class="logo-text">Symbar</span>
+        <nav>
+            <a class="nav-link nav-active-link" data-tab="settings_tab">Settings</a>
+            <a class="nav-link" data-tab="help_tab">How to Use</a>
+            <a class="nav-link" data-tab="faq_tab">FAQ</a>
+            <a class="nav-link" target="_blank" href="https://github.com/mh-anwar/symbar/issues">Report Issue</a>
+        </nav>
     </header>
 
-    <div id="settings_tab" class="tab active-tab">
-        <h2>General Options</h2>
-        <label class="container">
-            Dark Mode
-            <input type="checkbox" id="mode_checkbox" value="Dark mode">
-            <span class="checkmark"></span>
-        </label>
+    <main>
+        <div id="settings_tab" class="tab active-tab">
+            <section>
+                <h2>Appearance</h2>
+                <label class="toggle-row">
+                    <span class="toggle-label">Dark Mode</span>
+                    <input type="checkbox" id="mode_checkbox" class="toggle-input">
+                    <span class="toggle-switch"></span>
+                </label>
+            </section>
 
-        <label class="container">
-            Autotype (WARNING: This is untested beta functionality that can cause issues)
-            <input type="checkbox" id="autotype_checkbox" value="Autotype">
-            <span class="checkmark"></span>
-        </label>
-
-        <label class="container">
-            Show Recently Used first
-            <input type="checkbox" id="display_opt" value="recently_used">
-            <span class="checkmark"></span>
-        </label>
-        <div class="range-container">
-            <input type="range" id="toolbar_height" min="5" max="99" class="slider">
-            <span class="range-value" id="toolbar_height_value"></span>
-            <p>of page covered</p>
-        </div>
-
-        <h2>Custom Buttons/Toolbar
-            <div class="tooltip">
-                <span class="material-symbols-outlined">info</span>
-                <div class="tooltiptext">
-                    <kbd>Enter</kbd> for new button
-                    <kbd>Shift + Backspace</kbd> to delete button
+            <section>
+                <h2>Toolbar</h2>
+                <div class="setting-row">
+                    <label for="toolbar_height">Toolbar Height</label>
+                    <div class="range-group">
+                        <input type="range" id="toolbar_height" min="10" max="60" class="slider">
+                        <span class="range-value" id="toolbar_height_value"></span>
+                    </div>
                 </div>
-            </div>
-        </h2>
-        <p>Only use capital letters (pressing <kbd>Shift</kbd> will make lowercase letters)</p>
-        <button id="add_cust_btn">
-            <span class="material-symbols-outlined">add</span>
-            Add Custom Button
-        </button>
-        <button id="save_cust_btn">
-            <span class="material-symbols-outlined">
-                save
-            </span>
-            Save Buttons
-        </button>
-        <div id="cust_btn_ui" class="cust-symbols-cont">
-            <div id="cust_btn_cont" class="cust-symbols-cont"></div>
-            <div id="cust_btn_prev" class="cust-symbols-prev"></div>
+            </section>
+
+            <section>
+                <h2>Quick Popup</h2>
+                <p class="setting-desc">Show a small floating popup with your recently used symbols when you focus a text input.</p>
+                <label class="toggle-row">
+                    <span class="toggle-label">Enable Popup</span>
+                    <input type="checkbox" id="popup_checkbox" class="toggle-input">
+                    <span class="toggle-switch"></span>
+                </label>
+            </section>
+
+            <section>
+                <h2>Custom Symbols</h2>
+                <p class="setting-desc">Add your own symbols or text snippets. Press <kbd>Enter</kbd> to add another, <kbd>Shift+Backspace</kbd> to remove.</p>
+                <div class="cust-btn-actions">
+                    <button id="add_cust_btn" class="btn btn-secondary">+ Add Symbol</button>
+                    <button id="save_cust_btn" class="btn btn-primary">Save</button>
+                </div>
+                <div id="cust_btn_ui">
+                    <div id="cust_btn_cont" class="cust-inputs"></div>
+                    <div id="cust_btn_prev" class="cust-preview"></div>
+                </div>
+            </section>
         </div>
-    </div>
-    <div id="faq_tab" class="tab">
-        <h2>Do you collect/sell my browsing history, location, etc?</h2>
-        <p>We will <b>never</b> collect any data from you and since we wont have it, we will never sell it.</p>
-        <h2>Does this extension exist in other browsers?</h2>
-        <p>Currently the extension is only availible in all Chromium based browsers (Microsoft Edge, Brave, etc).</p>
 
-        <h2>What permissions do you use, and why do you use them?</h2>
-        <p>We use the following permissions:
-        <blockquote>
-            "permissions": [
-            "activeTab",
-            "tabs",
-            "storage"
-            ],
-        </blockquote>
-        We use these permissions to improve your experience.
-        The "activeTab", "tabs" and "storage" permissions allows us to display the toolbar. The "storage" permission
-        also allows us to save your preferences to your Chrome Account so that you don't have to constantly set them.
-        </p>
-    </div>
+        <div id="help_tab" class="tab">
+            <section>
+                <h2>Getting Started</h2>
+                <div class="help-steps">
+                    <div class="help-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Open the Toolbar</h3>
+                            <p>Click the Symbar icon in your browser toolbar on any webpage. The symbol toolbar will appear at the bottom of the page.</p>
+                        </div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Browse or Search</h3>
+                            <p>Use the dropdown to switch between categories (French, Math, Greek, Arrows, Currency, Common) or type in the search bar to find any symbol by name.</p>
+                        </div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Copy a Symbol</h3>
+                            <p>Click any symbol to copy it to your clipboard. Then paste it wherever you need it with <kbd>Ctrl+V</kbd> (or <kbd>Cmd+V</kbd> on Mac).</p>
+                        </div>
+                    </div>
+                    <div class="help-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Quick Popup</h3>
+                            <p>Enable the Quick Popup in Settings to see your recently used symbols in a small floating panel whenever you click into a text field.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Tips</h2>
+                <ul class="tips-list">
+                    <li>Your recently used symbols appear first for quick access</li>
+                    <li>Add custom symbols in Settings for frequently used text or characters</li>
+                    <li>Use the search bar to find symbols by description (e.g., "infinity", "arrow", "degree")</li>
+                    <li>Minimize the toolbar to a thin bar when you don't need it, but want it handy</li>
+                    <li>The toolbar works on any webpage - just click the extension icon</li>
+                </ul>
+            </section>
+        </div>
+
+        <div id="faq_tab" class="tab">
+            <section>
+                <h2>Do you collect or sell my data?</h2>
+                <p>No. Symbar does not collect, store, or transmit any of your data. All preferences are stored locally in your browser using Chrome's sync storage.</p>
+            </section>
+            <section>
+                <h2>Which browsers are supported?</h2>
+                <p>Symbar works in all Chromium-based browsers including Google Chrome, Microsoft Edge, Brave, Vivaldi, and Opera.</p>
+            </section>
+            <section>
+                <h2>What permissions does Symbar use?</h2>
+                <p>Symbar uses two permissions:</p>
+                <ul>
+                    <li><strong>tabs</strong> &mdash; Required to inject the toolbar into the active webpage when you click the extension icon.</li>
+                    <li><strong>storage</strong> &mdash; Saves your preferences (theme, toolbar height, custom symbols, recently used) so they persist across sessions and sync across your devices.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Why doesn't the toolbar appear on some pages?</h2>
+                <p>Browser extensions cannot run on internal browser pages (like <code>chrome://</code> URLs, the Chrome Web Store, or extension pages). Try it on any regular website.</p>
+            </section>
+        </div>
+    </main>
 </body>
-
 
 </html>
