@@ -1,111 +1,157 @@
 :root {
-  /*
-    ? Light Mode Variables
-    */
-  --symbar-bg: whitesmoke;
-  --symbar-bgsec: #f5f5f5;
-  --symbar-fg: #202020;
-
-  --symbar-border: #516d89;
-  --symbar-btnfg: #1e3246;
-
-  --symbar-unselected: #c4c4c4;
-  --symbar-hover: #212121;
-  --symbar-selected: #1873ce;
-  /*
-    ? Dark Mode Variables
-    */
-  --symbar-dbg: #0a1929;
-  --symbar-dbgsec: #1e1e1e;
-  --symbar-dfg: #e7ebf0;
-
-  --symbar-dborder: #4d7291;
-  --symbar-dpri: #86bde9;
-  --symbar-dbtnfg: #90caf9;
-
-  --symbar-dunselected: #434e5a;
-  --symbar-dhover: #c1c5c9;
-  --symbar-dselected: #90caf9;
+  /* Light Mode */
+  --symbar-bg: #ffffff;
+  --symbar-bg-secondary: #f8f9fa;
+  --symbar-fg: #1a1a2e;
+  --symbar-fg-secondary: #6b7280;
+  --symbar-border: #e5e7eb;
+  --symbar-border-hover: #9ca3af;
+  --symbar-accent: #4f46e5;
+  --symbar-accent-hover: #4338ca;
+  --symbar-accent-light: #eef2ff;
+  --symbar-btn-bg: #f9fafb;
+  --symbar-btn-hover: #eef2ff;
+  --symbar-btn-active: #4f46e5;
+  --symbar-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
+  --symbar-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --symbar-radius: 8px;
+  --symbar-radius-sm: 6px;
+  --symbar-copied-bg: #10b981;
 }
 
-/* 
-  ! NOTE: Because this CSS is inserted directly into webpages
-  ! it is crtical to make classes unique, thus "symbar-toolbar"
-  ! is prepended to all classes.
-*/
-.symbar-toolbar-base {
+/* Dark Mode */
+.symbar-dark-mode {
+  --symbar-bg: #1e1e2e;
+  --symbar-bg-secondary: #181825;
+  --symbar-fg: #cdd6f4;
+  --symbar-fg-secondary: #a6adc8;
+  --symbar-border: #313244;
+  --symbar-border-hover: #585b70;
+  --symbar-accent: #89b4fa;
+  --symbar-accent-hover: #74c7ec;
+  --symbar-accent-light: #1e1e2e;
+  --symbar-btn-bg: #313244;
+  --symbar-btn-hover: #45475a;
+  --symbar-btn-active: #89b4fa;
+  --symbar-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+  --symbar-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --symbar-copied-bg: #a6e3a1;
+}
 
-  all: unset;
+/* ============================================================
+   TOOLBAR BASE
+   ============================================================ */
+
+.symbar-toolbar-base {
+  all: initial;
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
   position: fixed;
   width: 100%;
   height: 20%;
+  min-height: 120px;
   background-color: var(--symbar-bg);
   color: var(--symbar-fg);
-  border: 0.2px solid transparent;
-  border-radius: 5px 5px 0px 0px;
+  border-top: 1px solid var(--symbar-border);
   bottom: 0;
   left: 0;
-  /*Excessive, but necessary as it should be 
-  on top of all other elemts on the page*/
-  z-index: 100000000000;
-  justify-content: space-around;
-  align-items: center;
-  opacity: 0.9;
-  transition: opacity 2s;
+  z-index: 2147483647;
+  box-shadow: var(--symbar-shadow);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease;
 }
 
-.symbar-toolbar-base:hover {
-  opacity: 1;
+.symbar-toolbar-base * {
+  box-sizing: border-box;
 }
+
+/* ============================================================
+   MINIMIZED BAR
+   ============================================================ */
 
 .symbar-toolbar-base-minimized {
+  all: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   position: fixed;
   width: 100%;
-  height: 7%;
-  color: white;
-  background-color: var(--symbar-dbg);
-  border: 0.2px solid transparent;
-  border-radius: 5px 5px 0px 0px;
+  height: 36px;
+  background-color: var(--symbar-bg);
+  color: var(--symbar-fg);
+  border-top: 1px solid var(--symbar-border);
   bottom: 0;
   left: 0;
-  z-index: 100000000000;
-  opacity: 0.8;
-  transition: opacity 2s;
+  z-index: 2147483647;
+  box-shadow: var(--symbar-shadow);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
 }
 
-.symbar-toolbar-base-minimized:hover {
-  opacity: 1;
+.symbar-toolbar-base-minimized * {
+  box-sizing: border-box;
 }
+
+.symbar-min-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 4px 10px !important;
+  margin: 0 !important;
+  font-size: 12px !important;
+}
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
 
 .symbar-main-box {
   display: flex;
   flex-direction: column;
   height: 100%;
-  flex: 80;
-  border-right: 1px solid var(--symbar-border);
-  padding: 0.3em;
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  overflow: hidden;
 }
 
 .symbar-nav-box {
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: fit-content;
-  gap: 0.3em;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
+/* ============================================================
+   ACTION SIDEBAR
+   ============================================================ */
+
 .symbar-action-box {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  flex: 20;
-  padding: 0.3em;
+  width: 140px;
+  flex-shrink: 0;
+  padding: 10px;
+  border-left: 1px solid var(--symbar-border);
+  gap: 8px;
 }
 
 .symbar-main-actions {
   display: flex;
-  flex-flow: row wrap;
+  flex-wrap: wrap;
+  gap: 4px;
 }
+
+/* ============================================================
+   SYMBOL BUTTON CONTAINERS
+   ============================================================ */
 
 .symbar-toolbar-hidden-btn-box {
   display: none;
@@ -115,271 +161,280 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
   max-height: 100%;
   overflow-y: auto;
-}
-
-.symbar-toolbar-select-form {
-  flex: 40;
-  height: 40px;
-  background-color: inherit !important;
-  color: inherit;
-  border: 2px solid var(--symbar-unselected);
-  border-radius: 0.3rem;
-  font: inherit;
-  margin: 3px;
-  padding: 0.5em 3.5em 0.5em 1em;
-  outline: none;
-  line-height: 1.5em;
-  text-align: center;
-  transition: border-color 1s;
-}
-
-/*
-* Select Form - Light Mode
-*/
-.symbar-toolbar-select-form:hover {
-  border-color: var(--symbar-hover)
-}
-
-.symbar-toolbar-select-form:active {
-  border-color: var(--symbar-selected)
-}
-
-/*
-* Select Form - Dark Mode
-*/
-.dark-mode-page .symbar-toolbar-select-form:hover {
-  border: 2px solid var(--symbar-dunselected);
-}
-
-.dark-mode-page .symbar-toolbar-select-form:hover {
-  border-color: var(--symbar-dhover)
-}
-
-.dark-mode-page .symbar-toolbar-select-form:active {
-  border-color: var(--symbar-dselected)
-}
-
-/*
-* Select Form Options
-*/
-.symbar-toolbar-select-form option {
-  background-color: var(--symbar-bgsec);
-  border: 2px solid transparent;
-  width: 100%;
-  margin: 0;
-}
-
-/*
-? Select Form - Dark mode
-*/
-.dark-mode-page .symbar-toolbar-select-form option {
-  background-color: var(--symbar-dbgsec);
-}
-
-/*
-* Search
-*/
-.symbar-toolbar-search {
-  flex: 40;
-  height: 40px;
-  background-color: inherit !important;
-  color: inherit;
-  border: 2px solid var(--symbar-unselected);
-  border-radius: 0.3rem;
-  font: inherit;
-  margin: 3px;
-  padding: 0.5em 3.5em 0.5em 1em;
-  outline: none;
-  line-height: 1.5em;
-  text-align: center;
-  transition: border-color 1s;
-}
-
-/*
-? Search - Light Mode
-*/
-.symbar-toolbar-search:hover {
-  border-color: var(--symbar-hover)
-}
-
-.symbar-toolbar-search:active {
-  border-color: var(--symbar-selected)
-}
-
-.symbar-toolbar-search:focus {
-  border-color: var(--symbar-selected)
-}
-
-/*
-? Search - Dark Mode
-*/
-.dark-mode-page .symbar-toolbar-search {
-  border: 2px solid var(--symbar-dunselected);
-}
-
-.dark-mode-page .symbar-toolbar-search:hover {
-  border-color: var(--symbar-dhover)
-}
-
-.dark-mode-page .symbar-toolbar-search:active {
-  border-color: var(--symbar-dselected)
-}
-
-.dark-mode-page .symbar-toolbar-search:focus {
-  border-color: var(--symbar-dselected)
+  overflow-x: hidden;
+  padding: 2px;
 }
 
 .symbar-search-results {
-  display: flex;
+  display: none;
   flex-direction: row;
   flex-wrap: wrap;
-}
-
-.symbar-toolbar-instructions {
-  flex: 30;
-  display: flex;
-  flex-flow: row wrap;
-  font-size: medium;
   align-content: flex-start;
+  gap: 4px;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 2px;
+}
+
+/* ============================================================
+   SELECT DROPDOWN
+   ============================================================ */
+
+.symbar-toolbar-select-form {
+  flex: 0 0 auto;
+  width: 160px;
+  height: 34px;
+  background-color: var(--symbar-btn-bg);
+  color: var(--symbar-fg);
+  border: 1px solid var(--symbar-border);
+  border-radius: var(--symbar-radius-sm);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 0 12px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  appearance: auto;
+}
+
+.symbar-toolbar-select-form:hover {
+  border-color: var(--symbar-border-hover);
+}
+
+.symbar-toolbar-select-form:focus {
+  border-color: var(--symbar-accent);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+.symbar-toolbar-select-form option {
+  background-color: var(--symbar-bg);
+  color: var(--symbar-fg);
+}
+
+/* ============================================================
+   SEARCH INPUT
+   ============================================================ */
+
+.symbar-toolbar-search {
+  flex: 1;
+  height: 34px;
+  background-color: var(--symbar-btn-bg);
+  color: var(--symbar-fg);
+  border: 1px solid var(--symbar-border);
+  border-radius: var(--symbar-radius-sm);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 0 12px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.symbar-toolbar-search::placeholder {
+  color: var(--symbar-fg-secondary);
+}
+
+.symbar-toolbar-search:hover {
+  border-color: var(--symbar-border-hover);
+}
+
+.symbar-toolbar-search:focus {
+  border-color: var(--symbar-accent);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+}
+
+/* ============================================================
+   ACTION BUTTONS
+   ============================================================ */
+
+.symbar-toolbar-btn {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-}
-
-.symbar-toolbar-recently-used {
-  height: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-/* 
-* General Button
-*/
-.symbar-toolbar-btn {
-  background-color: inherit;
-  color: inherit;
-  display: inline-block;
-  border-radius: 0.5rem;
-  margin: 0.5em;
-  padding: 0.5em;
-  width: max-content;
-  transition: box-shadow 0.3s;
-}
-
-/* 
-? General Button - Light Mode
-*/
-.symbar-toolbar-btn {
-  border: 1.5px solid var(--symbar-border);
-  box-shadow: -1px 1px;
+  background-color: var(--symbar-btn-bg);
+  color: var(--symbar-fg);
+  border: 1px solid var(--symbar-border);
+  border-radius: var(--symbar-radius-sm);
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1;
 }
 
 .symbar-toolbar-btn:hover {
-  border-width: 1px;
-  box-shadow: 1px -1px;
+  background-color: var(--symbar-btn-hover);
+  border-color: var(--symbar-border-hover);
 }
 
 .symbar-toolbar-btn:active {
-  border: 1.5px solid var(--symbar-selected);
-  box-shadow: 0 0;
+  background-color: var(--symbar-accent-light);
+  border-color: var(--symbar-accent);
 }
 
-/* 
-? General Button - Dark Mode
-*/
-.dark-mode-page .symbar-toolbar-btn {
-  background-color: var(--symbar-dbg);
-  color: inherit;
-  border: 1.5px solid var(--symbar-dborder);
-  box-shadow: -1px 1px;
-}
-
-.dark-mode-page .symbar-toolbar-btn:hover {
-  border-width: 1px;
-  box-shadow: 1px -1px;
-}
-
-.dark-mode-page .symbar-toolbar-btn:active {
-  border: 1.5px solid var(--symbar-dselected);
-  box-shadow: 0 0;
+.symbar-toolbar-btn svg {
+  flex-shrink: 0;
 }
 
 .symbar-toolbar-icon-btn {
-  width: min-content;
-  align-self: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 16px;
 }
 
-/*
-* Copy Button
-*/
+/* ============================================================
+   COPY / SYMBOL BUTTONS
+   ============================================================ */
+
 .symbar-toolbar-copy-btn {
-  display: inline-block;
-  background-color: inherit;
-  color: inherit;
-  min-width: 40px;
-  padding: 0.5rem;
-  border: 1.5px solid white;
-  box-shadow: 0px 1px;
-  border-radius: 0.5rem;
-  margin: 0.3rem;
-  font-size: 17px;
-  opacity: 0.9;
-  transition: opacity 2s;
-  transition: box-shadow 0.3s;
-}
-
-.symbar-toolbar-copy-btn:hover {
-  opacity: 1;
-}
-
-/*
-? Copy Button - Light Mode
-*/
-.symbar-toolbar-copy-btn {
-  background-color: var(--symbar-bg);
-  color: var(--symbar-btnfg);
-  border: 1.5px solid var(--symbar-border);
-}
-
-.symbar-toolbar-copy-btn:hover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--symbar-btn-bg);
+  color: var(--symbar-fg);
+  min-width: 38px;
+  height: 36px;
+  padding: 4px 8px;
   border: 1px solid var(--symbar-border);
-  box-shadow: 0px -1px;
-  opacity: 1;
+  border-radius: var(--symbar-radius-sm);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  font-family: inherit;
+  line-height: 1;
 }
 
-/*
-? Copy Button - Dark Mode
-*/
-.dark-mode-page .symbar-toolbar-copy-btn {
-  background-color: var(--symbar-dbg);
-  color: var(--symbar-dbtnfg);
-  border: 1.5px solid var(--symbar-dborder);
+.symbar-toolbar-copy-btn:hover {
+  background-color: var(--symbar-btn-hover);
+  border-color: var(--symbar-accent);
+  transform: translateY(-1px);
+  box-shadow: var(--symbar-shadow-sm);
 }
 
-.dark-mode-page .symbar-toolbar-copy-btn:hover {
-  border: 1px solid var(--symbar-dborder);
-  box-shadow: 0px -1px;
-  opacity: 1;
+.symbar-toolbar-copy-btn:active {
+  transform: translateY(0);
+  background-color: var(--symbar-accent);
+  color: white;
+  border-color: var(--symbar-accent);
 }
 
-/*
+/* ============================================================
+   INSTRUCTIONS / FEEDBACK
+   ============================================================ */
 
-* Scroll Bars
-
-*/
-/* WebKit-based browsers */
-.symbar-toolbar-toggled-btn-box::-webkit-scrollbar {
-  width: 8px;
+.symbar-toolbar-instructions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  color: var(--symbar-fg-secondary);
+  padding: 4px;
 }
 
-.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-track {
-  background-color: var(--symbar-dbgsec);
-  width: 10px;
+.symbar-toolbar-instructions p {
+  margin: 0;
 }
 
-.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-thumb {
-  background-color: #888;
-  border-radius: 10px;
+.symbar-copied-msg {
+  display: inline-block;
+  background-color: var(--symbar-copied-bg);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  animation: symbar-fade-in 0.15s ease;
+}
+
+@keyframes symbar-fade-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================================
+   FLOATING POPUP
+   ============================================================ */
+
+.symbar-popup {
+  all: initial;
+  display: none;
+  position: fixed;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding: 6px;
+  background-color: var(--symbar-bg);
+  color: var(--symbar-fg);
+  border: 1px solid var(--symbar-border);
+  border-radius: var(--symbar-radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-width: 320px;
+  animation: symbar-popup-in 0.15s ease;
+}
+
+@keyframes symbar-popup-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.symbar-popup-btn {
+  all: initial;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 2px 6px;
+  background-color: var(--symbar-btn-bg);
+  color: var(--symbar-fg);
+  border: 1px solid var(--symbar-border);
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  font-family: inherit;
+}
+
+.symbar-popup-btn:hover {
+  background-color: var(--symbar-btn-hover);
+  border-color: var(--symbar-accent);
+}
+
+.symbar-popup-btn-copied {
+  background-color: var(--symbar-copied-bg) !important;
+  color: white !important;
+  border-color: var(--symbar-copied-bg) !important;
+}
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar,
+.symbar-search-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-track,
+.symbar-search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-thumb,
+.symbar-search-results::-webkit-scrollbar-thumb {
+  background-color: var(--symbar-border-hover);
+  border-radius: 3px;
+}
+
+.symbar-toolbar-toggled-btn-box::-webkit-scrollbar-thumb:hover,
+.symbar-search-results::-webkit-scrollbar-thumb:hover {
+  background-color: var(--symbar-fg-secondary);
 }
