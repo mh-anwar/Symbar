@@ -2,21 +2,51 @@
 <html lang="en-US">
 
 <head>
-    <title>Welcome!</title>
+    <title>Welcome to Symbar!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="nofollow">
-    <meta name="description" content="Welcome Page">
+    <meta name="description" content="Welcome to Symbar">
     <link rel="stylesheet" type="text/css" href="welcome.css">
-    </link>
 </head>
 
 <body>
-    <div class="main-textbox">
-        <h1>Welcome! Thank you for installing this extension!</h1>
-        <h2>Before using it, please restart your browser or reload all your pages to ensure your experience is
-            smooth!</h2>
+    <div class="container">
+        <div class="hero">
+            <img src="../images/icon_128.png" alt="Symbar" class="hero-icon">
+            <h1>Welcome to Symbar</h1>
+            <p class="subtitle">Accents & Symbols Made Easy</p>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">1</div>
+                <h3>Click the Icon</h3>
+                <p>Click the Symbar icon in your browser toolbar on any webpage to open the symbol bar.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">2</div>
+                <h3>Find Your Symbol</h3>
+                <p>Browse categories or use the search bar to find symbols, accents, arrows, and more.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">3</div>
+                <h3>Click to Copy</h3>
+                <p>Click any symbol to copy it to your clipboard. Then paste it wherever you need it.</p>
+            </div>
+        </div>
+
+        <div class="cta">
+            <p>Head to any webpage and click the Symbar icon to get started.</p>
+            <p class="hint">You can customize symbols, themes, and more in <a id="open_settings" href="#">Settings</a>.</p>
+        </div>
     </div>
 
+    <script>
+        document.getElementById('open_settings').addEventListener('click', (e) => {
+            e.preventDefault();
+            chrome.runtime.openOptionsPage();
+        });
+    </script>
 </body>
 
 </html>
