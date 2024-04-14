@@ -2,13 +2,13 @@
   "author": "Mohammad Anwar",
   "manifest_version": 3,
   "name": "Symbar - Accents & Symbols Made Easy",
-  "short_name": "Accents & Symbols Made Easy",
-  "version": "1.2.0",
-  "description": "A toolbar to easily access and copy symbols.",
+  "short_name": "Symbar",
+  "version": "2.0.0",
+  "description": "Quickly find, copy, and paste symbols, accents, arrows, and special characters from a clean toolbar on any webpage.",
   "offline_enabled": true,
   "options_page": "settings/settings.html",
   "action": {
-    "default_title": "Launch Symbar!"
+    "default_title": "Open Symbar"
   },
   "icons": {
     "16": "images/icon_16.png",
