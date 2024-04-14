@@ -26,6 +26,7 @@ chrome.action.onClicked.addListener((tab_info) => {
 });
 
 function open_toolbar(response, tabs_info) {
+  if (!response) return;
   if (response.state === 0) {
     chrome.tabs.sendMessage(tabs_info.id, 'toolbar_on');
   } else if (response.state === 1) {
@@ -34,11 +35,11 @@ function open_toolbar(response, tabs_info) {
 }
 
 async function content_script_messenger(tab_info) {
-  if (tab_info.url.match('^chrome:') === null) {
-    chrome.tabs.sendMessage(tab_info.id, 'state_of_toolbar', (response) => {
-      open_toolbar(response, tab_info);
-    });
-  }
+  if (!tab_info.url || /^(chrome|chrome-extension|edge|about):/.test(tab_info.url)) return;
+  chrome.tabs.sendMessage(tab_info.id, 'state_of_toolbar', (response) => {
+    if (chrome.runtime.lastError) return;
+    open_toolbar(response, tab_info);
+  });
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
