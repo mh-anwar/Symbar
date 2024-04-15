@@ -1,41 +1,103 @@
-:root {
-  /* Light Mode */
+/* ============================================================
+   SYMBAR TOOLBAR - Fully isolated from host page CSS
+   Every element uses !important to prevent page overrides
+   ============================================================ */
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+
+.symbar-toolbar-base {
+  /* Light Mode (default) */
   --symbar-bg: #ffffff;
-  --symbar-bg-secondary: #f8f9fa;
-  --symbar-fg: #1a1a2e;
-  --symbar-fg-secondary: #6b7280;
-  --symbar-border: #e5e7eb;
-  --symbar-border-hover: #9ca3af;
-  --symbar-accent: #4f46e5;
-  --symbar-accent-hover: #4338ca;
-  --symbar-accent-light: #eef2ff;
-  --symbar-btn-bg: #f9fafb;
-  --symbar-btn-hover: #eef2ff;
-  --symbar-btn-active: #4f46e5;
-  --symbar-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
-  --symbar-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --symbar-radius: 8px;
-  --symbar-radius-sm: 6px;
-  --symbar-copied-bg: #10b981;
+  --symbar-bg-raised: #f4f5f7;
+  --symbar-fg: #1c1e21;
+  --symbar-fg-muted: #65676b;
+  --symbar-border: #dddfe2;
+  --symbar-accent: #5b5fc7;
+  --symbar-accent-fg: #ffffff;
+  --symbar-btn-bg: #f0f2f5;
+  --symbar-btn-hover-bg: #e4e6eb;
+  --symbar-btn-border: #ced0d4;
+  --symbar-close-bg: #fee2e2;
+  --symbar-close-fg: #dc2626;
+  --symbar-close-hover: #fecaca;
+  --symbar-copied: #059669;
+  --symbar-shadow-color: rgba(0, 0, 0, 0.12);
 }
 
-/* Dark Mode */
-.symbar-dark-mode {
-  --symbar-bg: #1e1e2e;
-  --symbar-bg-secondary: #181825;
-  --symbar-fg: #cdd6f4;
-  --symbar-fg-secondary: #a6adc8;
-  --symbar-border: #313244;
-  --symbar-border-hover: #585b70;
-  --symbar-accent: #89b4fa;
-  --symbar-accent-hover: #74c7ec;
-  --symbar-accent-light: #1e1e2e;
-  --symbar-btn-bg: #313244;
-  --symbar-btn-hover: #45475a;
-  --symbar-btn-active: #89b4fa;
-  --symbar-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
-  --symbar-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
-  --symbar-copied-bg: #a6e3a1;
+.symbar-toolbar-base.symbar-dark-mode {
+  --symbar-bg: #1a1d23;
+  --symbar-bg-raised: #22262e;
+  --symbar-fg: #e4e6ea;
+  --symbar-fg-muted: #9ba1ab;
+  --symbar-border: #363a42;
+  --symbar-accent: #7c80f0;
+  --symbar-accent-fg: #ffffff;
+  --symbar-btn-bg: #2a2e36;
+  --symbar-btn-hover-bg: #363a44;
+  --symbar-btn-border: #3e434d;
+  --symbar-close-bg: #3b1c1c;
+  --symbar-close-fg: #f87171;
+  --symbar-close-hover: #4c2020;
+  --symbar-copied: #34d399;
+  --symbar-shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Minimized bar needs its own variables */
+.symbar-toolbar-base-minimized {
+  --symbar-bg: #ffffff;
+  --symbar-bg-raised: #f4f5f7;
+  --symbar-fg: #1c1e21;
+  --symbar-fg-muted: #65676b;
+  --symbar-border: #dddfe2;
+  --symbar-accent: #5b5fc7;
+  --symbar-btn-bg: #f0f2f5;
+  --symbar-btn-hover-bg: #e4e6eb;
+  --symbar-btn-border: #ced0d4;
+  --symbar-shadow-color: rgba(0, 0, 0, 0.12);
+}
+
+.symbar-toolbar-base-minimized.symbar-dark-mode {
+  --symbar-bg: #1a1d23;
+  --symbar-bg-raised: #22262e;
+  --symbar-fg: #e4e6ea;
+  --symbar-fg-muted: #9ba1ab;
+  --symbar-border: #363a42;
+  --symbar-accent: #7c80f0;
+  --symbar-btn-bg: #2a2e36;
+  --symbar-btn-hover-bg: #363a44;
+  --symbar-btn-border: #3e434d;
+  --symbar-shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   GLOBAL RESET - Nuclear option for page CSS isolation
+   Applied to EVERY element inside the toolbar
+   ============================================================ */
+
+.symbar-toolbar-base,
+.symbar-toolbar-base *,
+.symbar-toolbar-base *::before,
+.symbar-toolbar-base *::after,
+.symbar-toolbar-base-minimized,
+.symbar-toolbar-base-minimized *,
+.symbar-toolbar-base-minimized *::before,
+.symbar-toolbar-base-minimized *::after {
+  all: revert !important;
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  line-height: 1.4 !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  text-indent: 0 !important;
+  text-shadow: none !important;
+  float: none !important;
+  clear: none !important;
+  vertical-align: baseline !important;
+  list-style: none !important;
 }
 
 /* ============================================================
@@ -43,29 +105,34 @@
    ============================================================ */
 
 .symbar-toolbar-base {
-  all: initial;
-  display: flex;
-  flex-direction: row;
-  position: fixed;
-  width: 100%;
-  height: 20%;
-  min-height: 120px;
-  background-color: var(--symbar-bg);
-  color: var(--symbar-fg);
-  border-top: 1px solid var(--symbar-border);
-  bottom: 0;
-  left: 0;
-  z-index: 2147483647;
-  box-shadow: var(--symbar-shadow);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  box-sizing: border-box;
-  transition: opacity 0.2s ease;
-}
-
-.symbar-toolbar-base * {
-  box-sizing: border-box;
+  all: initial !important;
+  display: flex !important;
+  flex-direction: row !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 20% !important;
+  min-height: 140px !important;
+  max-height: 50vh !important;
+  background-color: var(--symbar-bg) !important;
+  color: var(--symbar-fg) !important;
+  border: none !important;
+  border-top: 2px solid var(--symbar-border) !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  z-index: 2147483647 !important;
+  box-shadow: 0 -2px 20px var(--symbar-shadow-color) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  pointer-events: auto !important;
 }
 
 /* ============================================================
@@ -73,59 +140,78 @@
    ============================================================ */
 
 .symbar-toolbar-base-minimized {
-  all: initial;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: fixed;
-  width: 100%;
-  height: 36px;
-  background-color: var(--symbar-bg);
-  color: var(--symbar-fg);
-  border-top: 1px solid var(--symbar-border);
-  bottom: 0;
-  left: 0;
-  z-index: 2147483647;
-  box-shadow: var(--symbar-shadow);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 13px;
-}
-
-.symbar-toolbar-base-minimized * {
-  box-sizing: border-box;
+  all: initial !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 40px !important;
+  background-color: var(--symbar-bg) !important;
+  color: var(--symbar-fg) !important;
+  border: none !important;
+  border-top: 2px solid var(--symbar-border) !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 2147483647 !important;
+  box-shadow: 0 -2px 20px var(--symbar-shadow-color) !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 13px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .symbar-min-btn {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 4px !important;
-  padding: 4px 10px !important;
-  margin: 0 !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 28px !important;
+  padding: 0 14px !important;
+  margin: 0 4px !important;
+  background-color: var(--symbar-btn-bg) !important;
+  color: var(--symbar-fg) !important;
+  border: 1px solid var(--symbar-btn-border) !important;
+  border-radius: 6px !important;
   font-size: 12px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+.symbar-min-btn:hover {
+  background-color: var(--symbar-btn-hover-bg) !important;
 }
 
 /* ============================================================
-   MAIN CONTENT AREA
+   MAIN CONTENT AREA (symbol grid)
    ============================================================ */
 
 .symbar-main-box {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  flex: 1;
-  min-width: 0;
-  padding: 10px 12px;
-  overflow: hidden;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  padding: 10px 14px !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 .symbar-nav-box {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 8px;
-  margin-bottom: 8px;
-  flex-shrink: 0;
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100% !important;
+  gap: 8px !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 /* ============================================================
@@ -133,20 +219,82 @@
    ============================================================ */
 
 .symbar-action-box {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 140px;
-  flex-shrink: 0;
-  padding: 10px;
-  border-left: 1px solid var(--symbar-border);
-  gap: 8px;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  width: 130px !important;
+  flex-shrink: 0 !important;
+  padding: 10px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-left: 1px solid var(--symbar-border) !important;
+  background-color: var(--symbar-bg-raised) !important;
+  gap: 5px !important;
+  overflow: hidden !important;
 }
 
-.symbar-main-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+/* ============================================================
+   ACTION BUTTONS (Minimize, Close, Settings, Theme)
+   ============================================================ */
+
+.symbar-action-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  width: 100% !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  margin: 0 !important;
+  background-color: var(--symbar-btn-bg) !important;
+  color: var(--symbar-fg) !important;
+  border: 1px solid var(--symbar-btn-border) !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  text-align: left !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.symbar-action-btn svg {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.symbar-action-btn:hover {
+  background-color: var(--symbar-btn-hover-bg) !important;
+}
+
+.symbar-action-btn-close {
+  background-color: var(--symbar-close-bg) !important;
+  color: var(--symbar-close-fg) !important;
+  border-color: transparent !important;
+}
+
+.symbar-action-btn-close:hover {
+  background-color: var(--symbar-close-hover) !important;
+}
+
+.symbar-action-btn-close svg path {
+  stroke: var(--symbar-close-fg) !important;
+}
+
+.symbar-action-btn-theme {
+  font-size: 16px !important;
+  justify-content: center !important;
 }
 
 /* ============================================================
@@ -154,30 +302,41 @@
    ============================================================ */
 
 .symbar-toolbar-hidden-btn-box {
-  display: none;
+  display: none !important;
 }
 
 .symbar-toolbar-toggled-btn-box {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 4px;
-  max-height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 2px;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-content: flex-start !important;
+  gap: 3px !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 2px !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 .symbar-search-results {
-  display: none;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 4px;
-  max-height: 100%;
-  overflow-y: auto;
-  padding: 2px;
+  display: none !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-content: flex-start !important;
+  gap: 3px !important;
+  max-height: 100% !important;
+  overflow-y: auto !important;
+  padding: 2px !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Used by JS to show results */
+.symbar-search-results[style*="display: flex"] {
+  display: flex !important;
 }
 
 /* ============================================================
@@ -185,34 +344,41 @@
    ============================================================ */
 
 .symbar-toolbar-select-form {
-  flex: 0 0 auto;
-  width: 160px;
-  height: 34px;
-  background-color: var(--symbar-btn-bg);
-  color: var(--symbar-fg);
-  border: 1px solid var(--symbar-border);
-  border-radius: var(--symbar-radius-sm);
-  font-family: inherit;
-  font-size: 13px;
-  padding: 0 12px;
-  outline: none;
-  cursor: pointer;
-  transition: border-color 0.15s ease;
-  appearance: auto;
+  flex: 0 0 auto !important;
+  width: 150px !important;
+  height: 32px !important;
+  background-color: var(--symbar-btn-bg) !important;
+  color: var(--symbar-fg) !important;
+  border: 1px solid var(--symbar-btn-border) !important;
+  border-radius: 6px !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  padding: 0 10px !important;
+  margin: 0 !important;
+  outline: none !important;
+  cursor: pointer !important;
+  appearance: auto !important;
+  -webkit-appearance: menulist !important;
+  box-shadow: none !important;
+  text-transform: none !important;
 }
 
 .symbar-toolbar-select-form:hover {
-  border-color: var(--symbar-border-hover);
+  border-color: var(--symbar-accent) !important;
 }
 
 .symbar-toolbar-select-form:focus {
-  border-color: var(--symbar-accent);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+  border-color: var(--symbar-accent) !important;
+  outline: 2px solid var(--symbar-accent) !important;
+  outline-offset: -2px !important;
 }
 
 .symbar-toolbar-select-form option {
-  background-color: var(--symbar-bg);
-  color: var(--symbar-fg);
+  background-color: var(--symbar-bg) !important;
+  color: var(--symbar-fg) !important;
+  font-size: 13px !important;
+  padding: 4px 8px !important;
 }
 
 /* ============================================================
@@ -220,71 +386,43 @@
    ============================================================ */
 
 .symbar-toolbar-search {
-  flex: 1;
-  height: 34px;
-  background-color: var(--symbar-btn-bg);
-  color: var(--symbar-fg);
-  border: 1px solid var(--symbar-border);
-  border-radius: var(--symbar-radius-sm);
-  font-family: inherit;
-  font-size: 13px;
-  padding: 0 12px;
-  outline: none;
-  transition: border-color 0.15s ease;
+  flex: 1 1 0% !important;
+  height: 32px !important;
+  min-width: 100px !important;
+  background-color: var(--symbar-btn-bg) !important;
+  color: var(--symbar-fg) !important;
+  border: 1px solid var(--symbar-btn-border) !important;
+  border-radius: 6px !important;
+  font-family: inherit !important;
+  font-size: 13px !important;
+  padding: 0 12px !important;
+  margin: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
 }
 
 .symbar-toolbar-search::placeholder {
-  color: var(--symbar-fg-secondary);
+  color: var(--symbar-fg-muted) !important;
+  opacity: 1 !important;
 }
 
 .symbar-toolbar-search:hover {
-  border-color: var(--symbar-border-hover);
+  border-color: var(--symbar-accent) !important;
 }
 
 .symbar-toolbar-search:focus {
-  border-color: var(--symbar-accent);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
+  border-color: var(--symbar-accent) !important;
+  outline: 2px solid var(--symbar-accent) !important;
+  outline-offset: -2px !important;
 }
 
-/* ============================================================
-   ACTION BUTTONS
-   ============================================================ */
-
-.symbar-toolbar-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--symbar-btn-bg);
-  color: var(--symbar-fg);
-  border: 1px solid var(--symbar-border);
-  border-radius: var(--symbar-radius-sm);
-  padding: 6px 8px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 1;
-}
-
-.symbar-toolbar-btn:hover {
-  background-color: var(--symbar-btn-hover);
-  border-color: var(--symbar-border-hover);
-}
-
-.symbar-toolbar-btn:active {
-  background-color: var(--symbar-accent-light);
-  border-color: var(--symbar-accent);
-}
-
-.symbar-toolbar-btn svg {
-  flex-shrink: 0;
-}
-
-.symbar-toolbar-icon-btn {
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  font-size: 16px;
+/* Kill webkit search input decorations */
+.symbar-toolbar-search::-webkit-search-cancel-button,
+.symbar-toolbar-search::-webkit-search-decoration {
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
 /* ============================================================
@@ -292,35 +430,42 @@
    ============================================================ */
 
 .symbar-toolbar-copy-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--symbar-btn-bg);
-  color: var(--symbar-fg);
-  min-width: 38px;
-  height: 36px;
-  padding: 4px 8px;
-  border: 1px solid var(--symbar-border);
-  border-radius: var(--symbar-radius-sm);
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.12s ease;
-  font-family: inherit;
-  line-height: 1;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--symbar-btn-bg) !important;
+  color: var(--symbar-fg) !important;
+  min-width: 36px !important;
+  height: 34px !important;
+  padding: 2px 7px !important;
+  margin: 0 !important;
+  border: 1px solid var(--symbar-btn-border) !important;
+  border-radius: 5px !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: background-color 0.1s, border-color 0.1s, transform 0.1s !important;
 }
 
 .symbar-toolbar-copy-btn:hover {
-  background-color: var(--symbar-btn-hover);
-  border-color: var(--symbar-accent);
-  transform: translateY(-1px);
-  box-shadow: var(--symbar-shadow-sm);
+  background-color: var(--symbar-btn-hover-bg) !important;
+  border-color: var(--symbar-accent) !important;
+  transform: translateY(-1px) !important;
 }
 
 .symbar-toolbar-copy-btn:active {
-  transform: translateY(0);
-  background-color: var(--symbar-accent);
-  color: white;
-  border-color: var(--symbar-accent);
+  transform: translateY(0) !important;
+  background-color: var(--symbar-accent) !important;
+  color: var(--symbar-accent-fg) !important;
+  border-color: var(--symbar-accent) !important;
 }
 
 /* ============================================================
@@ -328,28 +473,39 @@
    ============================================================ */
 
 .symbar-toolbar-instructions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 12px;
-  color: var(--symbar-fg-secondary);
-  padding: 4px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  font-size: 11px !important;
+  color: var(--symbar-fg-muted) !important;
+  padding: 4px 0 0 0 !important;
+  margin: auto 0 0 0 !important;
+  border: none !important;
+  background: transparent !important;
+  flex-shrink: 0 !important;
 }
 
 .symbar-toolbar-instructions p {
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 11px !important;
+  color: var(--symbar-fg-muted) !important;
+  border: none !important;
+  background: transparent !important;
 }
 
 .symbar-copied-msg {
-  display: inline-block;
-  background-color: var(--symbar-copied-bg);
-  color: white;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  animation: symbar-fade-in 0.15s ease;
+  display: inline-block !important;
+  background-color: var(--symbar-copied) !important;
+  color: #ffffff !important;
+  padding: 2px 10px !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  animation: symbar-fade-in 0.15s ease !important;
 }
 
 @keyframes symbar-fade-in {
@@ -362,56 +518,69 @@
    ============================================================ */
 
 .symbar-popup {
-  all: initial;
+  all: initial !important;
   display: none;
-  position: fixed;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 3px;
-  padding: 6px;
-  background-color: var(--symbar-bg);
-  color: var(--symbar-fg);
-  border: 1px solid var(--symbar-border);
-  border-radius: var(--symbar-radius);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  z-index: 2147483647;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  max-width: 320px;
-  animation: symbar-popup-in 0.15s ease;
+  position: fixed !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 3px !important;
+  padding: 6px !important;
+  margin: 0 !important;
+  background-color: #ffffff !important;
+  color: #1c1e21 !important;
+  border: 1px solid #dddfe2 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  z-index: 2147483647 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  max-width: 320px !important;
 }
 
-@keyframes symbar-popup-in {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+.symbar-popup.symbar-dark-mode {
+  background-color: #1a1d23 !important;
+  color: #e4e6ea !important;
+  border-color: #363a42 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
 }
 
 .symbar-popup-btn {
-  all: initial;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 28px;
-  height: 28px;
-  padding: 2px 6px;
-  background-color: var(--symbar-btn-bg);
-  color: var(--symbar-fg);
-  border: 1px solid var(--symbar-border);
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.1s ease;
-  font-family: inherit;
+  all: initial !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  padding: 2px 6px !important;
+  margin: 0 !important;
+  background-color: #f0f2f5 !important;
+  color: #1c1e21 !important;
+  border: 1px solid #ced0d4 !important;
+  border-radius: 4px !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+}
+
+.symbar-dark-mode .symbar-popup-btn {
+  background-color: #2a2e36 !important;
+  color: #e4e6ea !important;
+  border-color: #3e434d !important;
 }
 
 .symbar-popup-btn:hover {
-  background-color: var(--symbar-btn-hover);
-  border-color: var(--symbar-accent);
+  background-color: #e4e6eb !important;
+  border-color: #5b5fc7 !important;
+}
+
+.symbar-dark-mode .symbar-popup-btn:hover {
+  background-color: #363a44 !important;
+  border-color: #7c80f0 !important;
 }
 
 .symbar-popup-btn-copied {
-  background-color: var(--symbar-copied-bg) !important;
-  color: white !important;
-  border-color: var(--symbar-copied-bg) !important;
+  background-color: #059669 !important;
+  color: #ffffff !important;
+  border-color: #059669 !important;
 }
 
 /* ============================================================
@@ -420,21 +589,21 @@
 
 .symbar-toolbar-toggled-btn-box::-webkit-scrollbar,
 .symbar-search-results::-webkit-scrollbar {
-  width: 6px;
+  width: 6px !important;
 }
 
 .symbar-toolbar-toggled-btn-box::-webkit-scrollbar-track,
 .symbar-search-results::-webkit-scrollbar-track {
-  background: transparent;
+  background: transparent !important;
 }
 
 .symbar-toolbar-toggled-btn-box::-webkit-scrollbar-thumb,
 .symbar-search-results::-webkit-scrollbar-thumb {
-  background-color: var(--symbar-border-hover);
-  border-radius: 3px;
+  background-color: var(--symbar-btn-border) !important;
+  border-radius: 3px !important;
 }
 
 .symbar-toolbar-toggled-btn-box::-webkit-scrollbar-thumb:hover,
 .symbar-search-results::-webkit-scrollbar-thumb:hover {
-  background-color: var(--symbar-fg-secondary);
+  background-color: var(--symbar-fg-muted) !important;
 }

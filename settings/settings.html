@@ -56,9 +56,17 @@
 
             <section>
                 <h2>Custom Symbols</h2>
-                <p class="setting-desc">Add your own symbols or text snippets. Press <kbd>Enter</kbd> to add another, <kbd>Shift+Backspace</kbd> to remove.</p>
+                <p class="setting-desc">Search for any symbol below, then click it to add it as a custom button. Or type your own text in the inputs.</p>
+
+                <div class="symbol-finder">
+                    <input type="search" id="symbol_finder_search" class="symbol-finder-input" placeholder="Search all symbols (e.g. arrow, pi, degree)..." />
+                    <div id="symbol_finder_results" class="symbol-finder-results"></div>
+                </div>
+
+                <h3 class="subsection-title">Your Custom Symbols</h3>
+                <p class="setting-desc">Press <kbd>Enter</kbd> to add another, <kbd>Shift+Backspace</kbd> to remove.</p>
                 <div class="cust-btn-actions">
-                    <button id="add_cust_btn" class="btn btn-secondary">+ Add Symbol</button>
+                    <button id="add_cust_btn" class="btn btn-secondary">+ Add Manually</button>
                     <button id="save_cust_btn" class="btn btn-primary">Save</button>
                 </div>
                 <div id="cust_btn_ui">

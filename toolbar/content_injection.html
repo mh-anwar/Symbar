@@ -23,18 +23,19 @@
     <div id="symbar_common" class="symbar-toolbar-hidden-btn-box"></div>
 </div>
 <div class="symbar-action-box">
-    <div class="symbar-main-actions">
-        <button id="symbar_minimize_toolbar" class="symbar-toolbar-btn" title="Minimize">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-        <button id="symbar_close_toolbar" class="symbar-toolbar-btn" title="Close">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-        <button id="symbar_options" class="symbar-toolbar-btn" title="Settings">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
-        <button id="symbar_dark_mode" class="symbar-toolbar-btn symbar-toolbar-icon-btn" title="Toggle theme"></button>
-    </div>
+    <button id="symbar_minimize_toolbar" class="symbar-action-btn">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Minimize
+    </button>
+    <button id="symbar_close_toolbar" class="symbar-action-btn symbar-action-btn-close">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Close
+    </button>
+    <button id="symbar_options" class="symbar-action-btn">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 3a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM8 9.5a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM8 16a1.5 1.5 0 110-3 1.5 1.5 0 010 3z" fill="currentColor"/></svg>
+        Settings
+    </button>
+    <button id="symbar_dark_mode" class="symbar-action-btn symbar-action-btn-theme"></button>
     <div class="symbar-toolbar-instructions" id="symbar_instructions">
         <p>Click any symbol to copy</p>
     </div>
