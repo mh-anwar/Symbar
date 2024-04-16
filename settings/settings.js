@@ -2,6 +2,9 @@
 
 const mode_checkbox = document.getElementById('mode_checkbox');
 const popup_checkbox = document.getElementById('popup_checkbox');
+const popup_source_select = document.getElementById('popup_source');
+const popup_count_slider = document.getElementById('popup_count');
+const popup_count_output = document.getElementById('popup_count_value');
 const toolbar_height_slider = document.getElementById('toolbar_height');
 const toolbar_height_value_output = document.getElementById('toolbar_height_value');
 const cust_btn_adder = document.getElementById('add_cust_btn');
@@ -9,14 +12,13 @@ const cust_save_btn = document.getElementById('save_cust_btn');
 const symbol_finder_input = document.getElementById('symbol_finder_search');
 const symbol_finder_results = document.getElementById('symbol_finder_results');
 
-let accentsData = null;
+let symbolsData = null;
 
-// Load accents data for the symbol finder
-async function loadAccents() {
-  if (accentsData) return accentsData;
-  const response = await fetch(chrome.runtime.getURL('./accents.json'));
-  accentsData = await response.json();
-  return accentsData;
+async function loadSymbols() {
+  if (symbolsData) return symbolsData;
+  const response = await fetch(chrome.runtime.getURL('./symbols.json'));
+  symbolsData = await response.json();
+  return symbolsData;
 }
 
 // Theme toggle - no reload needed
@@ -63,7 +65,7 @@ function open_tab(event) {
 // ============================================================
 
 async function searchSymbols(query) {
-  const data = await loadAccents();
+  const data = await loadSymbols();
   const results = [];
   const seen = new Set();
   const term = query.toLowerCase();
@@ -201,6 +203,14 @@ function populate_cust_buttons(data) {
 
 mode_checkbox.addEventListener('change', set_mode);
 popup_checkbox.addEventListener('change', set_popup);
+popup_source_select.addEventListener('change', () => {
+  chrome.storage.sync.set({ popup_source: popup_source_select.value });
+});
+popup_count_slider.addEventListener('input', () => {
+  const val = parseInt(popup_count_slider.value);
+  chrome.storage.sync.set({ popup_count: val });
+  popup_count_output.textContent = val;
+});
 toolbar_height_slider.addEventListener('input', set_toolbar_height);
 cust_btn_adder.addEventListener('click', add_cust_button);
 cust_save_btn.addEventListener('click', save_cust_buttons);
@@ -209,29 +219,36 @@ cust_save_btn.addEventListener('click', save_cust_buttons);
 // INITIALIZE STATE FROM STORAGE
 // ============================================================
 
-chrome.storage.sync.get(['mode', 'toolbar_height', 'popup_enabled', 'cust_btns'], function (data) {
-  // Theme
-  if (data.mode === 'dark') {
-    mode_checkbox.checked = true;
-    applyTheme('dark');
-  }
+chrome.storage.sync.get(
+  ['mode', 'toolbar_height', 'popup_enabled', 'popup_source', 'popup_count', 'cust_btns'],
+  function (data) {
+    if (data.mode === 'dark') {
+      mode_checkbox.checked = true;
+      applyTheme('dark');
+    }
 
-  // Toolbar height
-  if (data.toolbar_height) {
-    toolbar_height_slider.value = data.toolbar_height;
-    toolbar_height_value_output.textContent = data.toolbar_height + '%';
-  }
+    if (data.toolbar_height) {
+      toolbar_height_slider.value = data.toolbar_height;
+      toolbar_height_value_output.textContent = data.toolbar_height + '%';
+    }
 
-  // Popup - explicitly check for true
-  popup_checkbox.checked = data.popup_enabled === true;
+    popup_checkbox.checked = data.popup_enabled === true;
 
-  // Custom buttons
-  if (data.cust_btns && data.cust_btns.length > 0) {
-    populate_cust_buttons(data.cust_btns);
-  } else {
-    add_cust_button();
+    if (data.popup_source) {
+      popup_source_select.value = data.popup_source;
+    }
+
+    const count = data.popup_count || 10;
+    popup_count_slider.value = count;
+    popup_count_output.textContent = count;
+
+    if (data.cust_btns && data.cust_btns.length > 0) {
+      populate_cust_buttons(data.cust_btns);
+    } else {
+      add_cust_button();
+    }
   }
-});
+);
 
 // Tab navigation
 document.querySelectorAll('.nav-link').forEach((link) => {

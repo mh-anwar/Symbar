@@ -11,6 +11,8 @@ chrome.runtime.onInstalled.addListener((details) => {
         mode: 'dark',
         cust_btns: [],
         popup_enabled: false,
+        popup_source: 'recent',
+        popup_count: 10,
         toolbar_state: 0,
       });
       break;

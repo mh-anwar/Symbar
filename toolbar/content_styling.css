@@ -517,23 +517,34 @@
    FLOATING POPUP
    ============================================================ */
 
+/* Popup display is controlled entirely by inline styles in JS
+   to avoid the all:initial vs display:none conflict */
 .symbar-popup {
-  all: initial !important;
-  display: none;
-  position: fixed !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
-  gap: 3px !important;
-  padding: 6px !important;
+  gap: 4px !important;
+  padding: 8px !important;
   margin: 0 !important;
   background-color: #ffffff !important;
   color: #1c1e21 !important;
   border: 1px solid #dddfe2 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
-  z-index: 2147483647 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18) !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-  max-width: 320px !important;
+  max-width: 360px !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  box-sizing: border-box !important;
+  animation: symbar-popup-in 0.12s ease !important;
+}
+
+@keyframes symbar-popup-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .symbar-popup.symbar-dark-mode {
@@ -544,21 +555,27 @@
 }
 
 .symbar-popup-btn {
-  all: initial !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  min-width: 28px !important;
-  height: 28px !important;
+  min-width: 30px !important;
+  height: 30px !important;
   padding: 2px 6px !important;
   margin: 0 !important;
   background-color: #f0f2f5 !important;
   color: #1c1e21 !important;
   border: 1px solid #ced0d4 !important;
-  border-radius: 4px !important;
-  font-size: 16px !important;
+  border-radius: 6px !important;
+  font-size: 17px !important;
   cursor: pointer !important;
-  font-family: inherit !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  line-height: 1 !important;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: background-color 0.1s, border-color 0.1s !important;
 }
 
 .symbar-dark-mode .symbar-popup-btn {

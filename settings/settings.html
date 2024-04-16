@@ -46,12 +46,26 @@
 
             <section>
                 <h2>Quick Popup</h2>
-                <p class="setting-desc">Show a small floating popup with your recently used symbols when you focus a text input.</p>
+                <p class="setting-desc">Show a small floating popup with symbols when you focus a text input. Does not work on internal browser pages or sites that block extensions (e.g. Google Docs uses iframes that extensions cannot access).</p>
                 <label class="toggle-row">
                     <span class="toggle-label">Enable Popup</span>
                     <input type="checkbox" id="popup_checkbox" class="toggle-input">
                     <span class="toggle-switch"></span>
                 </label>
+                <div class="setting-row">
+                    <label for="popup_source">Show symbols from</label>
+                    <select id="popup_source" class="setting-select">
+                        <option value="recent">Recently Used</option>
+                        <option value="custom">Custom Symbols</option>
+                    </select>
+                </div>
+                <div class="setting-row">
+                    <label for="popup_count">Number of symbols</label>
+                    <div class="range-group">
+                        <input type="range" id="popup_count" min="3" max="20" class="slider">
+                        <span class="range-value" id="popup_count_value"></span>
+                    </div>
+                </div>
             </section>
 
             <section>

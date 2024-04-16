@@ -2,36 +2,81 @@
 
 var state_of_toolbar = 0;
 var popup_enabled = false;
-var accentsData = null;
+var popup_source = 'recent'; // 'recent' or 'custom'
+var popup_count = 10;
+var symbolsData = null;
 let toolbar_height = '20%';
 
-// Cache accents data once
-async function loadAccentsData() {
-  if (accentsData) return accentsData;
-  const response = await fetch(chrome.runtime.getURL('./accents.json'));
-  accentsData = await response.json();
-  return accentsData;
+// ============================================================
+// UTILITY - safe chrome.storage wrappers
+// ============================================================
+
+function safeStorageGet(keys) {
+  return new Promise((resolve) => {
+    try {
+      chrome.storage.sync.get(keys, (data) => {
+        if (chrome.runtime.lastError) {
+          resolve({});
+        } else {
+          resolve(data);
+        }
+      });
+    } catch (e) {
+      resolve({});
+    }
+  });
 }
 
-// Listen for storage changes
+function safeStorageSet(obj) {
+  try {
+    chrome.storage.sync.set(obj);
+  } catch (e) {
+    // Extension context invalidated
+  }
+}
+
+// Cache symbols data once
+async function loadSymbolsData() {
+  if (symbolsData) return symbolsData;
+  try {
+    const response = await fetch(chrome.runtime.getURL('./symbols.json'));
+    symbolsData = await response.json();
+  } catch (e) {
+    symbolsData = {};
+  }
+  return symbolsData;
+}
+
+// ============================================================
+// STORAGE CHANGE LISTENER
+// ============================================================
+
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (changes.toolbar_height?.newValue) {
-    toolbar_height = changes.toolbar_height.newValue + '%';
-    const toolbar = document.getElementById('copy_toolbar');
-    if (toolbar) {
-      toolbar.style.height = toolbar_height;
+  try {
+    if (changes.toolbar_height?.newValue) {
+      toolbar_height = changes.toolbar_height.newValue + '%';
+      const toolbar = document.getElementById('copy_toolbar');
+      if (toolbar) {
+        toolbar.style.height = toolbar_height;
+      }
+    } else if (changes.recently_used?.newValue) {
+      update_recent();
+    } else if (changes.mode?.newValue) {
+      const toolbar = document.getElementById('copy_toolbar');
+      if (toolbar) toolbar.remove();
+      toolbar_inserter();
+    } else if (changes.popup_enabled?.newValue !== undefined) {
+      popup_enabled = changes.popup_enabled.newValue;
+      if (!popup_enabled) {
+        removePopup();
+      }
+    } else if (changes.popup_source?.newValue) {
+      popup_source = changes.popup_source.newValue;
+    } else if (changes.popup_count?.newValue) {
+      popup_count = changes.popup_count.newValue;
     }
-  } else if (changes.recently_used?.newValue) {
-    update_recent();
-  } else if (changes.mode?.newValue) {
-    const toolbar = document.getElementById('copy_toolbar');
-    if (toolbar) toolbar.remove();
-    toolbar_inserter();
-  } else if (changes.popup_enabled?.newValue !== undefined) {
-    popup_enabled = changes.popup_enabled.newValue;
-    if (!popup_enabled) {
-      removePopup();
-    }
+  } catch (e) {
+    // Extension context invalidated
   }
 });
 
@@ -65,7 +110,7 @@ function toolbar_inserter() {
         .getElementById('symbar_select_form')
         .addEventListener('change', toolbar_select_form_toggler);
 
-      const data = await loadAccentsData();
+      const data = await loadSymbolsData();
       toolbar_populate_dropdowns(data);
 
       // Set up search with cached data
@@ -110,7 +155,7 @@ function toolbar_inserter() {
     });
 }
 
-// Substring + fuzzy search across all tags
+// Substring search across all tags
 function search(search_term, data) {
   const symbols = [];
   const seen = new Set();
@@ -118,13 +163,11 @@ function search(search_term, data) {
   Object.keys(data).forEach((lang) => {
     Object.keys(data[lang]).forEach((symb) => {
       if (seen.has(symb)) return;
-      // Check if the symbol itself matches
       if (symb.toLowerCase().includes(search_term)) {
         symbols.push(symb);
         seen.add(symb);
         return;
       }
-      // Check tags - substring match
       const tags = data[lang][symb];
       const tagString = tags.join(' ').toLowerCase();
       if (tagString.includes(search_term)) {
@@ -155,8 +198,8 @@ function toolbar_dark_mode_btn(mode) {
 }
 
 function toolbar_closer() {
-  chrome.storage.sync.get('toolbar_state', function (data) {
-    chrome.storage.sync.set({ toolbar_state: (data.toolbar_state || 0) + 1 });
+  safeStorageGet('toolbar_state').then((data) => {
+    safeStorageSet({ toolbar_state: (data.toolbar_state || 0) + 1 });
   });
   document.getElementById('copy_toolbar').remove();
   state_of_toolbar = 0;
@@ -183,19 +226,18 @@ function toolbar_populate_dropdowns(data) {
 }
 
 async function toolbar_add_recent(btn_text) {
-  let data = await chrome.storage.sync.get('recently_used');
+  const data = await safeStorageGet('recently_used');
   let recents = data.recently_used || [];
-  // Remove duplicate if it exists, so it moves to end
   recents = recents.filter((r) => r !== btn_text);
   if (recents.length >= 20) {
     recents.shift();
   }
   recents.push(btn_text);
-  chrome.storage.sync.set({ recently_used: recents });
+  safeStorageSet({ recently_used: recents });
 }
 
 async function toolbar_populate_custom() {
-  const data = await chrome.storage.sync.get('cust_btns');
+  const data = await safeStorageGet('cust_btns');
   const btns = data.cust_btns || [];
   const container = document.getElementById('symbar_custom');
   for (const val of btns) {
@@ -208,7 +250,7 @@ async function toolbar_populate_custom() {
 }
 
 async function update_recent() {
-  const data = await chrome.storage.sync.get('recently_used');
+  const data = await safeStorageGet('recently_used');
   const recents = data.recently_used || [];
   const recent_node = document.getElementById('symbar_recent');
   if (!recent_node) return;
@@ -225,7 +267,6 @@ async function update_recent() {
 function toolbar_copier() {
   const copyButtons = document.getElementsByClassName('symbar-toolbar-copy-btn');
   for (let i = 0; i < copyButtons.length; i++) {
-    // Remove old listeners by cloning
     const btn = copyButtons[i];
     if (btn.dataset.bound) continue;
     btn.dataset.bound = 'true';
@@ -238,8 +279,7 @@ function toolbar_copier() {
         instructions.innerHTML =
           '<span class="symbar-copied-msg">Copied!</span>';
         setTimeout(() => {
-          instructions.innerHTML =
-            '<p>Click any symbol to copy</p>';
+          instructions.innerHTML = '<p>Click any symbol to copy</p>';
         }, 2000);
       }
     });
@@ -265,7 +305,6 @@ function toolbar_select_form_toggler() {
     recents.style.display = 'flex';
   }
 
-  // Clear search when switching categories
   const searchEl = document.getElementById('symbar_search');
   if (searchEl) searchEl.value = '';
   const resultsEl = document.getElementById('symbar_search_results');
@@ -300,7 +339,6 @@ function toolbar_minimizer() {
       div.className = 'symbar-toolbar-base-minimized';
       div.id = 'minimized_toolbar';
 
-      // Match current mode
       chrome.storage.sync.get('mode', function (data) {
         if (data.mode === 'dark') {
           div.classList.add('symbar-dark-mode');
@@ -327,18 +365,13 @@ function toolbar_minimizer() {
 let popupEl = null;
 let popupTimeout = null;
 
-function createPopup() {
+function createPopup(isDark) {
   if (popupEl) return popupEl;
   const el = document.createElement('div');
   el.id = 'symbar_popup';
-  el.className = 'symbar-popup';
-
-  chrome.storage.sync.get('mode', function (data) {
-    if (data.mode === 'dark') {
-      el.classList.add('symbar-dark-mode');
-    }
-  });
-
+  el.className = 'symbar-popup' + (isDark ? ' symbar-dark-mode' : '');
+  // Set display none via inline style - CSS all:initial can't override inline
+  el.style.cssText = 'display: none !important;';
   document.body.appendChild(el);
   popupEl = el;
   return el;
@@ -351,70 +384,92 @@ function removePopup() {
   }
 }
 
-function positionPopup(el, rect) {
-  const popup = el;
-  popup.style.left = rect.left + 'px';
-  popup.style.top = (rect.top - popup.offsetHeight - 8) + 'px';
+function positionPopup(popup, rect) {
+  // Position above the input
+  const popupHeight = popup.offsetHeight || 40;
+  let top = rect.top - popupHeight - 8;
+  let left = rect.left;
 
-  // Make sure it doesn't go off screen
-  const popupRect = popup.getBoundingClientRect();
-  if (popupRect.top < 0) {
-    popup.style.top = (rect.bottom + 8) + 'px';
+  // If would go off top, show below
+  if (top < 0) {
+    top = rect.bottom + 8;
   }
-  if (popupRect.right > window.innerWidth) {
-    popup.style.left = (window.innerWidth - popupRect.width - 8) + 'px';
+  // Clamp to viewport
+  if (left + 320 > window.innerWidth) {
+    left = window.innerWidth - 328;
   }
+  if (left < 8) left = 8;
+
+  popup.style.cssText = `
+    display: flex !important;
+    position: fixed !important;
+    top: ${top}px !important;
+    left: ${left}px !important;
+    z-index: 2147483647 !important;
+  `;
 }
 
 async function showPopup(inputEl) {
   if (!popup_enabled) return;
 
-  const data = await chrome.storage.sync.get('recently_used');
-  const recents = data.recently_used || [];
-  if (recents.length === 0) return;
+  const data = await safeStorageGet(['recently_used', 'cust_btns', 'mode', 'popup_source', 'popup_count']);
+  const isDark = data.mode === 'dark';
+  const source = data.popup_source || popup_source;
+  const count = data.popup_count || popup_count;
 
-  const popup = createPopup();
+  let items;
+  if (source === 'custom') {
+    items = data.cust_btns || [];
+  } else {
+    items = (data.recently_used || []).slice(-count).reverse();
+  }
+
+  if (items.length === 0) return;
+
+  const popup = createPopup(isDark);
   popup.innerHTML = '';
 
-  // Show up to 10 most recent symbols
-  const toShow = recents.slice(-10).reverse();
-  for (const sym of toShow) {
+  for (const sym of items.slice(0, count)) {
     const btn = document.createElement('button');
     btn.className = 'symbar-popup-btn';
     btn.textContent = sym;
     btn.addEventListener('mousedown', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       navigator.clipboard.writeText(sym);
       toolbar_add_recent(sym);
-      // Brief flash feedback
       btn.classList.add('symbar-popup-btn-copied');
       setTimeout(() => btn.classList.remove('symbar-popup-btn-copied'), 300);
     });
     popup.appendChild(btn);
   }
 
-  // Position near the input element
   const rect = inputEl.getBoundingClientRect();
-  popup.style.display = 'flex';
   requestAnimationFrame(() => positionPopup(popup, rect));
 }
 
 function hidePopup() {
   if (popupEl) {
-    popupEl.style.display = 'none';
+    popupEl.style.cssText = 'display: none !important;';
   }
 }
 
-// Show popup when user focuses an input/textarea
+// Popup triggers - use capture phase to catch events before page handlers
 document.addEventListener(
   'focusin',
   (e) => {
     if (!popup_enabled) return;
-    const tag = e.target.tagName;
-    const isEditable = e.target.isContentEditable;
+    const el = e.target;
+    const tag = el.tagName;
+    const isEditable = el.isContentEditable;
+    // Skip if the click is inside the popup itself
+    if (popupEl && popupEl.contains(el)) return;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || isEditable) {
+      // Skip search/password inputs
+      const type = el.getAttribute('type');
+      if (type === 'password' || type === 'hidden') return;
       clearTimeout(popupTimeout);
-      popupTimeout = setTimeout(() => showPopup(e.target), 400);
+      popupTimeout = setTimeout(() => showPopup(el), 300);
     }
   },
   true
@@ -424,14 +479,20 @@ document.addEventListener(
   'focusout',
   (e) => {
     clearTimeout(popupTimeout);
-    popupTimeout = setTimeout(() => hidePopup(), 200);
+    popupTimeout = setTimeout(() => hidePopup(), 250);
   },
   true
 );
 
-// Initialize popup setting
-chrome.storage.sync.get('popup_enabled', (data) => {
-  popup_enabled = data.popup_enabled || false;
+// Reposition popup on scroll/resize
+window.addEventListener('scroll', () => hidePopup(), true);
+window.addEventListener('resize', () => hidePopup());
+
+// Initialize popup settings
+safeStorageGet(['popup_enabled', 'popup_source', 'popup_count']).then((data) => {
+  popup_enabled = data.popup_enabled === true;
+  popup_source = data.popup_source || 'recent';
+  popup_count = data.popup_count || 10;
 });
 
 // ============================================================

@@ -17,6 +17,33 @@
     "Û": ["Accent", "Circonflex", "U"],
     "Ü": ["Accent", "Tréma", "U"]
   },
+  "Spanish": {
+    "Á": ["Accent", "Acute", "A"],
+    "É": ["Accent", "Acute", "E"],
+    "Í": ["Accent", "Acute", "I"],
+    "Ó": ["Accent", "Acute", "O"],
+    "Ú": ["Accent", "Acute", "U"],
+    "Ñ": ["Tilde", "N", "Ene"],
+    "ñ": ["Tilde", "N", "Ene", "Small"],
+    "á": ["Accent", "Acute", "A", "Small"],
+    "é": ["Accent", "Acute", "E", "Small"],
+    "í": ["Accent", "Acute", "I", "Small"],
+    "ó": ["Accent", "Acute", "O", "Small"],
+    "ú": ["Accent", "Acute", "U", "Small"],
+    "ü": ["Accent", "Diaeresis", "U", "Small"],
+    "¿": ["Inverted", "Question", "Mark"],
+    "¡": ["Inverted", "Exclamation", "Mark"]
+  },
+  "German": {
+    "Ä": ["Umlaut", "A"],
+    "Ö": ["Umlaut", "O"],
+    "Ü": ["Umlaut", "U"],
+    "ä": ["Umlaut", "A", "Small"],
+    "ö": ["Umlaut", "O", "Small"],
+    "ü": ["Umlaut", "U", "Small"],
+    "ß": ["Eszett", "Sharp", "S", "Scharfes"],
+    "ẞ": ["Eszett", "Capital", "Sharp", "S"]
+  },
   "Math": {
     "π": ["Greek", "Small", "Letter", "Pi"],
     "∞": ["Infinity"],

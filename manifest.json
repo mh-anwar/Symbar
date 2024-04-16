@@ -32,7 +32,7 @@
       "resources": [
         "toolbar/content_injection.html",
         "toolbar/minimize_injection.html",
-        "accents.json"
+        "symbols.json"
       ],
       "matches": ["<all_urls>"]
     }
