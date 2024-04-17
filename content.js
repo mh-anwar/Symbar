@@ -433,14 +433,37 @@ async function showPopup(inputEl) {
     const btn = document.createElement('button');
     btn.className = 'symbar-popup-btn';
     btn.textContent = sym;
-    btn.addEventListener('mousedown', (e) => {
+    // Force pointer-events inline to override any page CSS
+    btn.style.cssText = 'pointer-events: auto !important; user-select: none !important;';
+
+    const copySymbol = (e) => {
       e.preventDefault();
       e.stopPropagation();
+      e.stopImmediatePropagation();
       navigator.clipboard.writeText(sym);
       toolbar_add_recent(sym);
       btn.classList.add('symbar-popup-btn-copied');
       setTimeout(() => btn.classList.remove('symbar-popup-btn-copied'), 300);
-    });
+    };
+
+    // Use both mousedown AND click - some pages (Google) intercept
+    // one but not the other. The flag prevents double-firing.
+    let fired = false;
+    btn.addEventListener('mousedown', (e) => {
+      fired = true;
+      copySymbol(e);
+    }, true);
+    btn.addEventListener('click', (e) => {
+      if (!fired) copySymbol(e);
+      fired = false;
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+    }, true);
+    btn.addEventListener('pointerdown', (e) => {
+      e.stopPropagation();
+    }, true);
+
     popup.appendChild(btn);
   }
 
@@ -479,7 +502,13 @@ document.addEventListener(
   'focusout',
   (e) => {
     clearTimeout(popupTimeout);
-    popupTimeout = setTimeout(() => hidePopup(), 250);
+    // Delay hiding so clicks on popup buttons can register.
+    // Also check if the new focus target is inside our popup.
+    popupTimeout = setTimeout(() => {
+      // Don't hide if something inside the popup is active
+      if (popupEl && popupEl.contains(document.activeElement)) return;
+      hidePopup();
+    }, 400);
   },
   true
 );

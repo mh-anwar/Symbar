@@ -576,6 +576,10 @@
   outline: none !important;
   box-shadow: none !important;
   transition: background-color 0.1s, border-color 0.1s !important;
+  pointer-events: auto !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .symbar-dark-mode .symbar-popup-btn {
