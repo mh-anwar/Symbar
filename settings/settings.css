@@ -121,23 +121,19 @@ main {
   display: block;
 }
 
+/* Grid layout only when settings tab is active */
 #settings_tab.active-tab {
-  display: grid;
-}
-
-/* Two-column grid for settings */
-#settings_tab {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 48px;
 }
 
-#settings_tab > section:last-child {
+#settings_tab.active-tab > section:last-child {
   grid-column: 1 / -1;
 }
 
 @media (max-width: 720px) {
-  #settings_tab {
+  #settings_tab.active-tab {
     grid-template-columns: 1fr;
   }
 }

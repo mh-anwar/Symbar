@@ -67,7 +67,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
       toolbar_height = changes.toolbar_height.newValue + '%';
       const toolbar = document.getElementById('copy_toolbar');
       if (toolbar) {
-        toolbar.style.height = toolbar_height;
+        toolbar.style.setProperty('height', toolbar_height, 'important');
       }
     } else if (changes.recently_used?.newValue) {
       update_recent();
@@ -131,11 +131,11 @@ function toolbar_inserter() {
 
           if (search_term === '') {
             resultsEl.innerHTML = '';
-            resultsEl.style.display = 'none';
+            resultsEl.style.setProperty('display', 'none', 'important');
           } else {
             const symbols = search(search_term, data);
             resultsEl.innerHTML = '';
-            resultsEl.style.display = 'flex';
+            resultsEl.style.setProperty('display', 'flex', 'important');
             for (const sym of symbols) {
               const btn = document.createElement('button');
               btn.className = 'symbar-toolbar-copy-btn';
@@ -190,7 +190,7 @@ function search(search_term, data) {
 
 function set_toolbar_height(data, copy_toolbar) {
   if (data.toolbar_height) {
-    copy_toolbar.style.height = data.toolbar_height + '%';
+    copy_toolbar.style.setProperty('height', data.toolbar_height + '%', 'important');
   }
 }
 
@@ -308,10 +308,10 @@ function toolbar_select_form_toggler() {
 
   if (target !== null) {
     target.className = 'symbar-toolbar-toggled-btn-box';
-    recents.style.display = 'none';
+    recents.style.setProperty('display', 'none', 'important');
   } else {
     recents.className = 'symbar-toolbar-toggled-btn-box';
-    recents.style.display = 'flex';
+    recents.style.setProperty('display', 'flex', 'important');
   }
 
   const searchEl = document.getElementById('symbar_search');
@@ -319,7 +319,7 @@ function toolbar_select_form_toggler() {
   const resultsEl = document.getElementById('symbar_search_results');
   if (resultsEl) {
     resultsEl.innerHTML = '';
-    resultsEl.style.display = 'none';
+    resultsEl.style.setProperty('display', 'none', 'important');
   }
 }
 
