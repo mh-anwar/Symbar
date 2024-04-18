@@ -326,7 +326,7 @@ function toolbar_select_form_toggler() {
 function toolbar_maximizer() {
   document.getElementById('maximize_toolbar').addEventListener('click', function () {
     document.getElementById('minimized_toolbar').remove();
-    document.getElementById('copy_toolbar').style.display = 'flex';
+    document.getElementById('copy_toolbar').style.setProperty('display', 'flex', 'important');
   });
 }
 
@@ -355,7 +355,7 @@ function toolbar_minimizer() {
       });
 
       document.body.appendChild(div);
-      document.getElementById('copy_toolbar').style.display = 'none';
+      document.getElementById('copy_toolbar').style.setProperty('display', 'none', 'important');
       fetch(chrome.runtime.getURL('toolbar/minimize_injection.html'))
         .then((response) => response.text())
         .then((html) => {
