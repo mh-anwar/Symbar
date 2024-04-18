@@ -72,8 +72,6 @@ chrome.storage.onChanged.addListener((changes, area) => {
     } else if (changes.recently_used?.newValue) {
       update_recent();
     } else if (changes.mode?.newValue) {
-      const toolbar = document.getElementById('copy_toolbar');
-      if (toolbar) toolbar.remove();
       toolbar_inserter();
     } else if (changes.popup_enabled?.newValue !== undefined) {
       popup_enabled = changes.popup_enabled.newValue;
@@ -95,12 +93,7 @@ chrome.storage.onChanged.addListener((changes, area) => {
 // ============================================================
 
 function toolbar_inserter() {
-  // Clean up any existing toolbar or minimized bar first
-  const existing = document.getElementById('copy_toolbar');
-  if (existing) existing.remove();
-  const existingMin = document.getElementById('minimized_toolbar');
-  if (existingMin) existingMin.remove();
-
+  cleanupAll();
   const div = document.createElement('div');
   let toolbar_mode;
 
@@ -544,22 +537,22 @@ safeStorageGet(['popup_enabled', 'popup_source', 'popup_count']).then((data) => 
 // MESSAGE HANDLING
 // ============================================================
 
-function message_parser(message, sender, sendResponse) {
-  const toolbar = document.getElementById('copy_toolbar');
-  const minimized_toolbar = document.getElementById('minimized_toolbar');
+function cleanupAll() {
+  const t = document.getElementById('copy_toolbar');
+  const m = document.getElementById('minimized_toolbar');
+  if (t) t.remove();
+  if (m) m.remove();
+}
 
+function message_parser(message, sender, sendResponse) {
   if (message === 'state_of_toolbar') {
     sendResponse({ state: state_of_toolbar });
   } else if (message === 'toolbar_on') {
+    cleanupAll();
     toolbar_inserter();
     state_of_toolbar = 1;
   } else if (message === 'toolbar_off') {
-    if (document.contains(toolbar)) {
-      toolbar.remove();
-    }
-    if (document.contains(minimized_toolbar)) {
-      minimized_toolbar.remove();
-    }
+    cleanupAll();
     state_of_toolbar = 0;
   }
   return false;
