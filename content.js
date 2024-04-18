@@ -95,6 +95,12 @@ chrome.storage.onChanged.addListener((changes, area) => {
 // ============================================================
 
 function toolbar_inserter() {
+  // Clean up any existing toolbar or minimized bar first
+  const existing = document.getElementById('copy_toolbar');
+  if (existing) existing.remove();
+  const existingMin = document.getElementById('minimized_toolbar');
+  if (existingMin) existingMin.remove();
+
   const div = document.createElement('div');
   let toolbar_mode;
 
