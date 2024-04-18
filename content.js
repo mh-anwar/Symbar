@@ -11,8 +11,17 @@ let toolbar_height = '20%';
 // UTILITY - safe chrome.storage wrappers
 // ============================================================
 
+function isContextValid() {
+  try {
+    return !!chrome.runtime && !!chrome.runtime.id;
+  } catch (e) {
+    return false;
+  }
+}
+
 function safeStorageGet(keys) {
   return new Promise((resolve) => {
+    if (!isContextValid()) { resolve({}); return; }
     try {
       chrome.storage.sync.get(keys, (data) => {
         if (chrome.runtime.lastError) {
@@ -28,6 +37,7 @@ function safeStorageGet(keys) {
 }
 
 function safeStorageSet(obj) {
+  if (!isContextValid()) return;
   try {
     chrome.storage.sync.set(obj);
   } catch (e) {
@@ -410,7 +420,7 @@ function positionPopup(popup, rect) {
 }
 
 async function showPopup(inputEl) {
-  if (!popup_enabled) return;
+  if (!popup_enabled || !isContextValid()) return;
 
   const data = await safeStorageGet(['recently_used', 'cust_btns', 'mode', 'popup_source', 'popup_count']);
   const isDark = data.mode === 'dark';

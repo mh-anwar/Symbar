@@ -46,7 +46,9 @@ function set_popup(event) {
 }
 
 function open_tab(event) {
-  const tabName = event.target.dataset.tab;
+  const link = event.target.closest('[data-tab]');
+  if (!link) return;
+  const tabName = link.dataset.tab;
   if (!tabName) return;
 
   document.querySelectorAll('.active-tab').forEach((el) => {
@@ -57,7 +59,7 @@ function open_tab(event) {
   });
 
   document.getElementById(tabName).classList.add('active-tab');
-  event.target.classList.add('nav-active-link');
+  link.classList.add('nav-active-link');
 }
 
 // ============================================================

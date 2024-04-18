@@ -121,6 +121,10 @@ main {
   display: block;
 }
 
+#settings_tab.active-tab {
+  display: grid;
+}
+
 /* Two-column grid for settings */
 #settings_tab {
   display: grid;
