@@ -27,21 +27,21 @@
 }
 
 .symbar-toolbar-base.symbar-dark-mode {
-  --symbar-bg: #1a1d23;
-  --symbar-bg-raised: #22262e;
-  --symbar-fg: #e4e6ea;
-  --symbar-fg-muted: #9ba1ab;
-  --symbar-border: #363a42;
-  --symbar-accent: #7c80f0;
-  --symbar-accent-fg: #ffffff;
-  --symbar-btn-bg: #2a2e36;
-  --symbar-btn-hover-bg: #363a44;
-  --symbar-btn-border: #3e434d;
-  --symbar-close-bg: #3b1c1c;
-  --symbar-close-fg: #f87171;
-  --symbar-close-hover: #4c2020;
+  --symbar-bg: #000000;
+  --symbar-bg-raised: #0a0a0a;
+  --symbar-fg: #f0f0f0;
+  --symbar-fg-muted: #a0a0a0;
+  --symbar-border: #222222;
+  --symbar-accent: #6ea8fe;
+  --symbar-accent-fg: #000000;
+  --symbar-btn-bg: #1a1a1a;
+  --symbar-btn-hover-bg: #252525;
+  --symbar-btn-border: #333333;
+  --symbar-close-bg: #2c0a0a;
+  --symbar-close-fg: #ff6b6b;
+  --symbar-close-hover: #3d1111;
   --symbar-copied: #34d399;
-  --symbar-shadow-color: rgba(0, 0, 0, 0.4);
+  --symbar-shadow-color: rgba(0, 0, 0, 0.6);
 }
 
 /* Minimized bar needs its own variables */
@@ -59,16 +59,16 @@
 }
 
 .symbar-toolbar-base-minimized.symbar-dark-mode {
-  --symbar-bg: #1a1d23;
-  --symbar-bg-raised: #22262e;
-  --symbar-fg: #e4e6ea;
-  --symbar-fg-muted: #9ba1ab;
-  --symbar-border: #363a42;
-  --symbar-accent: #7c80f0;
-  --symbar-btn-bg: #2a2e36;
-  --symbar-btn-hover-bg: #363a44;
-  --symbar-btn-border: #3e434d;
-  --symbar-shadow-color: rgba(0, 0, 0, 0.4);
+  --symbar-bg: #000000;
+  --symbar-bg-raised: #0a0a0a;
+  --symbar-fg: #f0f0f0;
+  --symbar-fg-muted: #a0a0a0;
+  --symbar-border: #222222;
+  --symbar-accent: #6ea8fe;
+  --symbar-btn-bg: #1a1a1a;
+  --symbar-btn-hover-bg: #252525;
+  --symbar-btn-border: #333333;
+  --symbar-shadow-color: rgba(0, 0, 0, 0.6);
 }
 
 /* ============================================================
@@ -163,7 +163,8 @@
   padding: 0 !important;
 }
 
-.symbar-min-btn {
+.symbar-toolbar-base-minimized .symbar-min-btn {
+  all: unset !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -175,14 +176,25 @@
   color: var(--symbar-fg) !important;
   border: 1px solid var(--symbar-btn-border) !important;
   border-radius: 6px !important;
-  font-size: 12px !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
+  line-height: 1 !important;
   cursor: pointer !important;
   white-space: nowrap !important;
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
 }
 
-.symbar-min-btn:hover {
+.symbar-toolbar-base-minimized .symbar-min-btn:hover {
   background-color: var(--symbar-btn-hover-bg) !important;
+}
+
+.symbar-toolbar-base-minimized .symbar-min-btn svg {
+  display: block !important;
+  width: 12px !important;
+  height: 12px !important;
+  flex-shrink: 0 !important;
 }
 
 /* ============================================================
@@ -548,10 +560,10 @@
 }
 
 .symbar-popup.symbar-dark-mode {
-  background-color: #1a1d23 !important;
-  color: #e4e6ea !important;
-  border-color: #363a42 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+  background-color: #000000 !important;
+  color: #f0f0f0 !important;
+  border-color: #2a2a2a !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7) !important;
 }
 
 .symbar-popup-btn {
@@ -583,9 +595,9 @@
 }
 
 .symbar-dark-mode .symbar-popup-btn {
-  background-color: #2a2e36 !important;
-  color: #e4e6ea !important;
-  border-color: #3e434d !important;
+  background-color: #1a1a1a !important;
+  color: #f0f0f0 !important;
+  border-color: #333333 !important;
 }
 
 .symbar-popup-btn:hover {
@@ -594,8 +606,8 @@
 }
 
 .symbar-dark-mode .symbar-popup-btn:hover {
-  background-color: #363a44 !important;
-  border-color: #7c80f0 !important;
+  background-color: #252525 !important;
+  border-color: #6ea8fe !important;
 }
 
 .symbar-popup-btn-copied {
